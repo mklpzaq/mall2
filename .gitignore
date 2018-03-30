@@ -31,12 +31,12 @@ local.properties
 .texlipse
 
 ### Maven ###
-/target/
+/target
 *****/maven/
 ****/maven/
 ***/META-INF/
 ****/META-INF/
-
+*.MF
 ### Java ###
 *.class
 
