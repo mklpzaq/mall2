@@ -9,4 +9,6 @@ import com.test.mall2.member.service.MemberService;
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
+	
+	String sss;
 }
