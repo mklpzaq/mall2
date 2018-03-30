@@ -21,7 +21,7 @@ public class Member {
 	}
 	public void setMemberPw(String memberPw) {
 		this.memberPw = memberPw;
-	}
+	}  
 	  
 	
-}    
+}      
