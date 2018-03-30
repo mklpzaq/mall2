@@ -31,10 +31,8 @@ local.properties
 .texlipse
 
 ### Maven ###
-target/
-*****/maven/
-****/maven/
-***/maven/
+/target/
+
 
 ### Java ###
 *.class
