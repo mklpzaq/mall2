@@ -10,5 +10,5 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
-	String sss;  
+	String sss;        
 }
