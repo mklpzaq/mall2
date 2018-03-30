@@ -28,7 +28,7 @@ public class CategoryService {
 		
 		return arrayCategory;
 	}
-	
+	  
 	public Category updateCategoryForm(int categoryNo)  {	
 		logger.info("updateCategoryForm");
 		Category category = categoryDao.updateCategoryForm(categoryNo);
