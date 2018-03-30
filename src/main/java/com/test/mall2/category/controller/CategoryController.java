@@ -58,8 +58,15 @@ public class CategoryController {
 		
 		model.addAttribute("category", category);
 		
-		return "updateCategoryForm";
+		return "updateCategoryForm";  
 	}  
 	
+	@RequestMapping(value = "/updateCategoryForm", method = RequestMethod.POST)
+	public String updateCategoryForm(Category category) {
+		logger.info("updateCategoryForm");
+		categoryService.updateCategory(category);		
 
+		
+		return "redirect:selectCategoryList";
+	} 
 }

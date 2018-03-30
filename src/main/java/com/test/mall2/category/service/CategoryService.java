@@ -33,6 +33,13 @@ public class CategoryService {
 		logger.info("updateCategoryForm");
 		Category category = categoryDao.updateCategoryForm(categoryNo);
 		
-		return category;
+		return category;  
 	}
+	
+	public void updateCategory(Category category)  {	
+		logger.info("updateCategory");
+		categoryDao.updateCategory(category);
+	 
+	}
+
 }

@@ -103,5 +103,23 @@ public class CategoryDao {
 		return null;
 	}
 	
+	public void updateCategory(Category category) {
+		try {
+			connection = DriverDB.driverConnection();
+			preparedstatement = connection.prepareStatement("UPDATE category SET category_name=? WHERE category_no=?");
+			preparedstatement.setString(1, category.getCategoryName());
+			preparedstatement.setInt(2, category.getCategoryNo());
+			
+			preparedstatement.executeUpdate();
+			
+			} catch (ClassNotFoundException classEX) {			
+				classEX.printStackTrace();
+			} catch (SQLException sqlEX) {			
+				sqlEX.printStackTrace();
+			} finally {
+				if(preparedstatement != null) try{preparedstatement.close();} catch(SQLException sqlEX) {}
+				if(connection != null) try{connection.close();} catch(SQLException sqlEX) {}			
+			}
+	}
 	
 }
