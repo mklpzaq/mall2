@@ -32,7 +32,8 @@ local.properties
 
 ### Maven ###
 /target/
-
+*****/maven/
+****/maven/
 
 ### Java ###
 *.class
