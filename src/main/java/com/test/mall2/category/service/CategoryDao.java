@@ -122,4 +122,21 @@ public class CategoryDao {
 			}
 	}
 	
+	public void deleteCategory(int categoryNo) {
+		try {
+			connection = DriverDB.driverConnection();
+			preparedstatement = connection.prepareStatement("DELETE FROM category WHERE category_no=?");
+			preparedstatement.setInt(1, categoryNo);
+			preparedstatement.executeUpdate();
+			
+			} catch (ClassNotFoundException classEX) {			
+				classEX.printStackTrace();
+			} catch (SQLException sqlEX) {			
+				sqlEX.printStackTrace();
+			} finally {
+				if(preparedstatement != null) try{preparedstatement.close();} catch(SQLException sqlEX) {}
+				if(connection != null) try{connection.close();} catch(SQLException sqlEX) {}			
+			}
+	}
+	
 }

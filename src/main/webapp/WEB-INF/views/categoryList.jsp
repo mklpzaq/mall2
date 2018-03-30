@@ -23,7 +23,7 @@
 					<th scope = "row">${category.categoryNo}</th>
 					<td>${category.categoryName}</td>
 					<td><a href="${pageContext.request.contextPath}/updateCategoryForm?categoryNo=${category.categoryNo}">수정</a></td>
-					<td><a href="${pageCOntext.request.contextPath}/modifyEmployee.jjdev?employeeNo>=${employee.employeeNo}">삭제</a></td>
+					<td><a href="${pageCOntext.request.contextPath}/deleteCategory?categoryNo=${category.categoryNo}">삭제</a></td>
 				</tr>
 			</tbody>
 		</c:forEach>

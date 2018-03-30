@@ -66,7 +66,14 @@ public class CategoryController {
 		logger.info("updateCategoryForm");
 		categoryService.updateCategory(category);		
 
-		
+		return "redirect:selectCategoryList";
+	} 
+	
+	@RequestMapping(value = "/deleteCategory", method = RequestMethod.GET)
+	public String deleteCategory(@RequestParam("categoryNo") int categoryNo) {
+		logger.info("deleteCategory");
+		categoryService.deleteCategory(categoryNo);		
+
 		return "redirect:selectCategoryList";
 	} 
 }

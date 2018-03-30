@@ -41,5 +41,11 @@ public class CategoryService {
 		categoryDao.updateCategory(category);
 	 
 	}
+	
+	public void deleteCategory(int categoryNo)  {	
+		logger.info("deleteCategory");
+		categoryDao.deleteCategory(categoryNo);
+	 
+	}
 
 }
