@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>카테고리 수정</title>
 </head>
 <body>
 	<form action="${pageContext.request.contextPath}/updateCategoryForm" method="post">

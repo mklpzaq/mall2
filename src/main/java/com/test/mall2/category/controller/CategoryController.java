@@ -2,9 +2,12 @@ package com.test.mall2.category.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,13 +43,11 @@ public class CategoryController {
 	}
 	
 	@RequestMapping(value = "/selectCategoryList", method = RequestMethod.GET)
-	public String selectCategoryList(Model model) {
-		logger.info("selectCategoryList");
-		//Category category = new Category();
-		//category.setCategoryName(categoryName);
-		ArrayList<Category> arrayCategory = categoryService.selectCategoryList();
+	public String selectCategoryList(@RequestParam("currentPage") String currentPage) {
+		logger.info("selectCategoryList");		
 		
-		model.addAttribute("arrayCategory", arrayCategory);
+		categoryService.selectCategoryList(currentPage);
+		
 		
 		return "categoryList";
 	}  

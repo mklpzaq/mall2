@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>카테고리 리스트</title>
 </head>
 <body>
+<button><a href="${pageContext.request.contextPath}/insertCategoryForm">카테고리 등록</a></button>
+
 
 	<table border="1">
 		<thead>
@@ -23,11 +25,16 @@
 					<th scope = "row">${category.categoryNo}</th>
 					<td>${category.categoryName}</td>
 					<td><a href="${pageContext.request.contextPath}/updateCategoryForm?categoryNo=${category.categoryNo}">수정</a></td>
-					<td><a href="${pageCOntext.request.contextPath}/deleteCategory?categoryNo=${category.categoryNo}">삭제</a></td>
+					<td><a href="${pageContext.request.contextPath}/deleteCategory?categoryNo=${category.categoryNo}">삭제</a></td>
 				</tr>
 			</tbody>
 		</c:forEach>
 	</table>
-
+	
+	<c:if test="${model2.currentPaging > 1}">
+			<button><a href="${pageContext.request.contextPath}/selectCategoryList">처음으로</a></button>
+			<button><a href="${pageContext.request.contextPath}/selectCategoryList?currentPage=${model2.currentPaging-1}">이전</a></button>
+	</c:if>
+	
 </body>
 </html>

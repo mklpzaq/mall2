@@ -41,13 +41,14 @@ public class CategoryDao {
 		
 	}
 	
-	public ArrayList<Category> selectCategory() {
+	public ArrayList<Category> selectCategory(int starRow, int pagePerRow) {
 		ArrayList<Category> arrayCategory = new ArrayList<Category>();	
 		try {
 			connection = DriverDB.driverConnection();
 			
-			preparedstatement = connection.prepareStatement("select * from category");
-					
+			preparedstatement = connection.prepareStatement("select * from category limit ?, ?");
+			preparedstatement.setInt(1, starRow);
+			preparedstatement.setInt(2, pagePerRow);
 			resultset = preparedstatement.executeQuery();
 			
 		
@@ -75,6 +76,31 @@ public class CategoryDao {
 		}
 		return null;	
 	}
+	
+	public int categoryRowCount() {
+		//teacher테이블에 있는 총게시물을 select하고 select한 숫자만큼 count를 메겨 그 count를 return해주는 메서드이다
+		//GetTeacherListController.java 클래스 실행시 호출되며 입력데이터는 없다
+		int Count = 0; //qurey문으로 Count숫자를 담을 int형 변수 Count선언
+				
+		try {
+			connection = DriverDB.driverConnection();
+			preparedstatement = connection.prepareStatement("select count(*) as count from category");	//teacher테이블을 select하고 그 숫자를								
+			resultset = preparedstatement.executeQuery();
+			if(resultset.next()) {
+			Count = resultset.getInt("count");
+			}
+			return Count;
+		} catch (ClassNotFoundException classEX) {			
+			classEX.printStackTrace();
+		} catch (SQLException sqlEX) {			
+			sqlEX.printStackTrace();
+		} finally {
+			if(preparedstatement != null) try{preparedstatement.close();} catch(SQLException sqlEX) {}
+			if(connection != null) try{connection.close();} catch(SQLException sqlEX) {}			
+		}		
+		return 0;
+	}
+	
 	
 	public Category updateCategoryForm(int categoryNo){
 		
