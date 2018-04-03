@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.test.mall2.category.service.Category;
 import com.test.mall2.category.service.CategoryService;
+import com.test.mall2.paging.Paging;
 
 @Controller
 public class CategoryController {
@@ -43,10 +44,19 @@ public class CategoryController {
 	}
 	
 	@RequestMapping(value = "/selectCategoryList", method = RequestMethod.GET)
-	public String selectCategoryList(@RequestParam("currentPage") String currentPage) {
+	public String selectCategoryList(Model model, HttpServletRequest request) {
 		logger.info("selectCategoryList");		
+		int currentPage = 1;
+		int pagePerRow = 10;
 		
-		categoryService.selectCategoryList(currentPage);
+		if(request.getParameter("currentPage") != null)
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		
+		Paging paging = new Paging(currentPage, pagePerRow);
+		
+		int offset = (paging.getCurrentPage()-1)* paging.getPagePerRow();
+		
+		
 		
 		
 		return "categoryList";

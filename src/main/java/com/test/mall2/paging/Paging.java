@@ -1,23 +1,23 @@
 package com.test.mall2.paging;
 
 public class Paging {
-	int pagePerRow; //ÆäÀÌÁö´ç Ç¥½ÃµÉ °Ô½Ã¹° ÃÖ´ë °¹¼ö
-	int firstPage;	//Ã¹¹øÂ° ÆäÀÌÁö ¹øÈ£
-	int starRow;	//½ÃÀÛÆäÀÌÁö
-	int prevPage; //ÀÌÀüÆäÀÌÁö	
-	int currentPage;	//ÇöÀçÆäÀÌÁö
-	int nextPage;	//´ÙÀ½ÆäÀÌÁö
-	int endPage;	//³¡ÆäÀÌÁö	
-	int totalPage;	//ÀüÃ¼ÆäÀÌÁö
-	int totalRowCount; //ÀüÃ¼ °Ô½Ã±Û¼ö
-	int pageView; //º¸¿©Áö´Â ÆäÀÌÁö °¹¼ö
+	int pagePerRow; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½Ãµï¿½ ï¿½Ô½Ã¹ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½
+	int firstPage;	//Ã¹ï¿½ï¿½Â° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
+	int starRow;	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	int prevPage; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	
+	int currentPage;	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	int nextPage;	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	int endPage;	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	
+	int totalPage;	//ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	int totalRowCount; //ï¿½ï¿½Ã¼ ï¿½Ô½Ã±Û¼ï¿½
+	int pageView; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 
 	public Paging (int currentPage, int pagePerRow) {
 		this.currentPage = currentPage;
 		this.pageView = 5;
 		this.pagePerRow = (pagePerRow != 0)	? pagePerRow : 10;
-		//°Ô½Ã¹° ÃÖ´ë °¹¼ö°¡ 0°³°¡ ¾Æ´Ï¶ó¸é ÇöÀç °Ô½Ã¹° °¹¼ö(pagePerRow)ÀÌ°í, ¸¸¾à °Ô½Ã¹°¼ö°¡ 0°³¶ó¸é 10°³Ç¥ÇöÀÌ´Ù(10Àº ±×³É °íÁ¤°ª) 3Ç×¿¬»êÀÚ
+		//ï¿½Ô½Ã¹ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ï¶ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½Ã¹ï¿½ ï¿½ï¿½ï¿½ï¿½(pagePerRow)ï¿½Ì°ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½Ã¹ï¿½ï¿½ï¿½ï¿½ï¿½ 0ï¿½ï¿½ï¿½ï¿½ï¿½ 10ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½Ì´ï¿½(10ï¿½ï¿½ ï¿½×³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½) 3ï¿½×¿ï¿½ï¿½ï¿½ï¿½ï¿½
 	
 	}
 
@@ -176,6 +176,33 @@ public class Paging {
 			
 		int totalPage = (totalRowCount + (pagePerRow-1))/pagePerRow;
 		
+		if(currentPage>totalPage)
+			setCurrentPage(totalPage);
+		
+		if(currentPage<0)
+			currentPage = 1;
+		
+		boolean isNowFirst = currentPage == 1 ? true : false;
+		boolean isNowFinal = currentPage == totalPage ? true : false;
+		
+		int starRow = ((currentPage -1) /pageView) * pageView + 1;
+		int endPage = starRow + pageView -1;
+		
+		if(endPage > totalPage)
+			endPage = totalPage;
+		
+		setTotalPage(1);
+		
+		if(!isNowFirst)
+			setPrevPage(((starRow-1)< 1 ? 1 : (starRow -1)));
+		
+		setStarRow(starRow);
+		setEndPage(endPage);
+		
+		if(!isNowFinal)
+			setNextPage(((endPage+1)> totalPage ? totalPage : (endPage+1)));
+		
+		setTotalPage(totalPage);
 		
 		}
 	}
