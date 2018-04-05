@@ -24,80 +24,20 @@ public class MemberController {
 	private MemberService memberService;	
 	private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
 	
-	@RequestMapping(value = "/insertMemberForm", method = RequestMethod.GET)
-	public String insertMemberFormController() {
-		
-   
-		return "insertMemberForm";
+	
+	@RequestMapping(value = "/addMember", method = RequestMethod.GET)
+	public String addMember() {
+		 
+		return "addMember";
 	}
 	
-	@RequestMapping(value = "/insertMemberAction", method = RequestMethod.POST)
-	public String insertMemberActionController(Member member, Model model) {
-		logger.info("member" + member);
-		System.out.println(member.getMemberNo());
-		System.out.println(member.getMemberId());
-		System.out.println(member.getMemberPw());
-		//request.setAttribute("member", member);
+	@RequestMapping(value = "/addMember", method = RequestMethod.POST)
+	public String insertMemberActionController(Member member) {		
 		
-		memberService.insertService(member);
-		
-		
-		//model.addAttribute("member", member);
-		
-		return "redirect:/memberList";
-		//return "redirect:/";
+		return "redirect:/";
+	
 	}
 	
-	@RequestMapping(value = "/memberList", method = RequestMethod.GET)
-	public String memberListController(Model model) {
-		
-		ArrayList<Member> list = null;
-		list = memberService.selectService();
-		System.out.println("list : " + list);
-		if(list != null) {
-			for(Member member : list) {
-				System.out.println(member.getMemberNo());
-				System.out.println(member.getMemberId());
-				System.out.println(member.getMemberPw());
-			}
-		}
-		model.addAttribute("memberList", list);
-		System.out.println("=====================");
-	
-		return "memberList";
-	}
 	
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

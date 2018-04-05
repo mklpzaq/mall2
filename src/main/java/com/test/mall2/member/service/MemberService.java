@@ -15,12 +15,10 @@ public class MemberService {
 	private MemberDao memberDao;
 	private static final Logger logger = LoggerFactory.getLogger(MemberService.class);
 	
-	public void insertService(Member member) {
-		memberDao.insertMember(member);
+	public int addMember(Member member) {
+		int row = memberDao.insertMember(member);
+		return row;
 	}
 	
-	public ArrayList<Member> selectService(){
-		ArrayList<Member> list = memberDao.selectMember();
-		return list;
-	}
+	
 }
