@@ -66,12 +66,12 @@ public class CategoryController {
 		return "categoryList";
 	}  
 	
-	/*@RequestMapping(value = "/updateCategoryForm", method = RequestMethod.GET)
-	public String updateCategoryForm(@RequestParam("categoryNo") int categoryNo, Model model) {
+	@RequestMapping(value = "/updateCategoryForm", method = RequestMethod.GET)
+	public String updateCategoryForm(Category category, Model model) {
 		logger.info("updateCategoryForm");
-		Category category = categoryService.updateCategoryForm(categoryNo);		
+		Category categoryForm = categoryService.updateCategoryForm(category);		
 		
-		model.addAttribute("category", category);
+		model.addAttribute("categoryForm", categoryForm);
 		
 		return "updateCategoryForm";  
 	}  
@@ -85,10 +85,10 @@ public class CategoryController {
 	} 
 	
 	@RequestMapping(value = "/deleteCategory", method = RequestMethod.GET)
-	public String deleteCategory(@RequestParam("categoryNo") int categoryNo) {
+	public String deleteCategory(Category category) {
 		logger.info("deleteCategory");
-		categoryService.deleteCategory(categoryNo);		
+		categoryService.deleteCategory(category);		
 
 		return "redirect:selectCategoryList";
-	} */
+	} 
 }

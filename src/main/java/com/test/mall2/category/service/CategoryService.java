@@ -34,11 +34,10 @@ public class CategoryService {
 		return categoryDao.selectCategoryList();
 	}
 	  
-	/*public Category updateCategoryForm(int categoryNo)  {	
+	public Category updateCategoryForm(Category category)  {	
 		logger.info("updateCategoryForm");
-		Category category = categoryDao.updateCategoryForm(categoryNo);
-		
-		return category;  
+				
+		return categoryDao.updateCategoryForm(category); 
 	}
 	
 	public void updateCategory(Category category)  {	
@@ -47,10 +46,10 @@ public class CategoryService {
 	 
 	}
 	
-	public void deleteCategory(int categoryNo)  {	
+	public void deleteCategory(Category category)  {	
 		logger.info("deleteCategory");
-		categoryDao.deleteCategory(categoryNo);
+		categoryDao.deleteCategory(category);
 	 
-	}*/
+	}
 
 }

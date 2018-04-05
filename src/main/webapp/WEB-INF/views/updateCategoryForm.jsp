@@ -11,11 +11,11 @@
 		<table border="1">
 			<tr>
 				<td>categoryNo</td>
-				<td><input type="text" name="categoryNo" size="10" value="${category.categoryNo}" readonly></td>
+				<td><input type="text" name="categoryNo" size="10" value="${categoryForm.categoryNo}" readonly></td>
 			<tr>
 			<tr>
 				<td>categoryName</td>
-				<td><input type="text" name="categoryName" size="50" value="${category.categoryName}"></td>
+				<td><input type="text" name="categoryName" size="50" value="${categoryForm.categoryName}"></td>
 			<tr>
 			<tr>
 				<td colspan="4"><input type="submit" value="수정하기"></td>
