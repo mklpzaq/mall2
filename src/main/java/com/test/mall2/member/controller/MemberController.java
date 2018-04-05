@@ -25,14 +25,16 @@ public class MemberController {
 	private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
 	
 	
-	@RequestMapping(value = "/addMember", method = RequestMethod.GET)
+	@RequestMapping(value = "/insertMemberForm", method = RequestMethod.GET)
 	public String addMember() {
-		 
-		return "addMember";
+		
+		return "insertMemberForm";
 	}
 	
-	@RequestMapping(value = "/addMember", method = RequestMethod.POST)
-	public String insertMemberActionController(Member member) {		
+	@RequestMapping(value = "/insertMemberForm", method = RequestMethod.POST)
+	public String insertMember(Member member) {		
+		logger.info("insertMember MemberController");
+		int row = memberService.addMember(member);
 		
 		return "redirect:/";
 	
