@@ -35,7 +35,7 @@ public class MemberController {
 	
 	
 	@RequestMapping(value = "/insertMemberForm", method = RequestMethod.GET)
-	public String addMember() {
+	public String insertMember() {
 		
 		return "insertMemberForm";
 	}

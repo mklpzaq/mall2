@@ -38,8 +38,7 @@
             <list>
             	<value>classpath:com/test/mall2/category/service/CategoryMapper.xml</value>
                 <value>classpath:com/test/mall2/member/service/MemberMapper.xml</value>
-               
-               
+                <value>classpath:com/test/mall2/board/service/BoardMapper.xml</value>               
             </list>
         </property>
     </bean>
