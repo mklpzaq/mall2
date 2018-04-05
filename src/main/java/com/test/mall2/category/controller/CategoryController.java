@@ -1,6 +1,7 @@
 package com.test.mall2.category.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,8 +27,7 @@ public class CategoryController {
 	CategoryService categoryService;	
 	
 	@RequestMapping(value = "/insertCategoryForm", method = RequestMethod.GET)
-	public String categoryInsertForm() {
-		
+	public String categoryInsertForm() {		
    
 		return "insertCategoryForm";
 	}
@@ -48,7 +48,7 @@ public class CategoryController {
 		logger.info("selectCategoryList");		
 		
 		
-		ArrayList<Category> arrayCategory = categoryService.selectCategoryList();
+		List<Category> ListCategory = categoryService.selectCategoryList();
 		
 		/*int currentPage = 1;
 		int pagePerRow = 10;
@@ -61,7 +61,7 @@ public class CategoryController {
 		int offset = (paging.getCurrentPage()-1)* paging.getPagePerRow();*/
 		
 		
-		model.addAttribute("arrayCategory", arrayCategory);
+		model.addAttribute("ListCategory", ListCategory);
 		
 		return "categoryList";
 	}  

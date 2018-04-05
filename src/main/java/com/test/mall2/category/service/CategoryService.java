@@ -1,6 +1,7 @@
 package com.test.mall2.category.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,16 +22,16 @@ public class CategoryService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(CategoryService.class);
 	
-	public void insertCategoryForm(Category category) {	
+	public int insertCategoryForm(Category category) {	
 		logger.info("insertCategoryForm");
-		categoryDao.insertCategory(category);
+		int row = categoryDao.insertCategory(category);
+		return row;
 	}
 	
-	public ArrayList<Category> selectCategoryList() {	
+	public List<Category> selectCategoryList() {	
 		logger.info("selectCategoryList");
-		ArrayList<Category> arrayCategory = categoryDao.selectCategory();
-		
-		return arrayCategory;
+				
+		return categoryDao.selectCategoryList();
 	}
 	  
 	/*public Category updateCategoryForm(int categoryNo)  {	

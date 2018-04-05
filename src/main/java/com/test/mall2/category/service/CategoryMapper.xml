@@ -13,5 +13,12 @@
 		 ,#{categoryName}
 		 )
 	 </insert>
+	 
+	 <select id="selectCategoryList" resultType="com.test.mall2.category.service.Category">
+	 	select 
+	 		category_no as categoryNo
+	 		,category_name as categoryName
+	 	from category
+	 </select>
 </mapper>
 

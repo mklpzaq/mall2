@@ -5,8 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -18,49 +21,22 @@ public class CategoryDao {
 	
 	@Autowired
 	private SqlSessionTemplate sqlsession;
-	final String SN = "com.test.mall2.category.service.CategoryMapper.";
+	final String NS = "com.test.mall2.category.service.CategoryMapper.";
 	PreparedStatement preparedstatement;
 	Connection connection;
 	ResultSet resultset;
 	
-	
+	private static final Logger logger = LoggerFactory.getLogger(CategoryService.class);
 		
-	public void insertCategory(Category category) {
-		sqlsession.insert(SN+"insertCategory", category);		
+	public int insertCategory(Category category) {
+		logger.debug("insertCategory");
+		int row = sqlsession.insert(NS+"insertCategory", category);	
+		return row;
 	}
 	
-	public ArrayList<Category> selectCategory() {
-		ArrayList<Category> arrayCategory = new ArrayList<Category>();	
-		try {
-			connection = DriverDB.driverConnection();
-			
-			preparedstatement = connection.prepareStatement("select * from category");			
-			resultset = preparedstatement.executeQuery();
-			
-		
-			
-			while(resultset.next()) {
-				Category category = new Category();
-				category.setCategoryNo(resultset.getInt("category_no"));
-				System.out.println(category.getCategoryNo()+"<-------selectCategory");
-				category.setCategoryName(resultset.getString("category_name"));
-				System.out.println(category.getCategoryName()+"<-------selectCategory");				
-				arrayCategory.add(category);
-				System.out.println(arrayCategory+"<----------arrayCategory");
-			}
-			return arrayCategory;
-		}catch (SQLException ex) {
-			ex.getStackTrace();
-			System.out.println(ex.getMessage());	
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
-		}finally {
-			//if(resultset != null) try {resultset.close();} catch(SQLException ex) {}
-			if(preparedstatement == null) try {preparedstatement.close();} catch(SQLException ex) {}
-			if(connection == null) try {connection.close();} catch(SQLException ex) {}
-		}
-		return null;	
+	public List<Category> selectCategoryList() {
+		logger.debug("selectCategoryList");
+		return sqlsession.selectList(NS+"selectCategoryList");
 	}
 	
 	public int categoryRowCount() {
