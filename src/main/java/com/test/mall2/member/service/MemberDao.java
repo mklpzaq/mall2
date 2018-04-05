@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
@@ -21,6 +22,11 @@ public class MemberDao {
 	@Autowired
  	private SqlSessionTemplate sqlSession;
 	final String NS ="com.test.mall2.member.service.MemberMapper.";
+	
+	
+	public List<Member> selectMemberList(){
+		return sqlSession.selectList(NS+"selectMemberList");
+	}
 	
 	public int insertMember(Member member) {
 		logger.info("insertMember");

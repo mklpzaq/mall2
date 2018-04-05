@@ -1,6 +1,7 @@
 package com.test.mall2.member.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +24,14 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;	
 	private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
+	
+	@RequestMapping(value = "/getMemberList", method = RequestMethod.GET)
+	public String getMemberList(Model model) {
+		List<Member> list = memberService.getMemberList();
+		// request.setAttribute()
+		model.addAttribute("memberList", list);
+		return "memberList";
+	}
 	
 	
 	@RequestMapping(value = "/insertMemberForm", method = RequestMethod.GET)

@@ -1,6 +1,7 @@
 package com.test.mall2.member.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,12 @@ public class MemberService {
 	@Autowired
 	private MemberDao memberDao;
 	private static final Logger logger = LoggerFactory.getLogger(MemberService.class);
+	
+	public List<Member> getMemberList(){
+		return memberDao.selectMemberList();
+	}
+	
+	
 	
 	public int addMember(Member member) {
 		int row = memberDao.insertMember(member);
