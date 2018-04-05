@@ -11,6 +11,10 @@
 	</appender>
 	
 	<!-- Application Loggers -->
+	<logger name="com.test.mall2.category.service">
+		<level value="debug"></level>
+	</logger>
+	
 	<logger name="com.test.mall2">
 		<level value="info" />
 	</logger>

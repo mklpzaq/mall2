@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -17,10 +18,12 @@ public class CategoryDao {
 	
 	@Autowired
 	Category category;
-		
+	private SqlSessionTemplate sqlsession;
 	PreparedStatement preparedstatement;
 	Connection connection;
 	ResultSet resultset;
+	
+	
 		
 	public void insertCategory(String categoryName) {
 		try {
@@ -78,13 +81,13 @@ public class CategoryDao {
 	}
 	
 	public int categoryRowCount() {
-		//teacherÅ×ÀÌºí¿¡ ÀÖ´Â ÃÑ°Ô½Ã¹°À» selectÇÏ°í selectÇÑ ¼ýÀÚ¸¸Å­ count¸¦ ¸Þ°Ü ±× count¸¦ returnÇØÁÖ´Â ¸Þ¼­µåÀÌ´Ù
-		//GetTeacherListController.java Å¬·¡½º ½ÇÇà½Ã È£ÃâµÇ¸ç ÀÔ·Âµ¥ÀÌÅÍ´Â ¾ø´Ù
-		int Count = 0; //qurey¹®À¸·Î Count¼ýÀÚ¸¦ ´ãÀ» intÇü º¯¼ö Count¼±¾ð
+		//teacherï¿½ï¿½ï¿½Ìºï¿½ ï¿½Ö´ï¿½ ï¿½Ñ°Ô½Ã¹ï¿½ï¿½ï¿½ selectï¿½Ï°ï¿½ selectï¿½ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½Å­ countï¿½ï¿½ ï¿½Þ°ï¿½ ï¿½ï¿½ countï¿½ï¿½ returnï¿½ï¿½ï¿½Ö´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½ï¿½Ì´ï¿½
+		//GetTeacherListController.java Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½Ç¸ï¿½ ï¿½Ô·Âµï¿½ï¿½ï¿½ï¿½Í´ï¿½ ï¿½ï¿½ï¿½ï¿½
+		int Count = 0; //qureyï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Countï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½ï¿½ï¿½ï¿½ intï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Countï¿½ï¿½ï¿½ï¿½
 				
 		try {
 			connection = DriverDB.driverConnection();
-			preparedstatement = connection.prepareStatement("select count(*) as count from category");	//teacherÅ×ÀÌºíÀ» selectÇÏ°í ±× ¼ýÀÚ¸¦								
+			preparedstatement = connection.prepareStatement("select count(*) as count from category");	//teacherï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½ selectï¿½Ï°ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½								
 			resultset = preparedstatement.executeQuery();
 			if(resultset.next()) {
 			Count = resultset.getInt("count");

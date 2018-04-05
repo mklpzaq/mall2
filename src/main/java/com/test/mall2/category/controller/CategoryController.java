@@ -46,7 +46,11 @@ public class CategoryController {
 	@RequestMapping(value = "/selectCategoryList", method = RequestMethod.GET)
 	public String selectCategoryList(Model model, HttpServletRequest request) {
 		logger.info("selectCategoryList");		
-		int currentPage = 1;
+		
+		
+		categoryService.selectCategoryList(request.getParameter("currentPage"));
+		
+		/*int currentPage = 1;
 		int pagePerRow = 10;
 		
 		if(request.getParameter("currentPage") != null)
@@ -54,7 +58,7 @@ public class CategoryController {
 		
 		Paging paging = new Paging(currentPage, pagePerRow);
 		
-		int offset = (paging.getCurrentPage()-1)* paging.getPagePerRow();
+		int offset = (paging.getCurrentPage()-1)* paging.getPagePerRow();*/
 		
 		
 		
