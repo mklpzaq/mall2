@@ -16,7 +16,7 @@
 			,#{memberId}
 			,#{boardTitle}
 			,#{boardContent}
-			,#{boardDate}
+			,now()
 		)			
 	</insert>
 
