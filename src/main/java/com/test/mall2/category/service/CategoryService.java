@@ -21,53 +21,19 @@ public class CategoryService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(CategoryService.class);
 	
-	public void insertCategoryForm(String categoryName) {	
+	public void insertCategoryForm(Category category) {	
 		logger.info("insertCategoryForm");
-		categoryDao.insertCategory(categoryName);
+		categoryDao.insertCategory(category);
 	}
 	
-	public void selectCategoryList(String currentPage) {	
+	public ArrayList<Category> selectCategoryList() {	
 		logger.info("selectCategoryList");
-				
-		int pagePerRow = 5;	//���������� ���� �ִ� �Խù� ��. �׷��ϱ� ������������ ���̴� ������ �Խñ��� ��. ��û���������� ���� ���� �������� ������ ������ �׳� ���ص�
-		int pageView = 5; //������ �Ʒ����� �������� �����Ҽ� �ִ� �ִ� ������ ����
+		ArrayList<Category> arrayCategory = categoryDao.selectCategory();
 		
-		int currentPaging = 1;
-		if(currentPage != null) {
-			currentPaging = Integer.parseInt(currentPage);
-		}
-		
-		/*int starRow = (currentPaging-1)*pagePerRow;  //selectTeacher�޼��带 �����Ҷ� ������ ��������(� �Խñ��� ȭ�鿡 ù �Խñ۷� ������) ���ϴ� ����
-		ArrayList<Category> arrayCategory = categoryDao.selectCategory(starRow, pagePerRow); //�Է¹��� starRow��°���� pagePerRow�� select ���ִ� query���� �����ϴ� �޼���
-		
-		int totalRowCount = categoryDao.categoryRowCount();  //�ѰԽù����� ���ϴ� count query�� �����ϰ� ���ϰ��� �޴� �޼���. 
-		int totalPage = totalRowCount/pagePerRow; //�ѰԽù���/������������ ���� �ִ� �Խñۼ� = ��������
-		
-		if(totalRowCount % pagePerRow != 0) {		//�ѰԽñۼ��� ������������ ���� �ִ� �Խñۼ����� �� �������� �ֱ� ������ ����� if�� 
-			totalPage++;							//�ѰԽñۼ��� ������������ ���� �մ� �Խñ۷� ������ 0���� �������� ������ ���������� �ϳ� �� ����� ���� ������ �Խñ��� �߰��� �����ش�
-		}
-		
-		if(totalPage<currentPaging) {		//Ȥ�� �� �߸��� page ������ �Էµ������ �ڵ����� �ִ�page�� ��ȯ���ִ� if��?
-			currentPaging=totalPage;
-		}
-								
-		int startPage = ((currentPaging - 1) / 5) * 5 + 1;  //page����� ���ö� ù��° page ����
-		int endPage = startPage + pageView - 1; //page����� ���ö� ������ page����
-		
-		if(endPage>totalPage) {		//������ page����� ���ڰ� ��page���� Ŭ�� page��ϼ��ڸ� �������������� �����ְ� �ٲٴ� if��
-			endPage=totalPage;
-		}*/
-		
-		/*model.addAttribute("arrayCategory", arrayCategory);
-		model.addAttribute("currentPaging", currentPaging);
-		model.addAttribute("totalPage", totalPage);
-		model.addAttribute("startPage", startPage);
-		model.addAttribute("endPage", endPage);
-		
-		return model;*/
+		return arrayCategory;
 	}
 	  
-	public Category updateCategoryForm(int categoryNo)  {	
+	/*public Category updateCategoryForm(int categoryNo)  {	
 		logger.info("updateCategoryForm");
 		Category category = categoryDao.updateCategoryForm(categoryNo);
 		
@@ -84,6 +50,6 @@ public class CategoryService {
 		logger.info("deleteCategory");
 		categoryDao.deleteCategory(categoryNo);
 	 
-	}
+	}*/
 
 }

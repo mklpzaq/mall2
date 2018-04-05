@@ -17,41 +17,24 @@ import com.test.mall2.category.service.Category;
 public class CategoryDao {
 	
 	@Autowired
-	Category category;
 	private SqlSessionTemplate sqlsession;
+	final String SN = "com.test.mall2.category.service.CategoryMapper.";
 	PreparedStatement preparedstatement;
 	Connection connection;
 	ResultSet resultset;
 	
 	
 		
-	public void insertCategory(String categoryName) {
-		try {
-			connection = DriverDB.driverConnection();
-			
-			preparedstatement = connection.prepareStatement("INSERT INTO category(category_no, category_name) VALUES (null, ?)");
-			preparedstatement.setString(1, categoryName);
-			
-			preparedstatement.executeUpdate();
-		} catch (ClassNotFoundException e) {			
-			e.printStackTrace();
-		} catch (SQLException e) {			
-			e.printStackTrace();
-		} finally {
-			if(preparedstatement != null) try{preparedstatement.close();} catch(SQLException ex) {}
-			if(connection != null) try{connection.close();} catch(SQLException ex) {}			
-		}
-		
+	public void insertCategory(Category category) {
+		sqlsession.insert(SN+"insertCategory", category);		
 	}
 	
-	public ArrayList<Category> selectCategory(int starRow, int pagePerRow) {
+	public ArrayList<Category> selectCategory() {
 		ArrayList<Category> arrayCategory = new ArrayList<Category>();	
 		try {
 			connection = DriverDB.driverConnection();
 			
-			preparedstatement = connection.prepareStatement("select * from category limit ?, ?");
-			preparedstatement.setInt(1, starRow);
-			preparedstatement.setInt(2, pagePerRow);
+			preparedstatement = connection.prepareStatement("select * from category");			
 			resultset = preparedstatement.executeQuery();
 			
 		
@@ -105,7 +88,7 @@ public class CategoryDao {
 	}
 	
 	
-	public Category updateCategoryForm(int categoryNo){
+	/*public Category updateCategoryForm(int categoryNo){
 		
 		try {
 			connection = DriverDB.driverConnection();
@@ -166,6 +149,6 @@ public class CategoryDao {
 				if(preparedstatement != null) try{preparedstatement.close();} catch(SQLException sqlEX) {}
 				if(connection != null) try{connection.close();} catch(SQLException sqlEX) {}			
 			}
-	}
+	}*/
 	
 }

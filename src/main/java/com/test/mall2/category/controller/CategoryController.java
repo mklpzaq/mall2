@@ -33,12 +33,12 @@ public class CategoryController {
 	}
 	
 	@RequestMapping(value = "/insertCategoryForm", method = RequestMethod.POST)
-	public String categoryInsertForm(String categoryName) {
+	public String categoryInsertForm(Category category) {
 		//Category category = new Category();
 		//category.setCategoryName(categoryName);
 		
 		logger.info("categoryInsertForm");
-		categoryService.insertCategoryForm(categoryName);
+		categoryService.insertCategoryForm(category);
    
 		return "redirect:selectCategoryList";
 	}
@@ -48,7 +48,7 @@ public class CategoryController {
 		logger.info("selectCategoryList");		
 		
 		
-		categoryService.selectCategoryList(request.getParameter("currentPage"));
+		ArrayList<Category> arrayCategory = categoryService.selectCategoryList();
 		
 		/*int currentPage = 1;
 		int pagePerRow = 10;
@@ -61,12 +61,12 @@ public class CategoryController {
 		int offset = (paging.getCurrentPage()-1)* paging.getPagePerRow();*/
 		
 		
-		
+		model.addAttribute("arrayCategory", arrayCategory);
 		
 		return "categoryList";
 	}  
 	
-	@RequestMapping(value = "/updateCategoryForm", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/updateCategoryForm", method = RequestMethod.GET)
 	public String updateCategoryForm(@RequestParam("categoryNo") int categoryNo, Model model) {
 		logger.info("updateCategoryForm");
 		Category category = categoryService.updateCategoryForm(categoryNo);		
@@ -90,5 +90,5 @@ public class CategoryController {
 		categoryService.deleteCategory(categoryNo);		
 
 		return "redirect:selectCategoryList";
-	} 
+	} */
 }
