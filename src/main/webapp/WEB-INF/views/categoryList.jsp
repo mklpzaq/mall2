@@ -29,7 +29,6 @@
 				</tr>
 			</tbody>
 		</c:forEach>
-	</table>
-	
+	</table>	
 </body>
 </html>
