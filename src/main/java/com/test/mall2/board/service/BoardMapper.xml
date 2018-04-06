@@ -4,6 +4,16 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.test.mall2.board.service.BoardMapper">
+	
+	<select id="selectBoardList">
+		SELECT
+			board_no as boardNo
+			,member_id as memberId
+			,board_title as board_title
+			,board_date as boardDate
+		FROM board
+	</select>
+	
 	<insert id="insertBoard" parameterType="com.test.mall2.board.service.Board">
 		INSERT INTO board (
 			board_no

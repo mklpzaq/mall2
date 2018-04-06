@@ -17,6 +17,11 @@ public class BoardController {
 	private BoardService boardservice;
 	private static final Logger logger = LoggerFactory.getLogger(BoardService.class);
 	
+	@RequestMapping(value ="selectBoardList", method = RequestMethod.GET)
+	public String selectBoardList() {
+		return "BoardList";
+	}
+	
 	@RequestMapping(value = "/insertBoardForm", method=RequestMethod.POST)
 	public String insertBoard(Board board) {
 		int row = boardservice.insertBoard(board);
