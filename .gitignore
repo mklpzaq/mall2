@@ -37,6 +37,10 @@ local.properties
 ***/META-INF/
 ****/META-INF/
 *.MF
+pom.properties
+MANIFEST.MF
+
+
 ### Java ###
 *.class
 
