@@ -44,11 +44,14 @@ public class CategoryController {
 	@RequestMapping(value = "/selectCategoryList", method = RequestMethod.GET)
 	public String selectCategoryList(Model model
 											,@RequestParam(value="currentPage", defaultValue="1") int currentPage
-											,@RequestParam(value="pagePerRow", required=true) int pagePerRow) {
+											,@RequestParam(value="pagePerRow", required=true, defaultValue="10") int pagePerRow) {
 	Map<String, Object> map = categoryService.selectCategoryList(currentPage,pagePerRow);
 	model.addAttribute("list", map.get("list"));
 	model.addAttribute("lastPage", map.get("lastPage"));
 	model.addAttribute("currentPage", currentPage);
+	model.addAttribute("startPage", map.get("startPage"));
+	model.addAttribute("endPage", map.get("endPage"));
+	
 		return "categoryList";
 	}  
 	

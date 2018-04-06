@@ -16,7 +16,7 @@
 				category_no as categoryNo
 				,category_name as categoryName
 			from category
-			order by category_no DESC 
+			order by category_no ASC 
 			limit #{beginRow}, #{pagePerRow} 
 	</select>
 	

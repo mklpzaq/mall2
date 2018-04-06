@@ -43,9 +43,18 @@ public class CategoryService {
 			lastPage = total/pagePerRow + 1;
 		}
 		
+		int pageView = 5;
+		int startPage = ((currentPage-1)/5)*5+1; //페이지 목록이 새로 나올 때, 첫번째로 뜨는 페이지 숫자
+		int endPage = startPage + pageView -1; //페이지 목록이 새로 나올 때, 마지막으로 뜨는 페이지 숫자
+		if(endPage>lastPage) {
+			endPage=lastPage;
+		}
+		
 		Map<String, Object> returnmap = new HashMap<String, Object>();
 		returnmap.put("list", list);
 		returnmap.put("lastPage", lastPage);
+		returnmap.put("startPage", startPage);
+		returnmap.put("endPage", endPage);
 		
 		return returnmap;
 	}

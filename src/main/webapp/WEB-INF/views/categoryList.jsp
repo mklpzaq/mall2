@@ -19,7 +19,7 @@
 				<td>삭제</td>
 			</tr>
 		</thead>
-		<c:forEach var="category" items="${ListCategory}">
+		<c:forEach var="category" items="${list}">
 			<tbody>
 				<tr>
 					<th scope = "row">${category.categoryNo}</th>
@@ -29,6 +29,20 @@
 				</tr>
 			</tbody>
 		</c:forEach>
-	</table>	
+	</table>
+	
+	<button><a href="${pageContext.request.contextPath}/selectCategoryList">처음으로</a></button>
+	<c:if test="${currentPage>1}">
+		<button><a href="${pageContext.request.contextPath}/selectCategoryList?currentPage=${currentPage-1}">이전</a></button>
+	</c:if>
+	
+	<c:forEach var="iCount" begin="${startPage}" end="${endPage}">
+		<button><a href="${pageContext.request.contextPath}/selectCategoryList?currentPage=${iCount}">${iCount}</a></button>
+	</c:forEach>
+	
+	<c:if test="${currentPage < lastPage}">
+		<button><a href="${pageContext.request.contextPath}/selectCategoryList?currentPage=${currentPage+1}">다음</a></button>
+		<button><a href="${pageContext.request.contextPath}/selectCategoryList?currentPage=${lastPage}">마지막으로</a></button>
+	</c:if>
 </body>
 </html>
