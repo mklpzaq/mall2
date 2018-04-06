@@ -28,13 +28,13 @@ public class MemberController {
 	private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
 	
 	
-	@RequestMapping(value = "/getMemberList", method = RequestMethod.GET)
+	@RequestMapping(value = "/getLogin", method = RequestMethod.GET)
 	public String Loging() {
 		return "login";
 		
 	}
 	
-	@RequestMapping(value = "/getMemberList", method = RequestMethod.POST)
+	@RequestMapping(value = "/getLogin", method = RequestMethod.POST)
 	public String Loging(Model model, Member member, HttpSession session) {
 		
 		Member returnMember = memberService.getMemberById(member);
