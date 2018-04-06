@@ -2,6 +2,8 @@ package com.test.mall2.category.controller;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,15 +45,18 @@ public class CategoryController {
 	
 	@RequestMapping(value = "/selectCategoryList", method = RequestMethod.GET)
 	public String selectCategoryList(Model model
+											, HttpSession session
 											,@RequestParam(value="currentPage", defaultValue="1") int currentPage
 											,@RequestParam(value="pagePerRow", required=true, defaultValue="10") int pagePerRow) {
+		
+		logger.info("pagePerRow");
 	Map<String, Object> map = categoryService.selectCategoryList(currentPage,pagePerRow);
 	model.addAttribute("list", map.get("list"));
 	model.addAttribute("lastPage", map.get("lastPage"));
 	model.addAttribute("currentPage", currentPage);
 	model.addAttribute("startPage", map.get("startPage"));
 	model.addAttribute("endPage", map.get("endPage"));
-	
+	//session.setAttribute("pagePerRow", pagePerRow);
 		return "categoryList";
 	}  
 	

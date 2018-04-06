@@ -4,12 +4,29 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <title>카테고리 리스트</title>
+<script type="text/javascript">
+	/* $(document).ready(function(){
+		$("option").click(function(){			
+			$("a").("[href]"="${pageContext.request.contextPath}/selectCategoryList?pagePerRow=$("option").val()")
+				
+		});		
+	}); */
+</script>
 </head>
 <body>
 <button><a href="${pageContext.request.contextPath}/insertCategoryForm">카테고리 등록</a></button>
 
-
+	<form action="${pageContext.request.contextPath}/selectCategoryList" method="get">
+		<select name="pagePerRow">
+			<option value="10">10개씩보기</option>
+			<option value="15">15개씩보기</option>
+			<option value="20">20개씩보기</option>
+		</select>
+	 <button type="submit">작성</button>
+	</form>
+	
 	<table border="1">
 		<thead>
 			<tr>
