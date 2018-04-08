@@ -61,7 +61,9 @@ public class MemberController {
 		// model.addAttribute("map", map);
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("lastPage", map.get("lastPage"));
+		model.addAttribute("lastPageMemberCnt", map.get("lastPageMemberCnt"));
 		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("pagePerRow", pagePerRow);
 		
 		return "memberList";
 	}

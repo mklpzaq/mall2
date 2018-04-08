@@ -6,7 +6,22 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<title>Insert title here</title>
+		<title>Member List</title>
+		<script>
+			$(document).ready(function(){
+				if($('#selectPagePerRow').val() !== $('#textPagePerRow').text()){
+					$('#selectPagePerRow').val($('#textPagePerRow').text());
+				}
+				
+				$('#selectPagePerRow').change(function(){
+					$(location).attr('href', './getMemberList?pagePerRow='+$('#selectPagePerRow > option:selected').val());
+					
+				});
+				
+			});
+			
+			
+		</script>
 	</head>
 	<body>
 		
@@ -15,71 +30,114 @@
 				<div class="col-sm-3"></div>
 				<div class="col-sm-6">
 					<!-- Begin Content -->
-					현재 페이지 : <input value="${currentPage}">
-					<h3>Member List</h3>
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th>memberNo</th>
-								<th>memberId</th>
-								<th>memberPw</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="member" items="${list}">
-								<tr>
-									<th>${member.memberNo}</th>
-									<td>${member.memberId}</td>
-									<td>${member.memberPw}</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-					<nav>
-						<ul class="pagination">
-							<li>
-								<a href="${pageContext.request.contextPath}/getMemberList?currentPage=1" aria-label="Previous">
-									<span aria-hidden="true">&laquo;</span>
-								</a>
-							</li>
-							<li>
-								<c:choose>
-									<c:when test="${currentPage > 1}">
-										<a href="${pageContext.request.contextPath}/getMemberList?currentPage=${currentPage-1}"aria-label="Previous">
-											<span aria-hidden="true">&lt;</span>
+					
+					<div class="panel panel-default">
+						<div class="panel-body text-center">
+							<div class="row">
+								<div class="col-sm-3">
+									<strong>${currentPage} / ${lastPage} Page</strong><br/>
+									pagePerRow : <strong id="textPagePerRow">${pagePerRow}</strong>
+								</div>
+								<div class="col-sm-6">
+									<h3>Member List</h3>
+								</div>
+								<div class="col-sm-3">
+									<select id="selectPagePerRow" name="selectPagePerRow">
+										<option value="5">5</option>
+										<option value="10">10</option>
+										<option value="15">15</option>
+										<option value="20">20</option>
+										<option value="30">30</option>
+										<option value="40">40</option>
+										<option value="50">50</option>
+									</select>개씩 보기
+								</div>
+							</div>
+							<hr/>
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<td><strong>memberNo</strong></td>
+										<td><strong>memberId</strong></td>
+										<td><strong>memberPw</strong></td>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="member" items="${list}">
+										<tr>
+											<td><strong>${member.memberNo}</strong></td>
+											<td>${member.memberId}</td>
+											<td>${member.memberPw}</td>
+										</tr>
+									</c:forEach>
+									<c:choose>
+										<c:when test="${currentPage == lastPage}">
+											<c:forEach var="remainderRow" begin="1" end="${pagePerRow - lastPageMemberCnt}" step="1">
+												<tr>
+													<td><strong>- -</strong></td>
+													<td>- -</td>
+													<td>- -</td>
+												</tr>
+											</c:forEach>
+										</c:when>
+									</c:choose>
+								</tbody>
+							</table>
+							<nav>
+								<ul class="pagination">
+									<li>
+										<a href="${pageContext.request.contextPath}/getMemberList?currentPage=1" aria-label="Previous">
+											<span aria-hidden="true">&laquo;</span>
 										</a>
-									</c:when>
-									<c:otherwise>
-										<a href="${pageContext.request.contextPath}/getMemberList?currentPage=1"aria-label="Previous">
-											<span aria-hidden="true">&lt;</span>
+									</li>
+									<li>
+										<c:choose>
+											<c:when test="${currentPage > 1}">
+												<a href="${pageContext.request.contextPath}/getMemberList?currentPage=${currentPage-1}"aria-label="Previous">
+													<span aria-hidden="true">&lt;</span>
+												</a>
+											</c:when>
+											<c:otherwise>
+												<a href="${pageContext.request.contextPath}/getMemberList?currentPage=1"aria-label="Previous">
+													<span aria-hidden="true">&lt;</span>
+												</a>
+											</c:otherwise>
+										</c:choose>
+									</li>
+									<c:forEach var="pageNum" begin="1" end="${lastPage}" step="1">
+										<c:choose>
+											<c:when test="${pageNum == currentPage}">
+												<li class="active"><a href="${pageContext.request.contextPath}/getMemberList?currentPage=${pageNum}">${pageNum}</a></li>
+											</c:when>
+											<c:otherwise>
+												<li><a href="${pageContext.request.contextPath}/getMemberList?currentPage=${pageNum}">${pageNum}</a></li>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+									<li>
+										<c:choose>
+											<c:when test="${currentPage < lastPage}">
+												<a href="${pageContext.request.contextPath}/getMemberList?currentPage=${currentPage+1}" aria-label="Next">
+													<span aria-hidden="true">&gt;</span>
+												</a>
+											</c:when>
+											<c:otherwise>
+												<a href="${pageContext.request.contextPath}/getMemberList?currentPage=${lastPage}"aria-label="Next">
+													<span aria-hidden="true">&gt;</span>
+												</a>
+											</c:otherwise>
+										</c:choose>
+									</li>
+									<li>
+										<a href="${pageContext.request.contextPath}/getMemberList?currentPage=${lastPage}" aria-label="Next">
+											<span aria-hidden="true">&raquo;</span>
 										</a>
-									</c:otherwise>
-								</c:choose>
-							</li>
-							<c:forEach var="pageNum" begin="1" end="${lastPage}" step="1">
-								<li><a href="${pageContext.request.contextPath}/getMemberList?currentPage=${pageNum}">${pageNum}</a></li>
-							</c:forEach>
-							<li>
-								<c:choose>
-									<c:when test="${currentPage < lastPage}">
-										<a href="${pageContext.request.contextPath}/getMemberList?currentPage=${currentPage+1}" aria-label="Previous">
-											<span aria-hidden="true">&gt;</span>
-										</a>
-									</c:when>
-									<c:otherwise>
-										<a href="${pageContext.request.contextPath}/getMemberList?currentPage=${lastPage}"aria-label="Previous">
-											<span aria-hidden="true">&gt;</span>
-										</a>
-									</c:otherwise>
-								</c:choose>
-							</li>
-							<li>
-								<a href="${pageContext.request.contextPath}/getMemberList?currentPage=${lastPage}" aria-label="Next">
-									<span aria-hidden="true">&raquo;</span>
-								</a>
-							</li>
-						</ul>
-					</nav>
+									</li>
+								</ul>
+							</nav>
+					
+						</div>
+					</div>
 					
 					<!-- End Content -->
 				</div>
@@ -88,28 +146,6 @@
 			</div>
 		<!-- End container-fluid -->	
 		</div>
-		
-<%-- <c:set var="it" value="빨간색"/>
-  <c:choose>
-<c:when test="${it eq '빨간색'}">
-빨간색입니다.
-</c:when>
-   <c:when test="${it eq '파란색'}">
-    파란색입니다.
-   </c:when>
-   <c:otherwise>
-   다른색입니다.
-   </c:otherwise>
-  </c:choose>
- --%>
-
-
-
-
-
-		
-
-
 		
 	</body>
 </html>

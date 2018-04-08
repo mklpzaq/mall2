@@ -39,10 +39,21 @@ public class MemberService {
 		int total = memberDao.totalCountMember();
 		// total이라는 정보, pagePerRow정보를 가지고 -> lastPage를 구하는 알고리즘이 필요.
 		int lastPage = 0;
-		if(total%pagePerRow == 0) {
+		int lastPageMemberCnt = 0;
+		if(0 == total){
+			/* total이 0일 경우 즉, 아무것도 입력되지 않은 초기상태일경우.
+			 * memberList.jsp에서 아무것도 없어도 페이지는 1페이지로 표시되어야 한다.
+			 * 그렇기 때문에 DB에 아무것도 없는 상태에서는 lastPage를 1페이지로 설정한다.
+			 * */
+			lastPage = 1;
+		}else if(total%pagePerRow == 0) {
 			lastPage = total/pagePerRow;
 		}else {
 			lastPage = total/pagePerRow + 1;
+			/* memberList.jsp에서 마지막페이지의 행을 10개로 두기 위해 (list에 들어있는 member의 수와 상관없이 두기위해) 
+			 * lastPageMemberCnt값이 필요하다.
+			 * */
+			lastPageMemberCnt = total%pagePerRow;
 		}
 		
 		
@@ -50,6 +61,7 @@ public class MemberService {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		returnMap.put("list", list);
 		returnMap.put("lastPage", lastPage);
+		returnMap.put("lastPageMemberCnt", lastPageMemberCnt);
 		
 		return returnMap; 
 	}
