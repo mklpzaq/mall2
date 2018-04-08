@@ -8,65 +8,73 @@
 		<title>Member Insert</title>
 		<script>
 			$(document).ready(function(){
-					
 				$('#memberId').keyup(function(){
 					if($('#memberId').val().length < 3){
-						$('#memberId').parent().addClass('has-error');
-						$('#idWarning').text('ID를 3자 이상 입력해주세요.');
+						$('#memberId').parent().removeClass('has-success has-feedback').addClass('has-error has-feedback');
+						$('#idIcon').removeClass('glyphicon glyphicon-ok form-control-feedback').addClass('glyphicon glyphicon-remove form-control-feedback');
+						$('#idHelper').text('ID를 3자 이상 입력해주세요.');
 					}else if($('#memberId').val().length >= 10){
-						$('#memberId').parent().addClass('has-error');
-						$('#idWarning').text('ID를 10자 이하 입력해주세요.');
+						$('#memberId').parent().removeClass('has-success has-feedback').addClass('has-error has-feedback');
+						$('#idIcon').removeClass('glyphicon glyphicon-ok form-control-feedback').addClass('glyphicon glyphicon-remove form-control-feedback');
+						$('#idHelper').text('ID를 10자 이하 입력해주세요.');
 					}else{
-						$('#memberId').parent().removeClass('has-error').addClass('has-success');
-						$('#idWarning').text('');
+						$('#memberId').parent().removeClass('has-error has-feedback').addClass('has-success has-feedback');
+						$('#idIcon').removeClass('glyphicon glyphicon-remove form-control-feedback').addClass('glyphicon glyphicon-ok form-control-feedback');
+						$('#idHelper').text('');
 					}
 				});
 				
 				$('#memberPw').keyup(function(){
 					if($('#memberPw').val().length < 3){
-						$('#memberPw').parent().addClass('has-error');
-						$('#pwWarning').text('PW를 3자 이상 입력해주세요.');
+						$('#memberPw').parent().removeClass('has-success has-feedback').addClass('has-error has-feedback');
+						$('#pwIcon').removeClass('glyphicon glyphicon-ok form-control-feedback').addClass('glyphicon glyphicon-remove form-control-feedback');
+						$('#pwHelper').text('PW를 3자 이상 입력해주세요.');
 					}else if($('#memberPw').val().length >= 10){
-						$('#memberPw').parent().addClass('has-error');
-						$('#pwWarning').text('PW를 10자 이하 입력해주세요.');
+						$('#memberPw').parent().removeClass('has-success has-feedback').addClass('has-error has-feedback');
+						$('#pwIcon').removeClass('glyphicon glyphicon-ok form-control-feedback').addClass('glyphicon glyphicon-remove form-control-feedback');
+						$('#pwHelper').text('PW를 10자 이하 입력해주세요.');
 					}else{
-						$('#memberPw').parent().removeClass('has-error').addClass('has-success');
-						$('#pwWarning').text('');
+						$('#memberPw').parent().removeClass('has-error has-feedback').addClass('has-success has-feedback');
+						$('#pwIcon').removeClass('glyphicon glyphicon-remove form-control-feedback').addClass('glyphicon glyphicon-ok form-control-feedback');
+						$('#pwHelper').text('');
 					}
 				});
 					
 				$('#memberPwCheck').keyup(function(){
 					if($('#memberPwCheck').val() != $('#memberPw').val()){
-						$('#pwCheckWarning').parent().addClass('has-error');
-						$('#pwCheckWarning').text('입력한 PW와 동일하게 입력해주세요.');
+						$('#memberPwCheck').parent().removeClass('has-success has-feedback').addClass('has-error has-feedback');
+						$('#pwCheckIcon').removeClass('glyphicon glyphicon-ok form-control-feedback').addClass('glyphicon glyphicon-remove form-control-feedback');
+						$('#pwCheckHelper').text('입력한 PW와 동일하게 입력해주세요.');
 					}else{
-						$('#pwCheckWarning').parent().removeClass('has-error').addClass('has-success');
-						$('#pwCheckWarning').text('');
+						$('#memberPwCheck').parent().removeClass('has-error has-feedback').addClass('has-success has-feedback');
+						$('#pwCheckIcon').removeClass('glyphicon glyphicon-remove form-control-feedback').addClass('glyphicon glyphicon-ok form-control-feedback');
+						$('#pwCheckHelper').text('');
 					}
 				});
 				
 				$('#insertButton').click(function(){
 					if($('#memberId').val().length < 3 || $('#memberId').val().length > 10){
 						$('#memberId').focus();
-						$('#memberId').parent().addClass('has-error');
-						$('#idWarning').text('올바른 ID가 아닙니다.');
+						$('#memberId').parent().removeClass('has-success has-feedback').addClass('has-error has-feedback');
+						$('#idIcon').removeClass('glyphicon glyphicon-ok form-control-feedback').addClass('glyphicon glyphicon-remove form-control-feedback');
+						$('#idHelper').text('올바른 ID가 아닙니다.');
 						return ;
 					}else if($('#memberPw').val().length < 3 || $('#memberPw').val().length > 10){
 						$('#memberPw').focus();
-						$('#memberPw').parent().addClass('has-error');
-						$('#pwWarning').text('올바른 PW가 아닙니다.');
+						$('#memberPw').parent().removeClass('has-success has-feedback').addClass('has-error has-feedback');
+						$('#pwIcon').removeClass('glyphicon glyphicon-ok form-control-feedback').addClass('glyphicon glyphicon-remove form-control-feedback');
+						$('#pwHelper').text('올바른 PW가 아닙니다.');
 						return ;
 					}else if($('#memberPwCheck').val() != $('#memberPw').val()){
 						$('#memberPwCheck').focus();
-						$('#pwCheckWarning').parent().addClass('has-error');
-						$('#pwCheckWarning').text('올바른 PW확인이 아닙니다.');
+						$('#memberPwCheck').parent().removeClass('has-success has-feedback').addClass('has-error has-feedback');
+						$('#pwCheckIcon').removeClass('glyphicon glyphicon-ok form-control-feedback').addClass('glyphicon glyphicon-remove form-control-feedback');
+						$('#pwCheckHelper').text('올바른 PW확인이 아닙니다.');
 						return ;
 					}
 					
 					$('#insertMemberForm').submit();
 				});
-				
-				
 			});
 		</script>
 	</head>
@@ -91,22 +99,26 @@
 									<div class="form-group">
 										<label for="memberId" class="col-sm-2 control-label">ID</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control" name = "memberId" id="memberId" placeholder="ID">
-											<span id="idWarning"></span>
+											<input type="text" class="form-control" name="memberId" id="memberId" placeholder="ID">
+											<span id="idIcon"></span>
+											<span id="idHelper"></span>
 										</div>
 									</div>
 									<div class="form-group">
 										<label for="memberPw" class="col-sm-2 control-label">PW</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control" name = "memberPw" id="memberPw" placeholder="PW">
-											<span id="pwWarning"></span>
+											<input type="text" class="form-control" name="memberPw" id="memberPw" placeholder="PW">
+											<span id="pwIcon"></span>
+											<span id="pwHelper"></span>
 										</div>
 									</div>
 									<div class="form-group">
 										<label for="memberPwCheck" class="col-sm-2 control-label">PWCheck</label>
 										<div class="col-sm-10">
 											<input type="text" class="form-control" id="memberPwCheck" placeholder="PWCheck">
-											<span id="pwCheckWarning"></span>
+											<span id="pwCheckIcon"></span>
+											<span id="pwCheckHelper"></span>
+											
 										</div>
 									</div>
 									<div class="form-group">
@@ -114,11 +126,9 @@
 											<button id="insertButton" type="button" class="btn btn-default">Insert Button</button>
 										</div>
 									</div>
-									
 								</form>
 							</div>
 						</div>
-				
 					<!-- End Content -->
 				</div>
 				<div class="col-sm-3"></div>

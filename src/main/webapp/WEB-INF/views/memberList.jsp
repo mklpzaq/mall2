@@ -12,7 +12,6 @@
 				if($('#selectPagePerRow').val() !== $('#textPagePerRow').text()){
 					$('#selectPagePerRow').val($('#textPagePerRow').text());
 				}
-				
 				$('#selectPagePerRow').change(function(){
 					$(location).attr('href', './getMemberList?pagePerRow='+$('#selectPagePerRow > option:selected').val());
 				});
@@ -20,7 +19,6 @@
 		</script>
 	</head>
 	<body>
-		
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-sm-3"></div>
@@ -147,10 +145,8 @@
 									</li>
 								</ul>
 							</nav>
-					
 						</div>
 					</div>
-					
 					<!-- End Content -->
 				</div>
 				<div class="col-sm-3"></div>
@@ -158,6 +154,5 @@
 			</div>
 		<!-- End container-fluid -->	
 		</div>
-		
 	</body>
 </html>

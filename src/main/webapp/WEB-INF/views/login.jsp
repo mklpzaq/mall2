@@ -21,7 +21,7 @@
 				$('#memberPw').blur(function(){
 					loginSwitch = true;
 					if($('#memberPw').val().length < 3 && loginSwitch){
-						alert('PW를 3자 이상 입력해주세요.');
+						$('inputGroupSuccess1Status').show();
 						loginSwitch = false;
 					}
 				});
@@ -35,7 +35,11 @@
 				});
 				
 				
-				
+				$('inputWarning2').keyup(function(){
+					if($('inputWarning2').val() < 3){
+						$('inputGroupSuccess1Status').show();
+					}
+				});
 				
 					
 			});
@@ -85,6 +89,8 @@
 								</form>
 							</div>
 						</div>
+				
+				
 				
 					<!-- End Content -->
 				</div>
