@@ -55,6 +55,12 @@ public class MemberService {
 			 * */
 			lastPageMemberCnt = total%pagePerRow;
 		}
+		//3
+		//시작 페이지 정보 beginPageNumForCurrentPage
+		/* 페이지 넘버를 5단위로 자를 경우 현재페이지(currentPage)에 대한 시작 페이지number를 구한다. */
+		int temp = (currentPage - 1)/5;
+		int beginPageNumForCurrentPage = temp * 5 + 1;
+		
 		
 		
 		//..
@@ -62,6 +68,8 @@ public class MemberService {
 		returnMap.put("list", list);
 		returnMap.put("lastPage", lastPage);
 		returnMap.put("lastPageMemberCnt", lastPageMemberCnt);
+		returnMap.put("beginPageNumForCurrentPage", beginPageNumForCurrentPage);
+		
 		
 		return returnMap; 
 	}

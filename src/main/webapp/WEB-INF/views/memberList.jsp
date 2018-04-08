@@ -15,12 +15,8 @@
 				
 				$('#selectPagePerRow').change(function(){
 					$(location).attr('href', './getMemberList?pagePerRow='+$('#selectPagePerRow > option:selected').val());
-					
 				});
-				
 			});
-			
-			
 		</script>
 	</head>
 	<body>
@@ -86,50 +82,66 @@
 							<nav>
 								<ul class="pagination">
 									<li>
-										<a href="${pageContext.request.contextPath}/getMemberList?currentPage=1" aria-label="Previous">
+										<a href="${pageContext.request.contextPath}/getMemberList?currentPage=1&pagePerRow=${pagePerRow}" aria-label="Previous">
 											<span aria-hidden="true">&laquo;</span>
 										</a>
 									</li>
 									<li>
 										<c:choose>
 											<c:when test="${currentPage > 1}">
-												<a href="${pageContext.request.contextPath}/getMemberList?currentPage=${currentPage-1}"aria-label="Previous">
+												<a href="${pageContext.request.contextPath}/getMemberList?currentPage=${currentPage-1}&pagePerRow=${pagePerRow}"aria-label="Previous">
 													<span aria-hidden="true">&lt;</span>
 												</a>
 											</c:when>
 											<c:otherwise>
-												<a href="${pageContext.request.contextPath}/getMemberList?currentPage=1"aria-label="Previous">
+												<a href="${pageContext.request.contextPath}/getMemberList?currentPage=1&pagePerRow=${pagePerRow}"aria-label="Previous">
 													<span aria-hidden="true">&lt;</span>
 												</a>
 											</c:otherwise>
 										</c:choose>
 									</li>
-									<c:forEach var="pageNum" begin="1" end="${lastPage}" step="1">
-										<c:choose>
-											<c:when test="${pageNum == currentPage}">
-												<li class="active"><a href="${pageContext.request.contextPath}/getMemberList?currentPage=${pageNum}">${pageNum}</a></li>
-											</c:when>
-											<c:otherwise>
-												<li><a href="${pageContext.request.contextPath}/getMemberList?currentPage=${pageNum}">${pageNum}</a></li>
-											</c:otherwise>
-										</c:choose>
-									</c:forEach>
+									<c:choose>
+										<c:when test="${lastPage > beginPageNumForCurrentPage + 4}">
+											<c:forEach var="pageNum" begin="${beginPageNumForCurrentPage}" end="${beginPageNumForCurrentPage + 4}" step="1">
+												<c:choose>
+													<c:when test="${pageNum == currentPage}">
+														<li class="active"><a href="${pageContext.request.contextPath}/getMemberList?currentPage=${pageNum}&pagePerRow=${pagePerRow}">${pageNum}</a></li>
+													</c:when>
+													<c:otherwise>
+														<li><a href="${pageContext.request.contextPath}/getMemberList?currentPage=${pageNum}&pagePerRow=${pagePerRow}">${pageNum}</a></li>
+													</c:otherwise>
+												</c:choose>
+											</c:forEach>
+										</c:when>
+										<c:otherwise>
+											<c:forEach var="pageNum" begin="${beginPageNumForCurrentPage}" end="${lastPage}" step="1">
+												<c:choose>
+													<c:when test="${pageNum == currentPage}">
+														<li class="active"><a href="${pageContext.request.contextPath}/getMemberList?currentPage=${pageNum}&pagePerRow=${pagePerRow}">${pageNum}</a></li>
+													</c:when>
+													<c:otherwise>
+														<li><a href="${pageContext.request.contextPath}/getMemberList?currentPage=${pageNum}&pagePerRow=${pagePerRow}">${pageNum}</a></li>
+													</c:otherwise>
+												</c:choose>
+											</c:forEach>
+										</c:otherwise>
+									</c:choose>
 									<li>
 										<c:choose>
 											<c:when test="${currentPage < lastPage}">
-												<a href="${pageContext.request.contextPath}/getMemberList?currentPage=${currentPage+1}" aria-label="Next">
+												<a href="${pageContext.request.contextPath}/getMemberList?currentPage=${currentPage+1}&pagePerRow=${pagePerRow}" aria-label="Next">
 													<span aria-hidden="true">&gt;</span>
 												</a>
 											</c:when>
 											<c:otherwise>
-												<a href="${pageContext.request.contextPath}/getMemberList?currentPage=${lastPage}"aria-label="Next">
+												<a href="${pageContext.request.contextPath}/getMemberList?currentPage=${lastPage}&pagePerRow=${pagePerRow}"aria-label="Next">
 													<span aria-hidden="true">&gt;</span>
 												</a>
 											</c:otherwise>
 										</c:choose>
 									</li>
 									<li>
-										<a href="${pageContext.request.contextPath}/getMemberList?currentPage=${lastPage}" aria-label="Next">
+										<a href="${pageContext.request.contextPath}/getMemberList?currentPage=${lastPage}&pagePerRow=${pagePerRow}" aria-label="Next">
 											<span aria-hidden="true">&raquo;</span>
 										</a>
 									</li>

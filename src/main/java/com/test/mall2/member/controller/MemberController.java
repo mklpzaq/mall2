@@ -49,13 +49,12 @@ public class MemberController {
  
 	/* currentPage는 안넘어오면 1로 받는다. 그리고 자동으로 받아서 int형으로 변환시킨후, currentPage로 넘긴다.*/
 	/* required=true 이렇게 하면 죽었다 깨어나도 넘어와야 된다. 안넘기면 에러를 발생시키게 한다. */
-	/* @RequestParam(value="pagePerRow" 부분에서 defaultValue부분을 10으로 일단 놓았다.
-	 * 그리고 required=true 이 옵션을 일단 삭제하였다.
-	 * (프로그램 실행을 위해서) 추후에  defaultValue부분을 삭제하고,  required=true 부분을 수정하자.*/
+	/* @RequestParam(value="pagePerRow" 부분에서 defaultValue부분을 10으로 설정하였다.
+	 * */
 	@RequestMapping(value = "/getMemberList", method = RequestMethod.GET)
 	public String getMemberList(Model model
 								,@RequestParam(value="currentPage", defaultValue="1") int currentPage
-								,@RequestParam(value="pagePerRow", required=true, defaultValue="10") int pagePerRow) {
+								,@RequestParam(value="pagePerRow", defaultValue="10", required=true) int pagePerRow) {
 		Map<String, Object> map = memberService.getMemberList(currentPage, pagePerRow);
 		// request.setAttribute()
 		// model.addAttribute("map", map);
@@ -64,6 +63,7 @@ public class MemberController {
 		model.addAttribute("lastPageMemberCnt", map.get("lastPageMemberCnt"));
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("pagePerRow", pagePerRow);
+		model.addAttribute("beginPageNumForCurrentPage", map.get("beginPageNumForCurrentPage"));
 		
 		return "memberList";
 	}
@@ -80,7 +80,7 @@ public class MemberController {
 		logger.info("insertMember MemberController");
 		int row = memberService.addMember(member);
 		
-		return "redirect:/";
+		return "redirect:/getMemberList";
 	
 	}
 	
