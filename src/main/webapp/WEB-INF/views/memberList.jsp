@@ -26,7 +26,7 @@
 				<div class="col-sm-3"></div>
 				<div class="col-sm-6">
 					<!-- Begin Content -->
-					
+					<a href="${pageContext.request.contextPath}/">Home</a>
 					<div class="panel panel-default">
 						<div class="panel-body text-center">
 							<div class="row">
