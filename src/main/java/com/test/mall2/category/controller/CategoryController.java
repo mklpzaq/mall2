@@ -56,8 +56,10 @@ public class CategoryController {
 	model.addAttribute("currentPage", currentPage);
 	model.addAttribute("startPage", map.get("startPage"));
 	model.addAttribute("endPage", map.get("endPage"));
-	//session.setAttribute("pagePerRow", pagePerRow);
+	model.addAttribute("pagePerRow", pagePerRow);
 		return "categoryList";
+		
+		
 	}  
 	
 	@RequestMapping(value = "/updateCategoryForm", method = RequestMethod.GET)
