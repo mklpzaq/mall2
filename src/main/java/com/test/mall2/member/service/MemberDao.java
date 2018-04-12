@@ -24,7 +24,7 @@ public class MemberDao {
  	private SqlSessionTemplate sqlSession;
 	final String NS ="com.test.mall2.member.service.MemberMapper.";
 	
-	public Member selectMemberById(Member member) {
+	public Member selectMemberById(Member member) {		
 		return sqlSession.selectOne(NS+"selectMemberById", member);
 	}
 

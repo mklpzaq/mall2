@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,10 @@ public class MemberService {
 	@Autowired
 	private MemberDao memberDao;
 	private static final Logger logger = LoggerFactory.getLogger(MemberService.class);
+	
+	public void terminateLoginSession(HttpSession session) {
+		session.invalidate();
+	}
 	
 	public Member getMemberById(Member member) {
 		return memberDao.selectMemberById(member);
