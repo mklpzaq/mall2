@@ -8,9 +8,9 @@
 	<body>
 		<h1>Item</h1>
 		<form action="${pageContext.request.contextPath}/insertItemForm" method="post">
-			<select id="categoryList" name="categoryNo">
+			<!-- <select id="categoryList" name="categoryNo">
 				<option>[카테고리선택]</option>
-			</select>
+			</select> -->
 			상품이름: <input type="text" name="itemName">
 			상품가격: <input type="text" name="itemPrice">
 			<button type="submit">상품추가</button>
