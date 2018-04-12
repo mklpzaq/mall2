@@ -8,7 +8,6 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	</head>		
 	<body>	
-			
 		<nav class="navbar navbar-default">
 			<div class="container-fluid">
 				<!-- Brand and toggle get grouped for better mobile display -->
@@ -21,53 +20,44 @@
 					</button>
 					<a class="navbar-brand" href="#">Brand</a>
 				</div>
-				
-				<!-- Collect the nav links, forms, and other content for toggling -->
-					
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				
-						<ul class="nav navbar-nav">
+					<ul class="nav navbar-nav">
+						<c:choose>
+							<c:when test="${loginMember != null}">	
+								<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>			
+								<li><a href="${pageContext.request.contextPath}/getMemberList">MemerList</a></li>						
+								<li><a href="${pageContext.request.contextPath}/selectCategoryList">CategoryList</a></li>
+								<li><a href="${pageContext.request.contextPath}/selectBoardList">BoardList</a></li>						
+							</c:when>
+							<c:otherwise>									
+								<li><a href="${pageContext.request.contextPath}/selectBoardList">BoardList</a></li>	
+							</c:otherwise>
+						</c:choose>				
+					</ul>										
+					<ul class="nav navbar-nav navbar-right">	
+						<li>								
+							<div style="padding:15px;">
 							<c:choose>
-								<c:when test="${loginMember != null}">	
-									<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>			
-									<li><a href="${pageContext.request.contextPath}/getMemberList">MemerList</a></li>						
-									<li><a href="${pageContext.request.contextPath}/selectCategoryList">CategoryList</a></li>
-									<li><a href="${pageContext.request.contextPath}/selectBoardList">BoardList</a></li>
-						
+								<c:when test="${loginMember != null}">
+									<strong>${loginMember.memberId} 님 환영합니다.</strong>
 								</c:when>
 								<c:otherwise>
-									<li><a href="${pageContext.request.contextPath}/selectBoardList">BoardList</a></li>	
+									<strong> 손님 환영합니다.</strong>
 								</c:otherwise>
-							</c:choose>
-							
-							<%-- <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>			
-							<li><a href="${pageContext.request.contextPath}/getMemberList">MemerList</a></li>						
-							<li><a href="${pageContext.request.contextPath}/selectCategoryList">CategoryList</a></li>
-							<li><a href="${pageContext.request.contextPath}/selectBoardList">BoardList</a></li>		 --%>				
-						</ul>
-										
-					<ul class="nav navbar-nav navbar-right">				
-					
-								<li>								
-									<div style="padding:15px;">
-									<c:choose>
-										<c:when test="${loginMember != null}">
-											<strong>${loginMember.memberId} 님 환영합니다.</strong>
-										</c:when>
-										<c:otherwise>
-											<strong> 손님 환영합니다.</strong>
-										</c:otherwise>
-									</c:choose>	
-									</div>									
-								</li>	
-				
-						<li><a href="${pageContext.request.contextPath}/getLogin">Login</a></li>
-						<li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
-						
+							</c:choose>	
+							</div>									
+						</li>	
+						<c:choose>
+							<c:when test="${loginMember != null}">
+								<li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
+							</c:when>
+							<c:otherwise>
+								<li><a href="${pageContext.request.contextPath}/getLogin">Login</a></li>
+							</c:otherwise>
+						</c:choose>					
 					</ul>
 				</div><!-- /.navbar-collapse -->
 			</div><!-- /.container-fluid -->
-		</nav>
-		
+		</nav>	
 	</body>
 </html>
