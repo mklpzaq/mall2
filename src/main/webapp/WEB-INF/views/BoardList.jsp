@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -15,10 +16,10 @@
 	<body>
 		<button><a href = "${pageContext.request.contextPath}/insertBoardForm">글쓰기</a></button>
 		<select id="pagePerRow">
-			<option	class="option" value=5 <c:if test="${pagePerRow == 5}">selected</c:if>>5개씩보기</option>
-			<option	class="option" value=10 <c:if test="${pagePerRow == 10}">selected</c:if>>10개씩보기</option>
-			<option class="option" value=15 <c:if test="${pagePerRow == 15}">selected</c:if>>15개씩보기</option>
-			<option class="option" value=20 <c:if test="${pagePerRow == 20}">selected</c:if>>20개씩보기</option>			
+			<option	class="option" value=5 <c:if test="${pagePerRow == 5}"></c:if>>5개씩보기</option>
+			<option	class="option" value=10 <c:if test="${pagePerRow == 10}"></c:if>>10개씩보기</option>
+			<option class="option" value=15 <c:if test="${pagePerRow == 15}"></c:if>>15개씩보기</option>
+			<option class="option" value=20 <c:if test="${pagePerRow == 20}"></c:if>>20개씩보기</option>			
 		</select>
 		<table border="1">
 			<thead>
@@ -27,6 +28,8 @@
 				<td>제목</td>
 				<td>작성자</td>
 				<td>작성날짜</td>
+				<td>수정</td>
+				<td>삭제</td>
 				</tr>
 			</thead>
 			<c:forEach var="Board" items="${list}">
@@ -34,6 +37,8 @@
 					<tr>
 						<th scope = "row">${board.boardNo}</th>
 						<td>${board.boardName}</td>
+						<td>${board.memberId}</td>
+						<td>${board.boardDate}</td>
 						<td><a href="${pageContext.request.contextPath}/updateBoardForm?boardNo=${board.boardNo}&pagePerRow=${pagePerRow}">수정</a></td>
 						<td><a href="${pageContext.request.contextPath}/deleteBoard?boardNo=${board.boardNo}&pagePerRow=${pagePerRow}">삭제</a></td>
 					</tr>
