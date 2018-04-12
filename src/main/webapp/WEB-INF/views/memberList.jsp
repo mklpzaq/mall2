@@ -19,7 +19,8 @@
 		</script>
 	</head>
 	<body>
-		<h3>${loginMember.memberId} 님 환영합니다.</h3>
+		<jsp:include page="./navbar.jsp"/>
+		
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-sm-3"></div>

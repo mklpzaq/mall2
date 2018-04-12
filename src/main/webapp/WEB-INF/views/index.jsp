@@ -3,27 +3,27 @@
 <%@ page session="true" %>
 <html>
 	<head>
-		<title>Home</title>
+		<title>Home</title>		
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">		
 	</head>
 	<body>		
-		<h1>Welcome Mall2!</h1>	
-		<c:choose>
-			<c:when test="${!empty loginMember}">
-				<h3>${loginMember.memberId} 님 환영합니다.</h3>
-			</c:when>
-		</c:choose>
-		<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
-		<P>  The time on the server is ${serverTime}. </P>
+		<jsp:include page="./navbar.jsp"/>
 		
-		<a href="${pageContext.request.contextPath}/getLogin">login</a>
-		<a href="${pageContext.request.contextPath}/insertMemberForm">insertMember</a>
-		<a href="${pageContext.request.contextPath}/getMemberList">memberList</a>
-		<a href="${pageContext.request.contextPath}/insertCategoryForm">insertCategory</a>
-		<a href="${pageContext.request.contextPath}/selectCategoryList">categoryList</a>
-		<a href="${pageContext.request.contextPath}/insertBoardForm">insertBoard</a>
-		<a href="${pageContext.request.contextPath}/#">새로 추가하시오</a>
-		
-		
-		
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="col-md-8">
+					<!-- Begin Content -->
+					
+						<h1>Welcome Mall2!</h1>	
+						
+					
+					
+					
+					<!-- End Content -->
+				</div>
+				<div class="col-md-2"></div>
+			</div>
+		</div>
 	</body>
 </html>
