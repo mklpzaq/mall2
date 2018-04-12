@@ -24,6 +24,18 @@ public class MemberDao {
  	private SqlSessionTemplate sqlSession;
 	final String NS ="com.test.mall2.member.service.MemberMapper.";
 	
+	public int deleteMember(int memberNo) {
+		return sqlSession.delete(NS+"deleteMember", memberNo);
+	}
+	
+	public int updateMember(Member member) {
+		return sqlSession.update(NS+"updateMember", member);
+	}
+	
+	public Member selecMemberForUpdate(int memberNo) {
+		return sqlSession.selectOne(NS+"selectMemberForUpdate", memberNo);
+	}
+	
 	public Member selectMemberById(Member member) {		
 		return sqlSession.selectOne(NS+"selectMemberById", member);
 	}

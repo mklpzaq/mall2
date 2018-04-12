@@ -27,6 +27,30 @@ public class MemberController {
 	private MemberService memberService;	
 	private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
 	
+	@RequestMapping(value="/deleteMember", method = RequestMethod.GET)
+	public String deleteMember(@RequestParam(value="sendNo") int memberNo) {
+		int result = memberService.deleteMember(memberNo);
+		
+		return "redirect:/getMemberList";
+	}
+	
+	@RequestMapping(value="/updateMember", method = RequestMethod.GET)
+	public String updateMember(Model model
+								,@RequestParam(value="sendNo") int memberNo){
+		logger.info("updateMember GET");		
+		Member member = memberService.selectMemberForUpdate(memberNo);
+		model.addAttribute("memberForUpdate", member);
+		return "updateMemberForm";
+	}
+	
+	@RequestMapping(value="/updateMember", method = RequestMethod.POST)
+	public String updateMember(Model model, Member member){
+		logger.info("/updateMember Post");
+		int result = memberService.updateMember(member);
+		
+		return "redirect:/getMemberList";
+	}
+	
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
 	public String Logout(HttpSession session) {
 		memberService.terminateLoginSession(session);

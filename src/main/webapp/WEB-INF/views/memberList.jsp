@@ -26,7 +26,6 @@
 				<div class="col-sm-3"></div>
 				<div class="col-sm-6">
 					<!-- Begin Content -->
-					<a href="${pageContext.request.contextPath}/">Home</a>
 					<div class="panel panel-default">
 						<div class="panel-body text-center">
 							<div class="row">
@@ -56,6 +55,8 @@
 										<td><strong>memberNo</strong></td>
 										<td><strong>memberId</strong></td>
 										<td><strong>memberPw</strong></td>
+										<td><strong>수정</strong></td>
+										<td><strong>삭제</strong></td>
 									</tr>
 								</thead>
 								<tbody>
@@ -64,9 +65,11 @@
 											<td><strong>${member.memberNo}</strong></td>
 											<td>${member.memberId}</td>
 											<td>${member.memberPw}</td>
+											<td><a href="${pageContext.request.contextPath}/updateMember?sendNo=${member.memberNo}">수정</a></td>
+											<td><a href="${pageContext.request.contextPath}/deleteMember?sendNo=${member.memberNo}">삭제</a></td>											
 										</tr>
 									</c:forEach>
-									<c:choose>
+									<%-- <c:choose>
 										<c:when test="${currentPage == lastPage}">
 											<c:forEach var="remainderRow" begin="1" end="${pagePerRow - lastPageMemberCnt}" step="1">
 												<tr>
@@ -76,7 +79,7 @@
 												</tr>
 											</c:forEach>
 										</c:when>
-									</c:choose>
+									</c:choose> --%>
 								</tbody>
 							</table>
 							<nav>

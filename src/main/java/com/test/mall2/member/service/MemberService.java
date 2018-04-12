@@ -20,6 +20,18 @@ public class MemberService {
 	private MemberDao memberDao;
 	private static final Logger logger = LoggerFactory.getLogger(MemberService.class);
 	
+	public int deleteMember(int memberNo) {		
+		return memberDao.deleteMember(memberNo);
+	}
+	
+	public int updateMember(Member member) {
+		return memberDao.updateMember(member);
+	}
+	
+	public Member selectMemberForUpdate(int memberNo) {
+		return memberDao.selecMemberForUpdate(memberNo);		
+	}
+	
 	public void terminateLoginSession(HttpSession session) {
 		session.invalidate();
 	}
