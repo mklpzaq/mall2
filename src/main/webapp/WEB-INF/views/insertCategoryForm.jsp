@@ -6,18 +6,23 @@
 <title>카테고리 등록</title>
 </head>
 <body>
-	<form action="${pageContext.request.contextPath}/insertCategoryForm" method="post">
-		<table border="1">
-			<tr>
-				<td>categoryName</td>
-				<td><input type="text" name="categoryName" size="50" value=""></td>
-			<tr>
-			<tr>
-				<td colspan="4"><input type="submit" value="카테고리추가"></td>
-			</tr>
-		</table>
-	</form>
-
-
+	<jsp:include page="./navbar.jsp"/>
+		
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="col-md-8">
+					<h2>카테고리 작성 </h2>
+					<form action="${pageContext.request.contextPath}/insertCategoryForm" method="post">
+						<div class="form-group">
+							<label for="categoryName">제목</label>
+							<input type="text" class="form-control" id="categoryName" name="categoryName" placeholder="제목을 입력하세요.">
+						</div>
+						<button type="submit" class="btn btn-primary">작성</button>						
+					</form>
+				</div>
+				<div class="col-md-2"></div>
+			</div>
+		</div>
 </body>
 </html>

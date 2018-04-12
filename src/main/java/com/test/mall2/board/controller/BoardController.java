@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.test.mall2.board.service.Board;
 import com.test.mall2.board.service.BoardService;
@@ -81,12 +82,12 @@ public class BoardController {
 	} 
 	
 	@RequestMapping(value = "/updateBoardForm", method = RequestMethod.POST)
-	public String updateBoardForm1(Board board, Model model) {
+	public String updateBoardForm(Board board, RedirectAttributes redirectAttributes) {
 		logger.info("updateBoardForm");
 		boardService.updateBoardForm(board);
 		
-		model.addAttribute("board", board);
-		
-		return "redirect:/boardView?board=board";  
+		redirectAttributes.addFlashAttribute("board", board);
+				
+		return "redirect:/boardView";  
 	}  
 }

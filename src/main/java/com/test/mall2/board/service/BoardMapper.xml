@@ -12,7 +12,7 @@
 			,board_title as boardTitle
 			,board_date as boardDate
 		FROM board
-		order by board_no ASC 
+		order by board_no DESC 
 		limit #{beginRow}, #{pagePerRow} 
 	</select>
 	

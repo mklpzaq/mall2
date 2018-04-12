@@ -7,20 +7,28 @@
 <title>카테고리 수정</title>
 </head>
 <body>
-	<form action="${pageContext.request.contextPath}/updateCategoryForm" method="post">
-		<table border="1">
-			<tr>
-				<td>categoryNo</td>
-				<td><input type="text" name="categoryNo" size="10" value="${categoryForm.categoryNo}" readonly></td>
-			<tr>
-			<tr>
-				<td>categoryName</td>
-				<td><input type="text" name="categoryName" size="50" value="${categoryForm.categoryName}"></td>
-			<tr>
-			<tr>
-				<td colspan="4"><input type="submit" value="수정하기"></td>
-			</tr>
-		</table>
-	</form>
+	<jsp:include page="./navbar.jsp"/>		
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="col-md-8">
+					<form action="${pageContext.request.contextPath}/updateCategoryForm" method="post">
+						<div class="col-md-3"></div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="categoryName">제목</label>
+								<input type="text" class="form-control" name="categoryNo" size="10" value="${categoryForm.categoryNo}" readonly>
+							</div>
+							<div class="form-group">
+								<label for="categoryName">제목</label>
+								<input type="text" class="form-control" name="categoryName" size="50" value="${categoryForm.categoryName}">
+							</div>
+						</div>
+						<div class="col-md-3"></div>							
+					</form>
+				</div>
+				<div class="col-md-2"></div>
+			</div>
+		</div>		
 </body>
 </html>
