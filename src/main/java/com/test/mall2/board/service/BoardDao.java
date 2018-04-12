@@ -17,10 +17,24 @@ public class BoardDao {
 		return sqlSession.selectList(NS + "selectBoardList", map);	
 	}
 	public int totalCountBoard() {
-		return sqlSession.selectOne(NS+"totalCountCategory"); // 결과값이 하나 이므로 selectOne 사용
+		return sqlSession.selectOne(NS+"totalCountBoard"); // 결과값이 하나 이므로 selectOne 사용
 	}
 	public int insertBoard(Board board) {
 		int row = sqlSession.insert(NS + "insertBoard", board);		
 		return row;
 	}
+	
+	public Board boardView(Board board) {
+			
+		return sqlSession.selectOne(NS + "boardView", board);	
+	}
+	
+	public void deleteBoard(Board boardNo) {
+		sqlSession.delete(NS + "deleteBoard", boardNo);	
+	}
+	
+	public void updateBoardForm(Board board) {
+		sqlSession.update(NS + "updateBoard", board);	
+	}
+	
 }

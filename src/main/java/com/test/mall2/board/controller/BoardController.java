@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.test.mall2.board.service.Board;
 import com.test.mall2.board.service.BoardService;
+import com.test.mall2.category.service.Category;
 
 
 @Controller
@@ -24,10 +25,9 @@ public class BoardController {
 	private static final Logger logger = LoggerFactory.getLogger(BoardService.class);
 	
 	@RequestMapping(value ="/selectBoardList", method = RequestMethod.GET)
-	public String selectBoardList(Model model
-											, HttpSession session
+	public String selectBoardList(Model model											
 											,@RequestParam(value="currentPage", defaultValue="1") int currentPage
-											,@RequestParam(value="gagePerRow", required=true, defaultValue="10") int pagePerRow) {
+											,@RequestParam(value="pagePerRow", required=true, defaultValue="10") int pagePerRow) {
 		logger.info("pagePerRow");
 	Map<String, Object> map = boardService.selectBoardList(currentPage, pagePerRow);
 	model.addAttribute("list", map.get("list"));
@@ -53,4 +53,40 @@ public class BoardController {
 		return "insertBoardForm";
 	}
 	
+	
+	@RequestMapping(value = "/boardView", method= RequestMethod.GET)
+	public String boardView(Board board, Model model) {
+		Board boardView = boardService.boardView(board);
+		
+		model.addAttribute("boardView", boardView);
+		
+		return "boardSangseView";
+	}
+	
+	@RequestMapping(value = "/deleteBoard", method= RequestMethod.GET)
+	public String deleteBoard(Board boardNo) {
+		boardService.deleteBoard(boardNo);
+		
+		return "redirect:/selectBoardList";
+	}
+	
+	@RequestMapping(value = "/updateBoardForm", method = RequestMethod.GET)
+	public String updateBoardForm(Board board, Model model) {
+		logger.info("updateBoardForm");
+		Board boardUpdate = boardService.boardView(board);
+		
+		model.addAttribute("boardUpdate", boardUpdate);
+		
+		return "updateBoardForm";  
+	} 
+	
+	@RequestMapping(value = "/updateBoardForm", method = RequestMethod.POST)
+	public String updateBoardForm1(Board board, Model model) {
+		logger.info("updateBoardForm");
+		boardService.updateBoardForm(board);
+		
+		model.addAttribute("board", board);
+		
+		return "redirect:/boardView?board=board";  
+	}  
 }

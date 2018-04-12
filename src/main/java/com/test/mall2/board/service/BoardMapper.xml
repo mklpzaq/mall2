@@ -5,13 +5,21 @@
   
 <mapper namespace="com.test.mall2.board.service.BoardMapper">
 	
-	<select id="selectBoardList">
+	<select id="selectBoardList" parameterType="java.util.Map" resultType="com.test.mall2.board.service.Board">
 		SELECT
 			board_no as boardNo
 			,member_id as memberId
-			,board_title as board_title
+			,board_title as boardTitle
 			,board_date as boardDate
 		FROM board
+		order by board_no ASC 
+		limit #{beginRow}, #{pagePerRow} 
+	</select>
+	
+	<select id="totalCountBoard"
+			resultType="Integer">
+		select count(*) from board
+	
 	</select>
 	
 	<insert id="insertBoard" parameterType="com.test.mall2.board.service.Board">
@@ -29,5 +37,30 @@
 			,now()
 		)			
 	</insert>
+	
+	<select id="boardView" resultType="com.test.mall2.board.service.Board">
+		SELECT
+			board_no as boardNo
+			,member_id as memberId
+			,board_title as boardTitle
+			,board_content as boardContent
+			,board_date as boardDate
+		FROM board
+		where
+			board_no = #{boardNo}
+	</select>
+	
+	<delete id="deleteBoard" parameterType="com.test.mall2.board.service.Board">
+	 DELETE
+	 	FROM board
+	 	WHERE board_no = #{boardNo}
+	</delete>
 
+	<update id="updateBoard" parameterType="com.test.mall2.board.service.Board">
+		UPDATE board
+			SET
+			board_title  = #{boardTitle}
+			,board_content = #{boardContent}
+		WHERE board_no = #{boardNo}				
+	</update>
 </mapper>

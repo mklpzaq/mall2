@@ -52,4 +52,17 @@ public class BoardService {
 		return row;
 	}
 	
+	
+	public Board boardView(Board board) {
+				
+		return boardDao.boardView(board);
+	}
+	
+	public void deleteBoard(Board boardNo) {
+		boardDao.deleteBoard(boardNo);
+	}
+	
+	public void updateBoardForm(Board board) {
+		boardDao.updateBoardForm(board);
+	}
 }
