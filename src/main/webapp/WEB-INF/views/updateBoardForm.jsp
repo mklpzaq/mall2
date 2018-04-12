@@ -44,7 +44,7 @@
 		</td>
 	</tr>
 	<tr>
-				<td colspan="4"><input type="submit" value="수정하기"></td>
+		<td colspan="4"><input type="submit" value="수정하기"></td>
 	</tr>
 	<%-- <tr>
 		<td style="font-family:돋음; font-size:12">
