@@ -36,15 +36,16 @@ public class MemberController {
 	
 	@RequestMapping(value = "/getLogin", method = RequestMethod.POST)
 	public String Loging(Model model, Member member, HttpSession session) {
-		
+		System.out.println("========= /getLogin 들어옴===============");
 		Member returnMember = memberService.getMemberById(member);
+		System.out.println("=========================");
 		if(returnMember == null) {
 			/* 왜 틀렸는지 다시 입력값을 로그인폼에서 보여주기 위해서 어트리부트를 한다. 그리고 포워드를 한다. */
 			model.addAttribute("requestMember", member);
 			return "login";
 		}
 		session.setAttribute("loginMember", returnMember);
-		return "redirect:/";
+		return "redirect:/index";
 	}
  
 	/* currentPage는 안넘어오면 1로 받는다. 그리고 자동으로 받아서 int형으로 변환시킨후, currentPage로 넘긴다.*/

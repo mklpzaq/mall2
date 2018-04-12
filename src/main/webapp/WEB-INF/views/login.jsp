@@ -8,38 +8,7 @@
 		<title>Member Login</title>
 		<script>
 			$(document).ready(function(){
-				var loginSwitch = false;
-					
-				$('#memberId').blur(function(){
-					loginSwitch = true;
-					if($('#memberId').val().length < 3 && loginSwitch){
-						alert('ID를 3자 이상 입력해주세요.');
-						loginSwitch = false;
-					}
-				});
 				
-				$('#memberPw').blur(function(){
-					loginSwitch = true;
-					if($('#memberPw').val().length < 3 && loginSwitch){
-						$('inputGroupSuccess1Status').show();
-						loginSwitch = false;
-					}
-				});
-					
-				$('#memberPwCheck').blur(function(){
-					loginSwitch = true;
-					if($('#memberPwCheck').val() != $('#memberPw').val() && loginSwitch){
-						alert('PW와 똑같이 입력하여 주세요.');
-						loginSwitch = false;
-					}
-				});
-				
-				
-				$('inputWarning2').keyup(function(){
-					if($('inputWarning2').val() < 3){
-						$('inputGroupSuccess1Status').show();
-					}
-				});
 				
 					
 			});
@@ -62,7 +31,7 @@
 									<div class="col-sm-3"></div>
 								</div>
 								<hr/>
-								<form class="form-horizontal">
+								<form class="form-horizontal" action="${pageContext.request.contextPath}/getLogin" method="post">
 									<div class="form-group">
 										<label for="memberId" class="col-sm-2 control-label">ID</label>
 										<div class="col-sm-10">
@@ -74,16 +43,10 @@
 										<div class="col-sm-10">
 											<input type="text" class="form-control" name = "memberPw" id="memberPw" placeholder="PW">
 										</div>
-									</div>
-									<div class="form-group">
-										<label for="memberPwCheck" class="col-sm-2 control-label">PWCheck</label>
-										<div class="col-sm-10">
-											<input type="text" class="form-control" id="memberPwCheck" placeholder="PWCheck">
-										</div>
-									</div>
+									</div>									
 									<div class="form-group">
 										<div class="col-sm-12">
-											<button id="loginButton" type="button" class="btn btn-default">Sign in</button>
+											<button id="loginButton" type="submit" class="btn btn-default">Sign in</button>
 										</div>
 									</div>
 								</form>

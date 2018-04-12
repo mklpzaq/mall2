@@ -25,7 +25,7 @@ public class MemberDao {
 	final String NS ="com.test.mall2.member.service.MemberMapper.";
 	
 	public Member selectMemberById(Member member) {
-		return sqlSession.selectOne(NS+"member", member);
+		return sqlSession.selectOne(NS+"selectMemberById", member);
 	}
 
 	/* 하나의  */
