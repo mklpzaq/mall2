@@ -44,9 +44,9 @@ public class CategoryDao {
 		sqlsession.update(NS+"updateCategory", category);
 	}
 	
-	public void deleteCategory(Category category) {
-		
-		sqlsession.delete(NS+"deleteCategory", category);
+	public void deleteCategory(int categoryNo) {
+		logger.info("Dao-deleteCategory");
+		sqlsession.delete(NS+"deleteCategory", categoryNo);
 	}
 	
 }

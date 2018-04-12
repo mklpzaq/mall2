@@ -45,7 +45,6 @@ public class CategoryController {
 	
 	@RequestMapping(value = "/selectCategoryList", method = RequestMethod.GET)
 	public String selectCategoryList(Model model
-											, HttpSession session
 											,@RequestParam(value="currentPage", defaultValue="1") int currentPage
 											,@RequestParam(value="pagePerRow", required=true, defaultValue="10") int pagePerRow) {
 		
@@ -81,9 +80,9 @@ public class CategoryController {
 	} 
 	
 	@RequestMapping(value = "/deleteCategory", method = RequestMethod.GET)
-	public String deleteCategory(Category category) {
-		logger.info("deleteCategory");
-		categoryService.deleteCategory(category);		
+	public String deleteCategory(@RequestParam(value="deleteCheckbox") int[] deleteCheckbox) {
+		logger.info("Controller-deleteCategory");
+		categoryService.deleteCategory(deleteCheckbox);		
 
 		return "redirect:selectCategoryList";
 	} 

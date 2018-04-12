@@ -71,10 +71,14 @@ public class CategoryService {
 	 
 	}
 	
-	public void deleteCategory(Category category)  {	
-		logger.info("deleteCategory");
-		categoryDao.deleteCategory(category);
-	 
+	public void deleteCategory(int[] deleteCheckbox)  {	
+		logger.info("Service-deleteCategory");
+		
+		for(int i = 0; i<deleteCheckbox.length; i++) {
+			int categoryNo = deleteCheckbox[i];
+			categoryDao.deleteCategory(categoryNo);
+		}
+			 
 	}
 	
 

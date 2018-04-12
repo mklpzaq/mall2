@@ -9,12 +9,30 @@
 <script>	
 	
 	$(document).ready(function(){			
-	  $('#pagePerRow').change(function(){			  
-	     	 
+	  $('#pagePerRow').change(function(){	     	 
 	     	 $(location).attr('href', './selectCategoryList?pagePerRow='+$('#pagePerRow > option:selected').val());
 	  });
 	});
-		
+	
+	$(document).ready(function(){
+		$("#button").click(function(){
+			$('input[name="deleteCheckbox"]:checked').each(function(){							
+				var text = $(this).val();
+				alert("categoryNo"+text+"삭제");					
+				$("#form1").submit();	
+			});
+		})	
+	});
+	
+	$(document).ready(function(){
+		$("#checkboxAll").click(function(){
+			if($(this).prop("checked")){
+				$("input[type=checkbox]").prop("checked",true);
+			}else{
+				$("input[type=checkbox]").prop("checked",false);
+			}
+		});
+	});
 	/* $(document).ready(function(){	
 		$('button[name=move]').click(function(){
 			$("#pagePerRowForm").submit();
@@ -44,22 +62,24 @@
 	<table border="1">
 		<thead>
 			<tr>
+				<th><input type="checkbox" id="checkboxAll" value="">전체선택</th>
 				<td>categoryNo</td>
 				<td>categoryName</td>
 				<td>수정</td>
-				<td>삭제</td>
 			</tr>
 		</thead>
-		<c:forEach var="category" items="${list}">
-			<tbody>
-				<tr>
-					<th scope = "row">${category.categoryNo}</th>
-					<td>${category.categoryName}</td>
-					<td><a href="${pageContext.request.contextPath}/updateCategoryForm?categoryNo=${category.categoryNo}&pagePerRow=${pagePerRow}">수정</a></td>
-					<td><a href="${pageContext.request.contextPath}/deleteCategory?categoryNo=${category.categoryNo}&pagePerRow=${pagePerRow}">삭제</a></td>
-				</tr>
-			</tbody>
-		</c:forEach>
+		<form id="form1" method="get" action="${pageContext.request.contextPath}/deleteCategory">
+			<c:forEach var="category" items="${list}">
+				<tbody>
+					<tr>
+						<th><input type="checkbox" name="deleteCheckbox" value="${category.categoryNo}"></th>
+						<th scope = "row">${category.categoryNo}</th>
+						<td>${category.categoryName}</td>
+						<td><a href="${pageContext.request.contextPath}/updateCategoryForm?categoryNo=${category.categoryNo}&pagePerRow=${pagePerRow}">수정</a></td>
+					</tr>
+				</tbody>
+			</c:forEach>
+		</form>
 	</table>
 	
 		
@@ -77,5 +97,9 @@
 		<button name="move"><a href="${pageContext.request.contextPath}/selectCategoryList?currentPage=${currentPage+1}&pagePerRow=${pagePerRow}">다음</a></button>
 		<button name="move"><a href="${pageContext.request.contextPath}/selectCategoryList?currentPage=${lastPage}&pagePerRow=${pagePerRow}">마지막으로</a></button>
 	</c:if>
+	
+	<div>
+  		<button id="button">카테고리 삭제</button>
+	</div>
 </body>
 </html>
