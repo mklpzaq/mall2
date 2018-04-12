@@ -25,7 +25,7 @@ public class BoardController {
 	@RequestMapping(value = "/insertBoardForm", method=RequestMethod.POST)
 	public String insertBoard(Board board) {
 		int row = boardservice.insertBoard(board);
-		return "redirect:/";
+		return "redirect:/selectBoardList";
 	}
 	
 	

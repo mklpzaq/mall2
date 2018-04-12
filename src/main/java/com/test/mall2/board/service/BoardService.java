@@ -1,5 +1,7 @@
 package com.test.mall2.board.service;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -14,9 +16,35 @@ public class BoardService {
 	private BoardDao boardDao;
 	private static final Logger logger = LoggerFactory.getLogger(BoardService.class);
 	
-	public Board selectBoardList() {
+	public Map<String, Object> selectBoardList(int currentPage, int pagePerRow) {
 		logger.info("selectBoardList");
-		return null;
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		int beginRow = (currentPage-1)*pagePerRow;
+		map.put("beginRow", beginRow);
+		map.put("pagePerRow", pagePerRow);
+		List<Board> list = boardDao.selectBoardList(map);
+		
+		int total = boardDao.totalCountBoard();
+		int lastPage = 0;
+		if(total%pagePerRow == 0) {
+			lastPage = total/pagePerRow;
+		}else {
+			lastPage = total/pagePerRow + 1;
+		}
+		
+		int pageView = 5;
+		int startPage = ((currentPage-1)/5)*5+1; 
+		int endPage = startPage + pageView -1; 
+		if(endPage>lastPage) {
+			endPage=lastPage;
+		}
+		
+		Map<String, Object> returnmap = new HashMap<String, Object>();
+		returnmap.put("list", list);
+		returnmap.put("lastPage", lastPage);
+		returnmap.put("startPage", startPage);
+		returnmap.put("endPage", endPage);
+		return returnmap;
 	}
 	
 	public int insertBoard(Board board) {
