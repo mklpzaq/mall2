@@ -15,7 +15,8 @@ public class ItemDao {
 
 	
 	public int insertItem(Item item) {
-		int row =sqlSession.insert(NS+"insertItem", item);
+		System.out.println(item.getItemName()+"<---ItemDao-insertItem");
+		int row = sqlSession.insert(NS+"insertItem",item);
 		return row;
 	}
 }

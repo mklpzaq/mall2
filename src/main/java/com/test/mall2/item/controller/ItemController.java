@@ -13,7 +13,7 @@ import com.test.mall2.item.service.ItemService;
 @Controller
 public class ItemController {
 	@Autowired
-	ItemService itemService;
+	private ItemService itemService;
 	
 	//ItemController get호출
 	@RequestMapping(value="/insertItemForm",  method = RequestMethod.GET)
