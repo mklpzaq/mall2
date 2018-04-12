@@ -15,8 +15,8 @@
 					<h2>카테고리 작성 </h2>
 					<form action="${pageContext.request.contextPath}/insertCategoryForm" method="post">
 						<div class="form-group">
-							<label for="categoryName">제목</label>
-							<input type="text" class="form-control" id="categoryName" name="categoryName" placeholder="제목을 입력하세요.">
+							<label for="categoryName">카테고리명</label>
+							<input type="text" class="form-control" id="categoryName" name="categoryName" placeholder="카테고리명을 입력하세요.">
 						</div>
 						<button type="submit" class="btn btn-primary">작성</button>						
 					</form>

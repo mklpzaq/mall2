@@ -81,10 +81,10 @@
 							<table class="table table-striped">
 								<thead>
 									<tr>
-										<th><input type="checkbox" id="checkboxAll" value="">전체선택</th>
-										<td>categoryNo</td>
-										<td>categoryName</td>
-										<td>수정</td>
+										<th><input type="checkbox" id="checkboxAll" value=""></th>
+										<td width="10%">번호</td>
+										<td width="80%">카테고리명</td>
+										<td width="10%">수정</td>
 									</tr>
 								</thead>
 								<tbody>

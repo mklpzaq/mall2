@@ -7,9 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-	<jsp:include page="./navbar.jsp"/>
-		
+	<jsp:include page="./navbar.jsp"/>	
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-2"></div>

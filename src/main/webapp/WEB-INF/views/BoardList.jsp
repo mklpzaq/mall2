@@ -13,6 +13,25 @@
 					$(location).attr('href', './selectBoardList?pagePerRow=' + $('#pagePerRow > option:selected').val());
 				})
 			})
+			$(document).ready(function(){
+			$("#button").click(function(){
+				$('input[name="deleteCheckbox"]:checked').each(function(){							
+					var text = $(this).val();
+					alert("categoryNo"+text+"삭제");					
+					$("#form1").submit();	
+					});
+				})	
+			});
+		
+			$(document).ready(function(){
+				$("#checkboxAll").click(function(){
+					if($(this).prop("checked")){
+						$("input[type=checkbox]").prop("checked",true);
+					}else{
+						$("input[type=checkbox]").prop("checked",false);
+					}
+				});
+			});
 		</script>
 	</head>
 	<body>
@@ -47,16 +66,18 @@
 							<table class="table table-striped">
 								<thead>
 									<tr>
-										<td>번호</td>
-										<td>제목</td>
-										<td>작성자</td>
-										<td>작성날짜</td>
+										<th><input type="checkbox" id="checkboxAll" value=""></th>
+										<td width="8%">번호</td>
+										<td width="50%">제목</td>
+										<td width="15%">작성자</td>
+										<td width="27%">작성날짜</td>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach var="board" items="${list}">
 										<tbody>
 											<tr>
+												<th><input type="checkbox" name="deleteCheckbox" value="${category.categoryNo}"></th>
 												<th scope = "row">${board.boardNo}</th>
 												<td><a href="${pageContext.request.contextPath}/boardView?boardNo=${board.boardNo}">${board.boardTitle}</a></td>
 												<td>${board.memberId}</td>
