@@ -15,6 +15,7 @@
 		</script>
 	</head>
 	<body>
+		<jsp:include page="./navbar.jsp"/>
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-sm-3"></div>
