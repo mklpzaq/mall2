@@ -15,4 +15,27 @@
 		)	
 	</insert>
 	
+	<select id="selectItemList" parameterType="java.util.Map" resultType="com.test.mall2.item.service.Item">
+		SELECT 
+			item_no
+			, category.category_no
+			,  category.category_name
+			, item_name
+			, item_price 
+		FROM item join category 
+		on item.category_no = category.category_no
+		ORDER BY item_no DESC 
+		LIMIT #{beginRow},#{pagePerRow}
+	</select>
+	
+	<select id="totalCountItem" resultType="Integer">
+		SELECT 
+			count(*) 
+		FROM item
+	</select>
+	
+	
+	
 </mapper>
+
+
