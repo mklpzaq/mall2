@@ -1,5 +1,7 @@
 package com.test.mall2.address.controller;
 
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,8 +46,18 @@ public class AddressController {
 								,@RequestParam(value="pagePerRow", defaultValue="10", required=true) int pagePerRow) {
 		logger.info("getAddressList AddressController");
 		
-		addressService.getAddressList(currentPage, pagePerRow);
+		Map<String, Object> map= addressService.getAddressList(currentPage, pagePerRow);
 		
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("lastPage", map.get("lastPage"));
+		model.addAttribute("beginPageNumForCurrentPage", map.get("beginPageNumForCurrentPage"));
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("pagePerRow", pagePerRow);
+		logger.info("list : "+ map.get("list"));
+		logger.info("lastPage : "+ map.get("lastPage"));
+		logger.info("beginPageNumForCurrentPage : "+ map.get("beginPageNumForCurrentPage"));
+		logger.info("currentPage : "+ currentPage);
+		logger.info("pagePerRow : "+ pagePerRow);	
 		return "addressList";
 	}
 	
