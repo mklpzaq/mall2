@@ -57,6 +57,7 @@
 										<td><strong>memberPw</strong></td>
 										<td><strong>수정</strong></td>
 										<td><strong>삭제</strong></td>
+										<td><strong>주소추가</strong></td>
 									</tr>
 								</thead>
 								<tbody>
@@ -66,7 +67,8 @@
 											<td>${member.memberId}</td>
 											<td>${member.memberPw}</td>
 											<td><a href="${pageContext.request.contextPath}/updateMember?sendNo=${member.memberNo}">수정</a></td>
-											<td><a href="${pageContext.request.contextPath}/deleteMember?sendNo=${member.memberNo}">삭제</a></td>											
+											<td><a href="${pageContext.request.contextPath}/deleteMember?sendNo=${member.memberNo}">삭제</a></td>
+											<td><a href="${pageContext.request.contextPath}/insertAddress?sendNo=${member.memberNo}">주소추가</a></td>											
 										</tr>
 									</c:forEach>
 									<%-- <c:choose>

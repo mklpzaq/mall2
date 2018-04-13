@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.test.mall2.address.service.AddressMapper">
+	
+	<!-- 마이바티스에서 세미콜론 찍으면 에러난다. -->
+<!-- 	<select id="totalCountMember" resultType="Integer">
+		SELECT COUNT(*) FROM member
+	</select>
+	 -->
+	
+ 
+	<insert id="insertAddress" 
+			parameterType="com.test.mall2.address.service.Address">
+			INSERT INTO address(
+				member_no 
+				,address_content
+				) VALUES (
+					#{memberNo}
+					,#{addressContent}
+			)
+	 </insert>
+</mapper>
+
