@@ -1,5 +1,8 @@
 package com.test.mall2.address.service;
 
+import java.util.List;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +17,15 @@ public class AddressDao {
 	private SqlSessionTemplate sqlSession;
 	private static final Logger logger = LoggerFactory.getLogger(AddressDao.class);
 	final String NS ="com.test.mall2.address.service.AddressMapper.";
+	
+	public int totalCountAddress() {
+		return sqlSession.selectOne(NS+"totalCountAddress");
+	}
+	
+	
+	public List<Address> selectAddressList(Map<String, Integer> map){
+		return sqlSession.selectList(NS+"selectAddressList", map);
+	}
 	
 	public int insertAddress(Address address) {
 		logger.info("insertAddress");

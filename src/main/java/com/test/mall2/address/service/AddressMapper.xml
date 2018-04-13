@@ -5,19 +5,38 @@
  
 <mapper namespace="com.test.mall2.address.service.AddressMapper">
 	
-	<!-- 마이바티스에서 세미콜론 찍으면 에러난다. -->
-<!-- 	<select id="totalCountMember" resultType="Integer">
-		SELECT COUNT(*) FROM member
-	</select>
-	 -->
+	<select id="totalCountAddress"
+			resultType="Integer">
+		SELECT
+			COUNT(*)
+		FROM
+			address
 	
- 
+	</select>
+	
+	
+	
+	<!-- 마이바티스에서 세미콜론 찍으면 에러난다. -->
+	<select id="selectAddressList"
+			parameterType="java.util.Map"
+			resultType="com.test.mall2.address.service.Address">
+		SELECT
+			address_no AS addressNo
+			,member_no AS memberNo
+			,address_content AS addressContent
+		FROM address
+		ORDER BY address_no DESC
+		LIMIT #{beginRow}, #{pagePerRow}
+	</select>
+	
 	<insert id="insertAddress" 
 			parameterType="com.test.mall2.address.service.Address">
-			INSERT INTO address(
-				member_no 
-				,address_content
-				) VALUES (
+			INSERT
+				INTO address(
+					member_no 
+					,address_content
+				)
+				VALUES (
 					#{memberNo}
 					,#{addressContent}
 			)
