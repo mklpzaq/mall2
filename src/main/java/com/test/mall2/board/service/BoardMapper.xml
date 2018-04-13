@@ -5,6 +5,46 @@
   
 <mapper namespace="com.test.mall2.board.service.BoardMapper">
 	
+	<select id="searchBoardListBoardDate" parameterType="java.util.Map" resultType="com.test.mall2.board.service.Board">
+		SELECT 
+			board_no as boardNo
+			,member_id as memberId
+			,board_title as boardTitle
+			,board_date as boardDate
+		FROM board
+		WHERE board_date BETWEEN #{sv1} AND #{sv2}
+	</select>
+	
+	<select id="searchBoardListBoardTitle" parameterType="STring" resultType="com.test.mall2.board.service.Board">
+		select 
+			board_no as boardNo
+			,member_id as memberId
+			,board_title as boardTitle
+			,board_date as boardDate
+		from board 
+		where board_title = #{sv}	
+	</select>
+	
+	<select id="searchBoardListMemberId" parameterType="STring" resultType="com.test.mall2.board.service.Board">
+		select 
+			board_no as boardNo
+			,member_id as memberId
+			,board_title as boardTitle
+			,board_date as boardDate
+		from board 
+		where member_id = #{sv}	
+	</select>
+	
+	
+	<select id="selectBoardListAll" resultType="com.test.mall2.board.service.Board">
+		SELECT
+			board_no as boardNo
+			,member_id as memberId
+			,board_title as boardTitle
+			,board_date as boardDate
+		FROM board		
+	</select>
+	
 	<select id="selectBoardList" parameterType="java.util.Map" resultType="com.test.mall2.board.service.Board">
 		SELECT
 			board_no as boardNo

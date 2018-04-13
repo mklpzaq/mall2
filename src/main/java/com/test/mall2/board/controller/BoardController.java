@@ -1,8 +1,10 @@
 package com.test.mall2.board.controller;
 
+import java.sql.Date;
+import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +18,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.test.mall2.board.service.Board;
 import com.test.mall2.board.service.BoardService;
-import com.test.mall2.category.service.Category;
 
 
 @Controller
@@ -89,5 +90,30 @@ public class BoardController {
 		redirectAttributes.addFlashAttribute("board", board);
 				
 		return "redirect:/boardView";  
-	}  
+	}
+	
+	@RequestMapping(value = "/searchBoardList", method = RequestMethod.POST)
+	public String searchBoardList(HttpServletRequest request, Model model) {
+		String sk = request.getParameter("sk");
+		String sv =request.getParameter("sv");		
+		/*@RequestParam(value="sk") String sk
+		,@RequestParam(value="sv") String sv
+		,@RequestParam(value="sv1") Date sv1
+		,@RequestParam(value="sv2") Date sv2*/
+		
+		logger.info("searchBoardList");
+		if(sv != null) {
+			boardService.searchBoardList(sk, sv);
+			
+		}else {
+			Date sv1 = Date.valueOf(request.getParameter("sv1"));
+			Date sv2 = Date.valueOf(request.getParameter("sv2"));
+			boardService.searchBoardList(sk, sv1, sv2);	
+			
+		}
+		
+		
+		
+		return "BoardList";  
+	} 
 }

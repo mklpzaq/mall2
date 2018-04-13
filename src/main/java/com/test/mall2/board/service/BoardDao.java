@@ -1,9 +1,12 @@
 package com.test.mall2.board.service;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +15,7 @@ public class BoardDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	final String NS ="com.test.mall2.board.service.BoardMapper.";
+	private static final Logger logger = LoggerFactory.getLogger(BoardDao.class);
 	
 	public List<Board> selectBoardList(Map<String, Integer> map) {
 		return sqlSession.selectList(NS + "selectBoardList", map);	
@@ -19,6 +23,7 @@ public class BoardDao {
 	public int totalCountBoard() {
 		return sqlSession.selectOne(NS+"totalCountBoard"); // 결과값이 하나 이므로 selectOne 사용
 	}
+	
 	public int insertBoard(Board board) {
 		int row = sqlSession.insert(NS + "insertBoard", board);		
 		return row;
@@ -35,6 +40,26 @@ public class BoardDao {
 	
 	public void updateBoardForm(Board board) {
 		sqlSession.update(NS + "updateBoard", board);	
+	}
+	
+	public List<Board> selectBoardList() {
+		logger.info("selectBoardList");
+		return sqlSession.selectList(NS + "selectBoardListAll");	
+	}
+	
+	public List<Board> searchBoardListMemberId(String sv) {
+		logger.info("searchBoardListMemberId");
+		return sqlSession.selectList(NS + "searchBoardListMemberId", sv);	
+	}
+	
+	public List<Board> searchBoardListBoardTitle(String sv) {
+		logger.info("searchBoardListBoardTitle");
+		return sqlSession.selectList(NS + "searchBoardListBoardTitle", sv);	
+	}
+		
+	public List<Board> searchBoardListBoardDate(Map<String, Date> map) {
+		logger.info("searchBoardListBoardDate");
+		return sqlSession.selectList(NS + "searchBoardListBoardDate", map);	
 	}
 	
 }

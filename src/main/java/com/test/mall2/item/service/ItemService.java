@@ -23,7 +23,7 @@ public class ItemService {
 		return row;
 	}
 	
-	@Autowired
+	
 	public Map<String, Object> selectItemList(int currentPage, int pagePerRow) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		int beginRow = (currentPage-1)*pagePerRow;

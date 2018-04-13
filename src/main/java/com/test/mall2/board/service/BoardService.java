@@ -1,5 +1,6 @@
 package com.test.mall2.board.service;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,5 +65,53 @@ public class BoardService {
 	
 	public void updateBoardForm(Board board) {
 		boardDao.updateBoardForm(board);
+	}
+	
+	public List<Board> searchBoardList(String sk, String sv) {
+		
+		logger.info("searchBoardList");
+		
+		List<Board> list = null;
+		
+		if(sk == null & sv == null){
+			list = boardDao.selectBoardList();
+		}else if(sk != null & sv == null){
+			list = boardDao.selectBoardList();
+		}else if(sk != null & sv.equals("")){
+			list = boardDao.selectBoardList();
+		}else if(sk != null & sv != null){
+			if(sk.equals("memberId")){
+				boardDao.searchBoardListMemberId(sv);
+			}else if(sk.equals("boardTitle")){
+				boardDao.searchBoardListBoardTitle(sv);
+			}
+		}
+		
+		return list;
+	}
+	
+	public List<Board> searchBoardList(String sk, Date sv1, Date sv2) {
+		
+		logger.info("searchBoardList");
+		
+		List<Board> list = null;
+		
+		if(sk == null & sv1 == null & sv2 == null){
+			list = boardDao.selectBoardList();
+		}else if(sk != null & sv1 == null & sv2 == null){
+			list = boardDao.selectBoardList();
+		}else if(sk != null & sv1.equals("") & sv2.equals("")){
+			list = boardDao.selectBoardList();
+		}else if(sk != null & sv1 != null & sv2 != null){
+			if(sk.equals("boardDate")){
+				Map<String, Date> map = new HashMap<String, Date>();
+				map.put("sv1", sv1);
+				map.put("sv2", sv2);
+				boardDao.searchBoardListBoardDate(map);
+			}
+		}
+		
+		
+		return list;
 	}
 }

@@ -32,6 +32,16 @@
 					}
 				});
 			});
+			
+			function changehtml(){
+				var property = $("#sk").val();
+				var show = $("#show");
+				if(property=="boardDate"){
+					$("#show").html('<input type="date" name="sv1">~<input type="date" name="sv2">');
+				}else {
+					$("#show").html('<input type="text" name="sv">');
+				}
+			}	
 		</script>
 	</head>
 	<body>
@@ -120,7 +130,7 @@
 										<li><a href="${pageContext.request.contextPath}/selectBoardList?currentPage=${currentPage+1}&pagePerRow=${pagePerRow}">다음</a></li>
 										<li><a href="${pageContext.request.contextPath}/selectBoardList?currentPage=${lastPage}&pagePerRow=${pagePerRow}">마지막으로</a></li>
 									</c:if>
-								
+																		
 									<%-- <li>
 										<a href="${pageContext.request.contextPath}/getMemberList?currentPage=1&pagePerRow=${pagePerRow}" aria-label="Previous">
 											<span aria-hidden="true">&laquo;</span>
@@ -187,6 +197,17 @@
 									</li> --%>
 								</ul>
 							</nav>
+							<div>
+								<form action="<%=request.getContextPath()%>/searchBoardList" method="post">
+									<select id="sk" name="sk" onclick="changehtml();">											
+										<option value="memberId">아이디</option>
+										<option value="boardTitle">제목</option>											
+										<option value="boardDate">등록날짜</option>		
+									</select>
+									<dr id="show"></dr>
+									<input type="submit" value="검색버튼" >
+								</form>
+							</div>
 						</div>
 					</div>
 					<!-- End Content -->
