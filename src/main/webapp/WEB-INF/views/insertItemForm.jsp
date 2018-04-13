@@ -8,14 +8,11 @@
 	<body>
 		<h1>Item</h1>
 		<form action="${pageContext.request.contextPath}/insertItemForm" method="post">
-			<select id="itemList" name="itemNo">
+		<!-- 	<select id="itemList" name="itemName">
 				<option>[카테고리선택]</option>
-				<option>1</option>
-				<option>2</option>
-				<option>3</option>
-				<option>4</option>
-				<option>5</option>
-			</select>
+				<option>테스트1</option>
+				<option>테스트2</option>
+			</select> -->
 			상품이름: <input type="text" name="itemName">
 			상품가격: <input type="text" name="itemPrice">
 			<button type="submit">상품추가</button>

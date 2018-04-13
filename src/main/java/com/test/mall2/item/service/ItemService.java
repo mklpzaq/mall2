@@ -12,13 +12,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
-@Transactional
 public class ItemService {
 
 	@Autowired
 	private ItemDao itemDao;
 		
-	public int insertItem(Item item) {
+	
+	public int insertItemForm(Item item) {
 		int row = itemDao.insertItem(item);
 		return row;
 	}
@@ -54,5 +54,16 @@ public class ItemService {
 		
 		return returnmap;
 	}
-
+	
+	public Item updateItemForm(Item item) {
+		return itemDao.updateItemForm(item);
+	}
+	
+	public void deleteItem(int[] deleteCheckbox) {	
+		for(int i = 0; i<deleteCheckbox.length; i++) {
+			int itemNo = deleteCheckbox[i];
+			itemDao.deleteItem(itemNo);
+		itemDao.deleteItem(itemNo);
+	}
+	}
 }

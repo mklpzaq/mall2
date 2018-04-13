@@ -18,12 +18,9 @@
 	<select id="selectItemList" parameterType="java.util.Map" resultType="com.test.mall2.item.service.Item">
 		SELECT 
 			item_no
-			, category.category_no
-			,  category.category_name
 			, item_name
 			, item_price 
-		FROM item join category 
-		on item.category_no = category.category_no
+		FROM item
 		ORDER BY item_no DESC 
 		LIMIT #{beginRow},#{pagePerRow}
 	</select>
@@ -34,7 +31,32 @@
 		FROM item
 	</select>
 	
+	<update id="updateItemForm" parameterType="com.test.mall2.item.service.Item">
+		SELECT
+			item_name as itemName
+			, item_price as itemPrice
+		FROM item
+		WHERE
+			item_no =
+			#{itemN0}
+	</update>
 	
+	<update id="updateItem" parameterType="com.test.mall2.item.service.Item">
+		UPDATE item
+		SET
+			item_no = #{itemNo}
+			,item_name = #{itemName}
+			,item_price = #{itemPrice}
+		WHERE
+			item_no = #{itemNo}
+	</update>
+	
+	<delete id="deldteItem" parameterType="com.test.mall2.item.service.Item">
+		DELETE
+		FROM item
+		WHERE
+			item_no = #{itemNo}		
+	</delete>
 	
 </mapper>
 

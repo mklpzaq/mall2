@@ -13,12 +13,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.test.mall2.category.controller.CategoryController;
 import com.test.mall2.item.service.Item;
 import com.test.mall2.item.service.ItemDao;
 import com.test.mall2.item.service.ItemService;
 
 @Controller
 public class ItemController {
+	private static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
+	
 	@Autowired
 	private ItemService itemService;
 	
@@ -31,7 +34,8 @@ public class ItemController {
 	//ItmeController post호출
 	@RequestMapping(value="/insertItemForm",  method = RequestMethod.POST)
 	public String insertItemForm(Item item) {
-		itemService.insertItem(item);
+		logger.info("ItemController---insertItemForm");
+		itemService.insertItemForm(item);
 		return "redirect:/selectItemList";
 	}
 	
@@ -39,7 +43,7 @@ public class ItemController {
 	public String selectItemList(Model model
 											,@RequestParam(value="currentPage", defaultValue="1") int currentPage
 											,@RequestParam(value="pagePerRow", required=true, defaultValue="10") int pagePerRow) {
-		
+		logger.info("ItemController---selectItemList");
 	Map<String, Object> map = itemService.selectItemList(currentPage,pagePerRow);
 	model.addAttribute("list", map.get("list"));
 	model.addAttribute("lastPage", map.get("lastPage"));
@@ -49,5 +53,24 @@ public class ItemController {
 	model.addAttribute("pagePerRow", pagePerRow);
 		return "itemList";		
 	}  
+	
+	@RequestMapping(value="/updateItemForm", method = RequestMethod.GET)
+	public String updateItemForm(Item item, Model model) {
+		Item itemForm = itemService.updateItemForm(item);
+		model.addAttribute("itemForm", itemForm);
+			return "updateItemForm";
+	}
+	
+	@RequestMapping(value="/updateItemForm", method = RequestMethod.POST)
+	public String updateItemForm(Item item) {
+		Item itemForm = itemService.updateItemForm(item);
+			return "redirect:/updateItemList";
+	}
+	
+	@RequestMapping(value="/deleteItem", method = RequestMethod.GET)
+	public String deleteItem(@RequestParam(value="deleteCheckbox") int[] deleteCheckbox) {
+		itemService.deleteItem(deleteCheckbox);
+		return "redirect:/selectItemList";
+	}
 	
 }

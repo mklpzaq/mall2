@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<title>item List</title>
+<title>item list</title>
 <script>	
 	$(document).ready(function(){			
 	  $('#pagePerRow').change(function(){	     	 
@@ -18,7 +18,7 @@
 		$("#button").click(function(){
 			$('input[name="deleteCheckbox"]:checked').each(function(){							
 				var text = $(this).val();
-				alert("itemNo"+text+"삭제");					
+				alert("categoryNo"+text+"삭제");					
 				$("#form1").submit();	
 			});
 		})	
@@ -32,7 +32,7 @@
 				$("input[type=checkbox]").prop("checked",false);
 			}
 		});
-	});		
+	});
 </script>
 </head>
 <body>
@@ -43,7 +43,7 @@
 				<div class="col-sm-6">
 					<!-- Begin Content -->
 					<a href="${pageContext.request.contextPath}/">Home</a>
-					<button><a href="${pageContext.request.contextPath}/insertItemForm">상품 등록</a></button>
+					<button><a href="${pageContext.request.contextPath}/insertItemForm">아이템 등록</a></button>
 					<div class="panel panel-default">
 						<div class="panel-body text-center">
 							<div class="row">
@@ -53,7 +53,7 @@
 								</div>
 								<div class="col-sm-6">
 									<h3>Item List</h3>
-								</div>>
+								</div>
 								<div class="col-sm-3">
 									<select id="pagePerRow">
 										<option	class="option" value=5 <c:if test="${pagePerRow == 5}">selected</c:if>>5개씩보기</option>
@@ -68,13 +68,10 @@
 								<thead>
 									<tr>
 										<th><input type="checkbox" id="checkboxAll" value=""></th>
-										<td width="10%">번호</td>
-										<td width="10%">카테고리번호</td>
-										<td width="10%">카테고리명</td>
-										<td width="35%">상품명</td>
-										<td width="15%">상품 가격</td>
-										<td width="10%">수정</td>
-										<td width="10%">삭제</td>
+										<td>번호</td>
+										<td>상품명</td>
+										<td>상품 가격</td>
+										<td>수정</td>
 									</tr>
 								</thead>
 								<tbody>
@@ -82,14 +79,11 @@
 										<c:forEach var="item" items="${list}">
 											<tbody>
 												<tr>
-													<th><input type="checkbox" name="deleteCheckbox" value="${item.itemNo}"></th>
+													<th><input type="checkbox" name="deleteCheckbox" value="${item.ItemNo}"></th>
 													<th scope = "row">${item.itemNo}</th>
-													<td>${category.categoryNo}</td>
-													<td>${category.categoryName}</td>
 													<td>${item.itemName}</td>
 													<td>${item.itemPrice}</td>
 													<td><a href="${pageContext.request.contextPath}/updateItemForm?itemNo=${item.itemNo}&pagePerRow=${pagePerRow}">수정</a></td>
-													<td><a href="${pageContext.request.contextPath}/deletItem?itemNo=${item.itmNo}&pagePerRow=${pagePerRow}">삭제</a></td>
 												</tr>
 											</tbody>
 										</c:forEach>
@@ -119,79 +113,14 @@
 									<li><a href="${pageContext.request.contextPath}/selectItemList?currentPage=${currentPage+1}&pagePerRow=${pagePerRow}">다음</a></li>
 									<li><a href="${pageContext.request.contextPath}/selectItemList?currentPage=${lastPage}&pagePerRow=${pagePerRow}">마지막으로</a></li>
 								</c:if>
-												
-									<%-- <li>
-										<a href="${pageContext.request.contextPath}/getMemberList?currentPage=1&pagePerRow=${pagePerRow}" aria-label="Previous">
-											<span aria-hidden="true">&laquo;</span>
-										</a>
-									</li>
-									<li>
-										<c:choose>
-											<c:when test="${currentPage > 1}">
-												<a href="${pageContext.request.contextPath}/getMemberList?currentPage=${currentPage-1}&pagePerRow=${pagePerRow}"aria-label="Previous">
-													<span aria-hidden="true">&lt;</span>
-												</a>
-											</c:when>
-											<c:otherwise>
-												<a href="${pageContext.request.contextPath}/getMemberList?currentPage=1&pagePerRow=${pagePerRow}"aria-label="Previous">
-													<span aria-hidden="true">&lt;</span>
-												</a>
-											</c:otherwise>
-										</c:choose>
-									</li>
-									<c:choose>
-										<c:when test="${lastPage > beginPageNumForCurrentPage + 4}">
-											<c:forEach var="pageNum" begin="${beginPageNumForCurrentPage}" end="${beginPageNumForCurrentPage + 4}" step="1">
-												<c:choose>
-													<c:when test="${pageNum == currentPage}">
-														<li class="active"><a href="${pageContext.request.contextPath}/getMemberList?currentPage=${pageNum}&pagePerRow=${pagePerRow}">${pageNum}</a></li>
-													</c:when>
-													<c:otherwise>
-														<li><a href="${pageContext.request.contextPath}/getMemberList?currentPage=${pageNum}&pagePerRow=${pagePerRow}">${pageNum}</a></li>
-													</c:otherwise>
-												</c:choose>
-											</c:forEach>
-										</c:when>
-										<c:otherwise>
-											<c:forEach var="pageNum" begin="${beginPageNumForCurrentPage}" end="${lastPage}" step="1">
-												<c:choose>
-													<c:when test="${pageNum == currentPage}">
-														<li class="active"><a href="${pageContext.request.contextPath}/getMemberList?currentPage=${pageNum}&pagePerRow=${pagePerRow}">${pageNum}</a></li>
-													</c:when>
-													<c:otherwise>
-														<li><a href="${pageContext.request.contextPath}/getMemberList?currentPage=${pageNum}&pagePerRow=${pagePerRow}">${pageNum}</a></li>
-													</c:otherwise>
-												</c:choose>
-											</c:forEach>
-										</c:otherwise>
-									</c:choose>
-									<li>
-										<c:choose>
-											<c:when test="${currentPage < lastPage}">
-												<a href="${pageContext.request.contextPath}/getMemberList?currentPage=${currentPage+1}&pagePerRow=${pagePerRow}" aria-label="Next">
-													<span aria-hidden="true">&gt;</span>
-												</a>
-											</c:when>
-											<c:otherwise>
-												<a href="${pageContext.request.contextPath}/getMemberList?currentPage=${lastPage}&pagePerRow=${pagePerRow}"aria-label="Next">
-													<span aria-hidden="true">&gt;</span>
-												</a>
-											</c:otherwise>
-										</c:choose>
-									</li>
-									<li>
-										<a href="${pageContext.request.contextPath}/getMemberList?currentPage=${lastPage}&pagePerRow=${pagePerRow}" aria-label="Next">
-											<span aria-hidden="true">&raquo;</span>
-										</a>
-									</li> --%>
-								</ul>
-							</nav>
-						</div>
-					</div>
+								
+								<div>
+							  		<button id="button">아이템 삭제</button>
+								</div>							
+									
 					<!-- End Content -->
 				</div>
 				<div class="col-sm-3"></div>
 
 </body>
 </html>
-							

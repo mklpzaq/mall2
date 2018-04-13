@@ -30,4 +30,11 @@ public class ItemDao {
 	public int totalCountItem() {
 		return sqlSession.selectOne(NS+"totalCountItem");
 	}
+	
+	public Item updateItemForm(Item item) {
+		return sqlSession.selectOne(NS+"updateItemForm", item);
+	}
+	public void deleteItem(int itemNo) {
+		sqlSession.delete(NS+"deletItem", itemNo);
+	}
 }
