@@ -4,6 +4,26 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="com.test.mall2.address.service.AddressMapper">
+
+	<update id="updateAddress">
+		UPDATE
+			address
+		SET
+			address_id
+			
+	</update>
+	
+	<select id="selectAddressForUpdate"
+			parameterType="Integer"
+			resultType="com.test.mall2.address.service.Address">
+		SELECT
+			address_no AS addressNo
+			,member_no AS memberNo
+			,address_content AS addressContent
+		FROM address
+		WHERE member_no = #{memberNo}
+		
+	</select>
 	
 	<select id="totalCountAddress"
 			resultType="Integer">
@@ -13,8 +33,6 @@
 			address
 	
 	</select>
-	
-	
 	
 	<!-- 마이바티스에서 세미콜론 찍으면 에러난다. -->
 	<select id="selectAddressList"

@@ -18,6 +18,11 @@ public class AddressDao {
 	private static final Logger logger = LoggerFactory.getLogger(AddressDao.class);
 	final String NS ="com.test.mall2.address.service.AddressMapper.";
 	
+	public Address selectAddressForUpdate(int addressNo) {
+		return sqlSession.selectOne(NS+"selectAddressForUpdate");
+	}
+	
+	
 	public int totalCountAddress() {
 		return sqlSession.selectOne(NS+"totalCountAddress");
 	}

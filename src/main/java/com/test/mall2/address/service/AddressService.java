@@ -17,6 +17,12 @@ public class AddressService {
 	private AddressDao addressDao;
 	private static final Logger logger = LoggerFactory.getLogger(AddressService.class);
 	
+	public Address selectAddressForUpdate(int addressNo) {
+		
+		return addressDao.selectAddressForUpdate(addressNo);
+	}
+	
+	
 	public Map<String, Object> getAddressList(int currentPage, int pagePerRow) {
 		int beginRow = (currentPage-1)*pagePerRow;
 		

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.test.mall2.IndexController;
 import com.test.mall2.address.service.Address;
 import com.test.mall2.address.service.AddressService;
+import com.test.mall2.member.service.Member;
 
 @Controller
 public class AddressController {
@@ -21,6 +22,18 @@ public class AddressController {
 	private AddressService addressService;
 	private static final Logger logger = LoggerFactory.getLogger(AddressController.class);
 
+	@RequestMapping(value="updateAddress", method = RequestMethod.GET)
+	public String updateMember(@RequestParam(value="sendNo") int addressNo){
+		logger.info("/updateAddress POST");
+		Address address = addressService.selectAddressForUpdate(addressNo);
+		
+		return "redirect:/getMemberList";
+	}
+	
+	
+	
+	
+	
 	@RequestMapping(value="/insertAddress", method=RequestMethod.GET)
 	public String insertAddress(Model model
 								,@RequestParam(value="sendNo") int memberNo) {

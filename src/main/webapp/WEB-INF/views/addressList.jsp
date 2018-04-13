@@ -62,8 +62,8 @@
 											<td><strong>${address.addressNo}</strong></td>
 											<td>${address.memberNo}</td>
 											<td>${address.addressContent}</td>
-											<td><a href="${pageContext.request.contextPath}/updateMember?sendNo=${address.addressNo}">수정</a></td>
-											<td><a href="${pageContext.request.contextPath}/deleteMember?sendNo=${address.addressNo}">삭제</a></td>
+											<td><a href="${pageContext.request.contextPath}/updateAddress?sendNo=${address.addressNo}">수정</a></td>
+											<td><a href="${pageContext.request.contextPath}/deleteAddress?sendNo=${address.addressNo}">삭제</a></td>
 										</tr>
 									</c:forEach>
 									<%-- <c:choose>
