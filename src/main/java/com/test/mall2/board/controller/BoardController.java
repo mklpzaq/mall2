@@ -1,6 +1,7 @@
 package com.test.mall2.board.controller;
 
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -92,28 +93,56 @@ public class BoardController {
 		return "redirect:/boardView";  
 	}
 	
-	@RequestMapping(value = "/searchBoardList", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/searchBoardList", method = RequestMethod.POST)
 	public String searchBoardList(HttpServletRequest request, Model model) {
 		String sk = request.getParameter("sk");
 		String sv =request.getParameter("sv");		
-		/*@RequestParam(value="sk") String sk
+		@RequestParam(value="sk") String sk
 		,@RequestParam(value="sv") String sv
 		,@RequestParam(value="sv1") Date sv1
-		,@RequestParam(value="sv2") Date sv2*/
+		,@RequestParam(value="sv2") Date sv2
 		
 		logger.info("searchBoardList");
 		if(sv != null) {
-			boardService.searchBoardList(sk, sv);
-			
+			List<Board> list = boardService.searchBoardList(sk, sv);
+			model.addAttribute("list", list);
 		}else {
 			Date sv1 = Date.valueOf(request.getParameter("sv1"));
 			Date sv2 = Date.valueOf(request.getParameter("sv2"));
-			boardService.searchBoardList(sk, sv1, sv2);	
-			
+			List<Board> list = boardService.searchBoardList(sk, sv1, sv2);	
+			model.addAttribute("list", list);
 		}
 		
 		
 		
 		return "BoardList";  
-	} 
+	} */
+	
+	@RequestMapping(value = "/searchBoardList", method = RequestMethod.POST)
+	// @RequestParam(defaultValue="") ==> 기본값 할당
+	public String list(@RequestParam(value="searchOption", defaultValue="all") String searchOption
+						,@RequestParam(defaultValue="") String keyword
+						,Model model) throws Exception{
+	    List<Board> list = boardService.listAll(searchOption, keyword);
+	    // 레코드의 갯수
+	    //int count = boardService.countArticle(searchOption, keyword);
+	    // ModelAndView - 모델과 뷰
+	    //ModelAndView mav = new ModelAndView();
+	    /*mav.addObject("list", list); // 데이터를 저장
+	    mav.addObject("count", count);
+	    mav.addObject("searchOption", searchOption);
+	    mav.addObject("keyword", keyword);*/
+	    // 데이터를 맵에 저장
+	    Map<String, Object> map = new HashMap<String, Object>();
+	    map.put("list", list); // list
+	    //map.put("count", count); // 레코드의 갯수
+	    map.put("searchOption", searchOption); // 검색옵션
+	    map.put("keyword", keyword); // 검색키워드
+	    //mav.addObject("map", map); // 맵에 저장된 데이터를 mav에 저장
+	    //mav.setViewName("board/list"); // 뷰를 list.jsp로 설정
+	    model.addAttribute("map", map);
+	    return "BoardList"; // list.jsp로 List가 전달된다.
+	}
+
+	
 }

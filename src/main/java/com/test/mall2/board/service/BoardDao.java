@@ -1,6 +1,7 @@
 package com.test.mall2.board.service;
 
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,7 +43,7 @@ public class BoardDao {
 		sqlSession.update(NS + "updateBoard", board);	
 	}
 	
-	public List<Board> selectBoardList() {
+	/*public List<Board> selectBoardList() {
 		logger.info("selectBoardList");
 		return sqlSession.selectList(NS + "selectBoardListAll");	
 	}
@@ -60,6 +61,14 @@ public class BoardDao {
 	public List<Board> searchBoardListBoardDate(Map<String, Date> map) {
 		logger.info("searchBoardListBoardDate");
 		return sqlSession.selectList(NS + "searchBoardListBoardDate", map);	
+	}*/
+	
+	public List<Board> listAll(String searchOption, String keyword) throws Exception {
+	    // 검색옵션, 키워드 맵에 저장
+	    Map<String, String> map = new HashMap<String, String>();
+	    map.put("searchOption", searchOption);
+	    map.put("keyword", keyword);
+	    return sqlSession.selectList(NS+"listAll", map);
 	}
 	
 }

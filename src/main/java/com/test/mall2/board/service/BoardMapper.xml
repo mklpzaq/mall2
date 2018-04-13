@@ -5,7 +5,35 @@
   
 <mapper namespace="com.test.mall2.board.service.BoardMapper">
 	
-	<select id="searchBoardListBoardDate" parameterType="java.util.Map" resultType="com.test.mall2.board.service.Board">
+	<select id="listAll" parameterType="java.util.Map" resultType="com.test.mall2.board.service.Board">
+	    SELECT 
+	    	board_no
+	    	, member_id
+	    	, board_title
+	    	, board_content
+	    	, board_date 
+	    FROM board
+	    <!-- WHERE절을 include 태그로 삽입 -->
+	    <include refid="search"></include>
+	    ORDER BY board_no desc
+	</select>
+	
+	<sql id="search">
+	    <choose>
+	        <!-- 검색옵션이 전체 검색일 경우 -->
+	        <when test="searchOption == 'all'">
+	            WHERE member_id like '%'||#{keyword}||'%'
+	            OR board_title like '%'||#{keyword}||'%'
+	            OR board_date like '%'||#{keyword}||'%'
+	        </when>
+	        <!-- 전체 검색이 아닐 경우 -->
+	        <otherwise>
+	            WHERE ${searchOption} like %'||#{keyword}||'%'
+	        </otherwise>
+	    </choose>
+	</sql>
+		
+	<!-- <select id="searchBoardListBoardDate" parameterType="java.util.Map" resultType="com.test.mall2.board.service.Board">
 		SELECT 
 			board_no as boardNo
 			,member_id as memberId
@@ -43,7 +71,7 @@
 			,board_title as boardTitle
 			,board_date as boardDate
 		FROM board		
-	</select>
+	</select> -->
 	
 	<select id="selectBoardList" parameterType="java.util.Map" resultType="com.test.mall2.board.service.Board">
 		SELECT

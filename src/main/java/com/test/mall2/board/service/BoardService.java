@@ -67,7 +67,7 @@ public class BoardService {
 		boardDao.updateBoardForm(board);
 	}
 	
-	public List<Board> searchBoardList(String sk, String sv) {
+	/*public List<Board> searchBoardList(String sk, String sv) {
 		
 		logger.info("searchBoardList");
 		
@@ -109,9 +109,15 @@ public class BoardService {
 				map.put("sv2", sv2);
 				boardDao.searchBoardListBoardDate(map);
 			}
-		}
-		
-		
+		}		
 		return list;
+	}*/
+	
+	
+	public List<Board> listAll(String searchOption, String keyword) throws Exception {
+		
+		logger.info("searchBoardList");
+		
+		return boardDao.listAll(searchOption, keyword);
 	}
 }

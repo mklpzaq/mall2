@@ -34,7 +34,7 @@
 			});
 			
 			function changehtml(){
-				var property = $("#sk").val();
+				var property = $("#searchOption").val();
 				var show = $("#show");
 				if(property=="boardDate"){
 					$("#show").html('<input type="date" name="sv1">~<input type="date" name="sv2">');
@@ -199,12 +199,14 @@
 							</nav>
 							<div>
 								<form action="<%=request.getContextPath()%>/searchBoardList" method="post">
-									<select id="sk" name="sk" onclick="changehtml();">											
-										<option value="memberId">아이디</option>
-										<option value="boardTitle">제목</option>											
-										<option value="boardDate">등록날짜</option>		
+									<select name="searchOption" onclick="changehtml();">											
+										<option value="all" <c:out value="${map.searchOption == 'all'?'selected':''}"/>>전체</option>
+										<option value="memberId"  <c:out value="${map.searchOption == 'memberId'?'selected':''}"/>>아이디</option>
+										<option value="boardTitle"  <c:out value="${map.searchOption == 'boardTitle'?'selected':''}"/>>제목</option>											
+										<option value="boardDate"  <c:out value="${map.searchOption == 'boardDate'?'selected':''}"/>>등록날짜</option>		
 									</select>
 									<dr id="show"></dr>
+									<input name="keyword" value="${map.keyword}">
 									<input type="submit" value="검색버튼" >
 								</form>
 							</div>
