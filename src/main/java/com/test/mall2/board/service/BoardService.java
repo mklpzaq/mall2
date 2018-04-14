@@ -116,7 +116,7 @@ public class BoardService {
 	
 	public List<Board> listAll(String searchOption, String keyword) throws Exception {
 		
-		logger.info("searchBoardList");
+		logger.info("listAll");
 		
 		return boardDao.listAll(searchOption, keyword);
 	}

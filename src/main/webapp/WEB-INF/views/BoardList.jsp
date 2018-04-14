@@ -33,7 +33,7 @@
 				});
 			});
 			
-			function changehtml(){
+			/* function changehtml(){
 				var property = $("#searchOption").val();
 				var show = $("#show");
 				if(property=="boardDate"){
@@ -41,7 +41,7 @@
 				}else {
 					$("#show").html('<input type="text" name="sv">');
 				}
-			}	
+			} */	
 		</script>
 	</head>
 	<body>
@@ -87,7 +87,7 @@
 									<c:forEach var="board" items="${list}">
 										<tbody>
 											<tr>
-												<th><input type="checkbox" name="deleteCheckbox" value="${category.categoryNo}"></th>
+												<th><input type="checkbox" name="deleteCheckbox" value="${board.boardNo}"></th>
 												<th scope = "row">${board.boardNo}</th>
 												<td><a href="${pageContext.request.contextPath}/boardView?boardNo=${board.boardNo}">${board.boardTitle}</a></td>
 												<td>${board.memberId}</td>
@@ -199,14 +199,14 @@
 							</nav>
 							<div>
 								<form action="<%=request.getContextPath()%>/searchBoardList" method="post">
-									<select name="searchOption" onclick="changehtml();">											
-										<option value="all" <c:out value="${map.searchOption == 'all'?'selected':''}"/>>전체</option>
-										<option value="memberId"  <c:out value="${map.searchOption == 'memberId'?'selected':''}"/>>아이디</option>
-										<option value="boardTitle"  <c:out value="${map.searchOption == 'boardTitle'?'selected':''}"/>>제목</option>											
-										<option value="boardDate"  <c:out value="${map.searchOption == 'boardDate'?'selected':''}"/>>등록날짜</option>		
+									<select id="searchOption" name="searchOption" onclick="changehtml();">											
+										<option value="all" <c:out value="${searchOption == 'all'?'selected':''}"/>>전체</option>
+										<option value="member_id"  <c:out value="${searchOption == 'member_id'?'selected':''}"/>>아이디</option>
+										<option value="board_title"  <c:out value="${searchOption == 'board_title'?'selected':''}"/>>제목</option>											
+										<option value="board_date"  <c:out value="${searchOption == 'board_date'?'selected':''}"/>>등록날짜</option>		
 									</select>
 									<dr id="show"></dr>
-									<input name="keyword" value="${map.keyword}">
+									<input id="keyword" name="keyword" value="${keyword}">
 									<input type="submit" value="검색버튼" >
 								</form>
 							</div>

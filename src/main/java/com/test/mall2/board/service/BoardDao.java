@@ -65,6 +65,8 @@ public class BoardDao {
 	
 	public List<Board> listAll(String searchOption, String keyword) throws Exception {
 	    // 검색옵션, 키워드 맵에 저장
+		logger.info(searchOption);
+		logger.info(keyword);
 	    Map<String, String> map = new HashMap<String, String>();
 	    map.put("searchOption", searchOption);
 	    map.put("keyword", keyword);

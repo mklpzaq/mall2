@@ -25,7 +25,7 @@ import com.test.mall2.board.service.BoardService;
 public class BoardController {
 	@Autowired
 	private BoardService boardService;
-	private static final Logger logger = LoggerFactory.getLogger(BoardService.class);
+	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
 	@RequestMapping(value ="/selectBoardList", method = RequestMethod.GET)
 	public String selectBoardList(Model model											
@@ -121,8 +121,9 @@ public class BoardController {
 	@RequestMapping(value = "/searchBoardList", method = RequestMethod.POST)
 	// @RequestParam(defaultValue="") ==> 기본값 할당
 	public String list(@RequestParam(value="searchOption", defaultValue="all") String searchOption
-						,@RequestParam(defaultValue="") String keyword
+						,@RequestParam(value="keyword", defaultValue="") String keyword
 						,Model model) throws Exception{
+		logger.info("list");
 	    List<Board> list = boardService.listAll(searchOption, keyword);
 	    // 레코드의 갯수
 	    //int count = boardService.countArticle(searchOption, keyword);
@@ -138,9 +139,12 @@ public class BoardController {
 	    //map.put("count", count); // 레코드의 갯수
 	    map.put("searchOption", searchOption); // 검색옵션
 	    map.put("keyword", keyword); // 검색키워드
+	    
 	    //mav.addObject("map", map); // 맵에 저장된 데이터를 mav에 저장
 	    //mav.setViewName("board/list"); // 뷰를 list.jsp로 설정
-	    model.addAttribute("map", map);
+	    model.addAttribute("list", list);
+	    model.addAttribute("searchOption", searchOption);
+	    model.addAttribute("keyword", keyword);
 	    return "BoardList"; // list.jsp로 List가 전달된다.
 	}
 

@@ -8,27 +8,26 @@
 	<select id="listAll" parameterType="java.util.Map" resultType="com.test.mall2.board.service.Board">
 	    SELECT 
 	    	board_no
-	    	, member_id
-	    	, board_title
-	    	, board_content
-	    	, board_date 
+	    	, member_id as memberId
+	    	, board_title as boardTitle
+	    	, board_content as boardContent
+	    	, board_date as boardDate
 	    FROM board
-	    <!-- WHERE절을 include 태그로 삽입 -->
+	    <!-- WHERE절을 include 태그로 삽입 -->	    
 	    <include refid="search"></include>
-	    ORDER BY board_no desc
+	    ORDER BY board_no DESC
 	</select>
 	
-	<sql id="search">
+	<sql id="search">	
 	    <choose>
 	        <!-- 검색옵션이 전체 검색일 경우 -->
-	        <when test="searchOption == 'all'">
-	            WHERE member_id like '%'||#{keyword}||'%'
-	            OR board_title like '%'||#{keyword}||'%'
-	            OR board_date like '%'||#{keyword}||'%'
+	        <when test="searchOption.equals('all')">	        
+	            WHERE member_id like CONCAT('%',${keyword},'%')
+	            OR board_title like CONCAT('%',${keyword},'%')	            
 	        </when>
 	        <!-- 전체 검색이 아닐 경우 -->
 	        <otherwise>
-	            WHERE ${searchOption} like %'||#{keyword}||'%'
+	            WHERE ${searchOption} like CONCAT('%',${keyword},'%')
 	        </otherwise>
 	    </choose>
 	</sql>
