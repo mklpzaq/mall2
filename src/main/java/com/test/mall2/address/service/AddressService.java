@@ -17,11 +17,17 @@ public class AddressService {
 	private AddressDao addressDao;
 	private static final Logger logger = LoggerFactory.getLogger(AddressService.class);
 	
-	public Address selectAddressForUpdate(int addressNo) {
-		
-		return addressDao.selectAddressForUpdate(addressNo);
+	public int deleteAddress(int addressNo) {
+		return addressDao.deleteAddress(addressNo);
 	}
 	
+	public int updateAddress(Address address) {
+		return addressDao.updateAddress(address);
+	}
+	
+	public Address selectAddressForUpdate(int addressNo) {
+		return addressDao.selectAddressForUpdate(addressNo);
+	}
 	
 	public Map<String, Object> getAddressList(int currentPage, int pagePerRow) {
 		int beginRow = (currentPage-1)*pagePerRow;
@@ -33,12 +39,11 @@ public class AddressService {
 		logger.info("beginRow :" + beginRow);
 		logger.info("pagePerRow :" + pagePerRow);
 		List<Address> list = addressDao.selectAddressList(map);
-		System.out.println("==========================");
-		System.out.println("list : " + list);
 		
 		//total로 DB에 있는 전체 레코드 개수가 반환되었다.
 		int total = addressDao.totalCountAddress();
 		int lastPage = 0;
+		/* DB에 address 레코드 수가 1개도 존재하지 않는 경우 == 초기상태일때, 1페이지로 나오게 lastPage를 1로 초기화 한다.*/
 		if(0 == total) {
 			lastPage = 1;
 		}else if(total%pagePerRow == 0) {
@@ -46,7 +51,7 @@ public class AddressService {
 		}else {
 			lastPage = total/pagePerRow + 1;
 		}
-		
+		/* 페이지가 5개 단위씩 보이게 하는 계산식 */
 		int temp = (currentPage - 1)/5;
 		int beginPageNumForCurrentPage = temp * 5 + 1;
 		
@@ -55,12 +60,10 @@ public class AddressService {
 		returnMap.put("lastPage", lastPage);
 		returnMap.put("beginPageNumForCurrentPage", beginPageNumForCurrentPage);
 		
-		
 		return returnMap;
 	}
 	
 	public int insertAddress(Address address) {
 		return addressDao.insertAddress(address);
 	}
-	
 }

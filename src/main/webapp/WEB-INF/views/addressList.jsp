@@ -20,20 +20,20 @@
 		
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-md-2"></div>
-				<div class="col-md-8">
+				<div class="col-md-3"></div>
+				<div class="col-md-6">
 					<!-- Begin Content -->
 					
 					<div class="panel panel-default">
 						<div class="panel-body text-center">
 							<div class="row">
-								<div class="col-sm-3">
+								<div class="col-md-3">
 									<strong>${currentPage} / ${lastPage} Page</strong>								
 								</div>
-								<div class="col-sm-6">
+								<div class="col-md-6">
 									<h3>Address List</h3>
 								</div>
-								<div class="col-sm-3">
+								<div class="col-md-3">
 									<select id="selectPagePerRow" name="selectPagePerRow">
 										<option value="5"<c:if test="${pagePerRow == 5}">selected</c:if>>5</option>
 										<option value="10"<c:if test="${pagePerRow == 10}">selected</c:if>>10</option>
@@ -43,6 +43,7 @@
 										<option value="40"<c:if test="${pagePerRow == 40}">selected</c:if>>40</option>
 										<option value="50"<c:if test="${pagePerRow == 50}">selected</c:if>>50</option>
 									</select>개씩 보기
+									
 								</div>
 							</div>
 							<hr/>
@@ -66,17 +67,6 @@
 											<td><a href="${pageContext.request.contextPath}/deleteAddress?sendNo=${address.addressNo}">삭제</a></td>
 										</tr>
 									</c:forEach>
-									<%-- <c:choose>
-										<c:when test="${currentPage == lastPage}">
-											<c:forEach var="remainderRow" begin="1" end="${pagePerRow - lastPageMemberCnt}" step="1">
-												<tr>
-													<td><strong>- -</strong></td>
-													<td>- -</td>
-													<td>- -</td>
-												</tr>
-											</c:forEach>
-										</c:when>
-									</c:choose> --%>
 								</tbody>
 							</table>
 							<nav>
@@ -152,7 +142,7 @@
 					
 					<!-- End Content -->
 				</div>
-				<div class="col-md-2"></div>
+				<div class="col-md-3"></div>
 			</div>
 		</div>
 			

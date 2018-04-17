@@ -29,7 +29,8 @@
 								<li><a href="${pageContext.request.contextPath}/insertMemberForm">insertMember</a></li>			
 								<li><a href="${pageContext.request.contextPath}/getMemberList">MemerList</a></li>						
 								<li><a href="${pageContext.request.contextPath}/selectCategoryList">CategoryList</a></li>
-								<li><a href="${pageContext.request.contextPath}/selectBoardList">BoardList</a></li>						
+								<li><a href="${pageContext.request.contextPath}/selectBoardList">BoardList</a></li>
+								<li><a href="${pageContext.request.contextPath}/getAddressList">AddressList</a></li>					
 							</c:when>
 							<c:otherwise>									
 								<li><a href="${pageContext.request.contextPath}/selectBoardList">BoardList</a></li>	

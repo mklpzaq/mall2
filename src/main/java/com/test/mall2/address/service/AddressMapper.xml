@@ -5,12 +5,21 @@
  
 <mapper namespace="com.test.mall2.address.service.AddressMapper">
 
-	<update id="updateAddress">
+	<delete id="deleteAddress"
+			parameterType="Integer">
+		DELETE
+		FROM address
+		WHERE address_no = #{addressNo}
+	</delete>
+
+	<update id="updateAddress"
+			parameterType="com.test.mall2.address.service.Address">
 		UPDATE
 			address
 		SET
-			address_id
-			
+			address_content = #{addressContent}
+		WHERE
+			address_no = #{addressNo}
 	</update>
 	
 	<select id="selectAddressForUpdate"
@@ -21,8 +30,7 @@
 			,member_no AS memberNo
 			,address_content AS addressContent
 		FROM address
-		WHERE member_no = #{memberNo}
-		
+		WHERE address_no = #{addressNo}
 	</select>
 	
 	<select id="totalCountAddress"
@@ -31,10 +39,9 @@
 			COUNT(*)
 		FROM
 			address
-	
 	</select>
 	
-	<!-- 마이바티스에서 세미콜론 찍으면 에러난다. -->
+	<!-- mybatis에서 세미콜론 찍으면 에러난다. -->
 	<select id="selectAddressList"
 			parameterType="java.util.Map"
 			resultType="com.test.mall2.address.service.Address">
@@ -50,13 +57,13 @@
 	<insert id="insertAddress" 
 			parameterType="com.test.mall2.address.service.Address">
 			INSERT
-				INTO address(
-					member_no 
-					,address_content
-				)
-				VALUES (
-					#{memberNo}
-					,#{addressContent}
+			INTO address(
+				member_no 
+				,address_content
+			)
+			VALUES (
+				#{memberNo}
+				,#{addressContent}
 			)
 	 </insert>
 </mapper>

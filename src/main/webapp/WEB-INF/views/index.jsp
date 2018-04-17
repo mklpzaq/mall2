@@ -11,8 +11,8 @@
 		
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-md-2"></div>
-				<div class="col-md-8">
+				<div class="col-md-3"></div>
+				<div class="col-md-6">
 					<!-- Begin Content -->
 					
 						<h1>Welcome Mall2!</h1>	
@@ -22,7 +22,7 @@
 					
 					<!-- End Content -->
 				</div>
-				<div class="col-md-2"></div>
+				<div class="col-md-3"></div>
 			</div>
 		</div>
 	</body>

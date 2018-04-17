@@ -23,6 +23,8 @@ public class Address {
 	public void setAddressContent(String addressContent) {
 		this.addressContent = addressContent;
 	}
-	
-	
+	@Override
+	public String toString() {
+		return "Address [addressNo=" + addressNo + ", memberNo=" + memberNo + ", addressContent=" + addressContent + "]";
+	}
 }

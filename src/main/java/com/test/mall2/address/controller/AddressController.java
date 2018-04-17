@@ -22,17 +22,29 @@ public class AddressController {
 	private AddressService addressService;
 	private static final Logger logger = LoggerFactory.getLogger(AddressController.class);
 
-	@RequestMapping(value="updateAddress", method = RequestMethod.GET)
+	
+	@RequestMapping(value="/deleteAddress", method = RequestMethod.GET)
 	public String updateMember(@RequestParam(value="sendNo") int addressNo){
-		logger.info("/updateAddress POST");
-		Address address = addressService.selectAddressForUpdate(addressNo);
-		
-		return "redirect:/getMemberList";
+		logger.info("deleteAddress GET");
+		int result = addressService.deleteAddress(addressNo);
+		return "redirect:/getAddressList";
 	}
 	
+	@RequestMapping(value="/updateAddress", method = RequestMethod.GET)
+	public String updateMember(Model model
+								,@RequestParam(value="sendNo") int addressNo){
+		logger.info("updateAddress GET");
+		Address address = addressService.selectAddressForUpdate(addressNo);
+		model.addAttribute("address", address);
+		return "/updateAddressForm";
+	}
 	
-	
-	
+	@RequestMapping(value="/updateAddress", method = RequestMethod.POST)
+	public String updateMember(Address address){
+		logger.info("updateAddress POST");
+		int result = addressService.updateAddress(address);
+		return "redirect:/getAddressList";
+	}
 	
 	@RequestMapping(value="/insertAddress", method=RequestMethod.GET)
 	public String insertAddress(Model model
@@ -45,11 +57,7 @@ public class AddressController {
 	@RequestMapping(value="/insertAddress", method=RequestMethod.POST)
 	public String insertAddress(Address address) {
 		logger.info("insertAddress AddressController");
-		logger.info("memberNo : " + address.getMemberNo());
-		logger.info("addressContent : " + address.getAddressContent());
-		
 		int result = addressService.insertAddress(address);
-		
 		return "redirect:/getAddressList";
 	}
 	
