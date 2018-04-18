@@ -1,6 +1,7 @@
 package com.test.mall2.board.service;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,14 +64,27 @@ public class BoardDao {
 		return sqlSession.selectList(NS + "searchBoardListBoardDate", map);	
 	}*/
 	
-	public List<Board> listAll(String searchOption, String keyword) throws Exception {
+	public List<Board> listAll(String searchOption, ArrayList<String> keyword) throws Exception {
 	    // 검색옵션, 키워드 맵에 저장
-		logger.info(searchOption);
-		logger.info(keyword);
-	    Map<String, String> map = new HashMap<String, String>();
-	    map.put("searchOption", searchOption);
-	    map.put("keyword", keyword);
-	    return sqlSession.selectList(NS+"listAll", map);
+		logger.info(searchOption);		
+		List<Board> returnList;
+		if(keyword.size() == 1 ){					
+		    Map<String, String> map = new HashMap<String, String>();
+		    map.put("searchOption", searchOption);
+		    map.put("keyword", keyword.get(0));
+		    returnList = sqlSession.selectList(NS+"listAll", map);		
+		}else if(keyword.size() == 2) {			
+			Map<String, Object> map = new HashMap<String, Object>();
+		    map.put("searchOption", searchOption);
+		    map.put("keyword1", Date.valueOf(keyword.get(0)));
+		    map.put("keyword2", Date.valueOf(keyword.get(1)));
+		    returnList = sqlSession.selectList(NS+"listAll", map);
+		}else {
+			Map<String, String> map = new HashMap<String, String>();
+		    map.put("searchOption", searchOption);
+		    
+			returnList = sqlSession.selectList(NS+"listAll", map);	
+		}
+		return returnList;
 	}
-	
 }

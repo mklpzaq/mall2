@@ -7,7 +7,7 @@
 	
 	<select id="listAll" parameterType="java.util.Map" resultType="com.test.mall2.board.service.Board">
 	    SELECT 
-	    	board_no
+	    	board_no as boardNo
 	    	, member_id as memberId
 	    	, board_title as boardTitle
 	    	, board_content as boardContent
@@ -20,14 +20,13 @@
 	
 	<sql id="search">	
 	    <choose>
-	        <!-- 검색옵션이 전체 검색일 경우 -->
-	        <when test="searchOption.equals('all')">	        
-	            WHERE member_id like CONCAT('%',${keyword},'%')
-	            OR board_title like CONCAT('%',${keyword},'%')	            
+	        <!-- 검색옵션이 날짜일 경우 -->
+	        <when test="searchOption == 'board_date'">        
+	        	WHERE board_date BETWEEN '${keyword1}' AND '${keyword2}'            
 	        </when>
-	        <!-- 전체 검색이 아닐 경우 -->
+	        <!-- 날짜 검색이 아닐 경우 -->
 	        <otherwise>
-	            WHERE ${searchOption} like CONCAT('%',${keyword},'%')
+	            WHERE ${searchOption} like CONCAT('%','${keyword}','%')
 	        </otherwise>
 	    </choose>
 	</sql>

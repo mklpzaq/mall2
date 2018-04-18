@@ -1,6 +1,7 @@
 package com.test.mall2.board.controller;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -121,9 +122,10 @@ public class BoardController {
 	@RequestMapping(value = "/searchBoardList", method = RequestMethod.POST)
 	// @RequestParam(defaultValue="") ==> 기본값 할당
 	public String list(@RequestParam(value="searchOption", defaultValue="all") String searchOption
-						,@RequestParam(value="keyword", defaultValue="") String keyword
+						,@RequestParam(value="keyword", defaultValue="") ArrayList<String> keyword
 						,Model model) throws Exception{
-		logger.info("list");
+		logger.info(searchOption);
+		
 	    List<Board> list = boardService.listAll(searchOption, keyword);
 	    // 레코드의 갯수
 	    //int count = boardService.countArticle(searchOption, keyword);

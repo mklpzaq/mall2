@@ -1,6 +1,7 @@
 package com.test.mall2.board.service;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -114,9 +115,9 @@ public class BoardService {
 	}*/
 	
 	
-	public List<Board> listAll(String searchOption, String keyword) throws Exception {
+	public List<Board> listAll(String searchOption, ArrayList<String> keyword) throws Exception {
 		
-		logger.info("listAll");
+		logger.info(searchOption);
 		
 		return boardDao.listAll(searchOption, keyword);
 	}

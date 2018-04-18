@@ -33,15 +33,15 @@
 				});
 			});
 			
-			/* function changehtml(){
+			function changehtml(){
 				var property = $("#searchOption").val();
-				var show = $("#show");
-				if(property=="boardDate"){
-					$("#show").html('<input type="date" name="sv1">~<input type="date" name="sv2">');
+				var show = $("#keyword");
+				if(property=="board_date"){
+					$("#keyword").html('<input type="date" name="keyword">~<input type="date" name="keyword">');
 				}else {
-					$("#show").html('<input type="text" name="sv">');
+					$("#keyword").html('<input type="text" name="keyword">');
 				}
-			} */	
+			}	
 		</script>
 	</head>
 	<body>
@@ -200,13 +200,12 @@
 							<div>
 								<form action="<%=request.getContextPath()%>/searchBoardList" method="post">
 									<select id="searchOption" name="searchOption" onclick="changehtml();">											
-										<option value="all" <c:out value="${searchOption == 'all'?'selected':''}"/>>전체</option>
 										<option value="member_id"  <c:out value="${searchOption == 'member_id'?'selected':''}"/>>아이디</option>
 										<option value="board_title"  <c:out value="${searchOption == 'board_title'?'selected':''}"/>>제목</option>											
 										<option value="board_date"  <c:out value="${searchOption == 'board_date'?'selected':''}"/>>등록날짜</option>		
 									</select>
-									<dr id="show"></dr>
-									<input id="keyword" name="keyword" value="${keyword}">
+									<dr id="keyword"></dr>
+									<%-- <input id="keyword" name="keyword" value="${keyword}"> --%>
 									<input type="submit" value="검색버튼" >
 								</form>
 							</div>
