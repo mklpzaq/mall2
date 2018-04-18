@@ -45,13 +45,12 @@
 		UPDATE item
 		SET
 			item_no = #{itemNo}
-			,item_name = #{itemName}
-			,item_price = #{itemPrice}
-		WHERE
-			item_no = #{itemNo}
+			, item_name = #{itemName}
+			, item_price = #{itemPrice}
+		WHERE item_no = #{itemNo}
 	</update>
 	
-	<delete id="deldteItem" parameterType="com.test.mall2.item.service.Item">
+	<delete id="deletItem" parameterType="com.test.mall2.item.service.Item">
 		DELETE
 		FROM item
 		WHERE

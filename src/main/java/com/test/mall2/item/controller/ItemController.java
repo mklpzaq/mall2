@@ -57,7 +57,7 @@ public class ItemController {
 	
 	//updateItemForm get
 	@RequestMapping(value = "/updateItemForm", method = RequestMethod.GET)
-	public String updateCategoryForm(Item item, Model model) {
+	public String updateItemForm(Item item, Model model) {
 		logger.info("updateItemForm-GET");
 		Item itemForm = itemService.updateItemForm(item);		
 		model.addAttribute("itemForm", itemForm);
@@ -68,13 +68,13 @@ public class ItemController {
 	@RequestMapping(value = "/updateItemForm", method = RequestMethod.POST)
 	public String updateItemForm(Item item) {
 		logger.info("updateItemForm-POST");
-		itemService.updateItemForm(item);		
+		itemService.updateItem(item);		
 		return "redirect:selectItemList";
 	} 
 	
 	//deleteItem get
 	@RequestMapping(value = "/deleteItem", method = RequestMethod.GET)
-	public String deleteCategory(@RequestParam(value="deleteCheckbox") int[] deleteCheckbox) {
+	public String deleteItem(@RequestParam(value="deleteCheckbox") int[] deleteCheckbox) {
 		logger.info("deleteItem");
 		itemService.deleteItem(deleteCheckbox);		
 

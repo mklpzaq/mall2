@@ -64,12 +64,17 @@ public class ItemService {
 		return itemDao.updateItemForm(item);
 	}
 	
+	public void updateItem(Item item)  {	
+		logger.info("updateItem");
+		itemDao.updateItem(item);
+	 
+	}
+	
 	public void deleteItem(int[] deleteCheckbox) {	
-		logger.info("ItemService------deleteItem");
+		logger.info("deleteItem");
 		for(int i = 0; i<deleteCheckbox.length; i++) {
 			int itemNo = deleteCheckbox[i];
 			itemDao.deleteItem(itemNo);
-		itemDao.deleteItem(itemNo);
 	}
 	}
 }

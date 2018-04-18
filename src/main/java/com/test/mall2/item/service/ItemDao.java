@@ -39,6 +39,11 @@ public class ItemDao {
 		logger.info("updateItemForm");
 		return sqlSession.selectOne(NS+"updateItemForm", item);
 	}
+	
+	public void updateItem(Item item) {
+		logger.info("updateItem");
+		sqlSession.update(NS+"updateItem", item);
+	}
 	public void deleteItem(int itemNo) {
 		logger.info("deleteItem");
 		sqlSession.delete(NS+"deletItem", itemNo);

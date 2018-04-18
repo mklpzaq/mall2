@@ -16,13 +16,18 @@
 						<div class="col-md-3"></div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label for="categoryName">제목</label>
+								<label for="categoryName">번호</label>
 								<input type="text" class="form-control" name="categoryNo" size="10" value="${categoryForm.categoryNo}" readonly>
 							</div>
 							<div class="form-group">
 								<label for="categoryName">제목</label>
 								<input type="text" class="form-control" name="categoryName" size="50" value="${categoryForm.categoryName}">
 							</div>
+							<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button type="submit" class="btn btn-default">수정</button>
+							</div>
+						</div>
 						</div>
 						<div class="col-md-3"></div>							
 					</form>
