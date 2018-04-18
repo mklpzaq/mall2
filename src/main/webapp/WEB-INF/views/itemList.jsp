@@ -96,8 +96,8 @@ $(document).ready(function(){
 								<ul class="pagination">
 								
 								<c:if test="${currentPage>1}">
-									<li><a href="${pageContext.request.contextPath}/selectItemList?pagePerRow=${pagePerRow}">처음으로</a></li>
-									<li><a href="${pageContext.request.contextPath}/selectItemList?currentPage=${currentPage-1}&pagePerRow=${pagePerRow}">이전</a></li>
+									<li><a href="${pageContext.request.contextPath}/selectItemList?pagePerRow=${pagePerRow}">«</a></li>
+									<li><a href="${pageContext.request.contextPath}/selectItemList?currentPage=${currentPage-1}&pagePerRow=${pagePerRow}"><</a></li>
 								</c:if>
 								
 								<c:forEach var="iCount" begin="${startPage}" end="${endPage}">
@@ -112,8 +112,8 @@ $(document).ready(function(){
 								</c:forEach>				
 								
 								<c:if test="${currentPage < lastPage}">
-									<li><a href="${pageContext.request.contextPath}/selectItemList?currentPage=${currentPage+1}&pagePerRow=${pagePerRow}">다음</a></li>
-									<li><a href="${pageContext.request.contextPath}/selectItemList?currentPage=${lastPage}&pagePerRow=${pagePerRow}">마지막으로</a></li>
+									<li><a href="${pageContext.request.contextPath}/selectItemList?currentPage=${currentPage+1}&pagePerRow=${pagePerRow}">></a></li>
+									<li><a href="${pageContext.request.contextPath}/selectItemList?currentPage=${lastPage}&pagePerRow=${pagePerRow}">»</a></li>
 								</c:if>
 								
 								<div>
