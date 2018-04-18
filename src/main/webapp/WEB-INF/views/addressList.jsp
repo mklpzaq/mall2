@@ -37,7 +37,7 @@
 				$('#searchButton').click(function(){
 					searchSelect = $('#selectButtonText').text();
 					searchWord = $('#searchWord').val();
-					$(location).attr('href', './getAddressList?searchSignal=1&searchSelect=' + searchSelect + '&searchWord=' + searchWord);
+					$(location).attr('href', './getAddressList?searchSignal=y&searchSelect=' + searchSelect + '&searchWord=' + searchWord);
 				});
 				
 			})

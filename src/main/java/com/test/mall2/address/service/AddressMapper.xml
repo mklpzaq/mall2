@@ -34,11 +34,25 @@
 	</select>
 	
 	<select id="totalCountAddress"
+			parameterType="java.util.Map"
 			resultType="Integer">
 		SELECT
 			COUNT(*)
 		FROM
 			address
+		<if test="!searchWord.equals('')">
+			<choose>
+				<when test="searchSelect.equals('addressNo')">
+					WHERE address_no = #{searchWord}
+				</when>
+				<when test="searchSelect.equals('memberNo')">
+					WHERE member_no = #{searchWord}
+				</when>
+				<when test="searchSelect.equals('addressContent')">
+					WHERE address_content = #{searchWord}
+				</when>
+			</choose>
+		</if>
 	</select>
 	
 	
@@ -52,17 +66,19 @@
 		FROM
 			address
 		
-		<choose>
-			<when test="searchSelect.equals('addressNo')">
-				WHERE address_no = #{searchWord}
-			</when>
-			<when test="searchSelect.equals('memberNo')">
-				WHERE member_no = #{searchWord}
-			</when>
-			<when test="searchSelect.equals('addressContent')">
-				WHERE address_content = #{searchWord}
-			</when>
-		</choose>
+		<if test="!searchWord.equals('')">
+			<choose>
+				<when test="searchSelect.equals('addressNo')">
+					WHERE address_no = #{searchWord}
+				</when>
+				<when test="searchSelect.equals('memberNo')">
+					WHERE member_no = #{searchWord}
+				</when>
+				<when test="searchSelect.equals('addressContent')">
+					WHERE address_content = #{searchWord}
+				</when>
+			</choose>
+		</if>
 			
 		ORDER BY
 			address_no DESC
@@ -80,6 +96,19 @@
 			,member_no AS memberNo
 			,address_content AS addressContent
 		FROM address
+		<if test="!searchWord.equals('')">
+			<choose>
+				<when test="searchSelect.equals('addressNo')">
+					WHERE address_no = #{searchWord}
+				</when>
+				<when test="searchSelect.equals('memberNo')">
+					WHERE member_no = #{searchWord}
+				</when>
+				<when test="searchSelect.equals('addressContent')">
+					WHERE address_content = #{searchWord}
+				</when>
+			</choose>
+		</if>
 		ORDER BY address_no DESC
 		LIMIT #{beginRow}, #{pagePerRow}
 	</select>

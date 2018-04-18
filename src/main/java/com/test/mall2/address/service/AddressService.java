@@ -29,7 +29,8 @@ public class AddressService {
 		return addressDao.selectAddressForUpdate(addressNo);
 	}
 	
-	public Map<String, Object> getAddressList(int currentPage, int pagePerRow, int searchSignal, String searchSelect, String searchWord) {
+	public Map<String, Object> getAddressList(int currentPage, int pagePerRow, String searchSignal, String searchSelect, String searchWord) {
+		logger.info("getAddressList AddressService");
 		int beginRow = (currentPage-1)*pagePerRow;
 		
 		/*Map<String, Integer> map = new HashMap<String, Integer>();*/
@@ -46,33 +47,30 @@ public class AddressService {
 		 * 그러기 위해서는 searchWord 값 정보와
 		 * searchSignal 정보에 따른 분기가 필요할지 모르므로 map에 넣어준다. 
 		 * */
-		if(1 == searchSignal) {
-			map.put("searchSignal", searchSignal);
-			map.put("searchSelect", searchSelect);
-			map.put("searchWord", searchWord);
-		}
-		
-		/* '검색버튼'을 눌러 검색을 했을 경우(searchSignal : 1), 리스트는 검색결과에 맞게 다르게 반환되게 해야 한다. */
-		List<Address> list = null; 
-		if(1 == searchSignal) {
-			logger.info("=======서치사인 들어옴=========");
-			if(searchWord.equals("")) {
-				logger.info("=======서치워드 공란=========");
-				list = addressDao.selectAddressList(map);
-			}else {
-				logger.info("=======서치워드 존재함.=========");
-				list = addressDao.selectSearchAddressList(map);
-			}
-		}else {
-			logger.info("=======서치사인 안들어옴=========");
-			list = addressDao.selectAddressList(map);
-		}
 		
 		
-		//total로 DB에 있는 전체 레코드 개수가 반환되었다.
-		int total = addressDao.totalCountAddress();
-		int lastPage = 0;
+		map.put("searchSignal", searchSignal);
+		map.put("searchSelect", searchSelect);
+		map.put("searchWord", searchWord);
+		logger.info("searchSignal :" + searchSignal);
+		logger.info("searchSelect :" + searchSelect);
+		logger.info("searchWord :" + searchWord);
+		
+		/* beginRow와 pagePerRow값에 따라 SQL문의 LIMIT문이 작동될 것이고
+		 * 그에 맞는 list가 반환된다.
+		 * 검색 또한 마찬가지로 검색결과에 맞는 레코드들이
+		 * SQL문의 LIMIT문에 의해 제한되어 list에 저장된다.
+		 * (pagePerRow값이 10이면 list에 담기는 개수는 10개 레코드이다.)
+		 * */
+		List<Address> list = addressDao.selectAddressList(map);
+		
+		/* 검색을 하였다면 검색조건에 맞는 레코드 개수가 반환되고,
+		 * 검색을 하지 않았다면 DB에 존재하는 모든 address 레코드 개수가 반환된다. 
+		 *  */
+		int total = addressDao.totalCountAddress(map);
+		
 		/* DB에 address 레코드 수가 1개도 존재하지 않는 경우 == 초기상태일때, 1페이지로 나오게 lastPage를 1로 초기화 한다.*/
+		int lastPage = 0;
 		if(0 == total) {
 			lastPage = 1;
 		}else if(total%pagePerRow == 0) {

@@ -73,9 +73,10 @@ public class AddressController {
 	public String getAddressList(Model model
 								,@RequestParam(value="currentPage", defaultValue="1") int currentPage
 								,@RequestParam(value="pagePerRow", defaultValue="10", required=true) int pagePerRow
-								,@RequestParam(value="searchSignal", defaultValue="0") int searchSignal
+								,@RequestParam(value="searchSignal", defaultValue="n") String searchSignal
 								,@RequestParam(value="searchSelect", defaultValue="") String searchSelect
 								,@RequestParam(value="searchWord", defaultValue="") String searchWord) {
+		logger.info("====================================");
 		logger.info("getAddressList AddressController");
 		logger.info("searchSignal : " + searchSignal);
 		logger.info("searchSelect : " + searchSelect);
