@@ -71,6 +71,7 @@ $(document).ready(function(){
 										<td>번호</td>
 										<td>상품명</td>
 										<td>상품 가격</td>
+										<td>구매</td>
 										<td>수정</td>
 									</tr>
 								</thead>
@@ -83,7 +84,8 @@ $(document).ready(function(){
 													<td scope = "row">${item.itemNo}</td>
 													<td>${item.itemName}</td>
 													<td>${item.itemPrice}</td>
-													<td><a href="${pageContext.request.contextPath}/updateItemForm?itemNo=${item.itemNo}&pagePerRow=${pagePerRow}">수정</a></td>
+													<td><a href="${pageContext.request.contextPath}/updateItemForm?itemNo=${item.itemNo}">구매</a></td>
+													<td><a href="${pageContext.request.contextPath}/updateItemForm?itemNo=${item.itemNo}&pagePerRow=${pagePerRow}">수정</a></td>							
 												</tr>
 											</tbody>
 										</c:forEach>
