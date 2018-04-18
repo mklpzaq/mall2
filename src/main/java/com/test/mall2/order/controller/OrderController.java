@@ -30,18 +30,11 @@ public class OrderController {
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		logger.info(loginMember.getMemberId());
 		
-		orderService.insertOrder(loginMember, itemNo);
-	/*Map<String, Object> map = boardService.selectBoardList(currentPage, pagePerRow);
-	model.addAttribute("list", map.get("list"));
-	model.addAttribute("lastPage", map.get("lastPage"));
-	model.addAttribute("currentPage", currentPage);
-	model.addAttribute("startPage", map.get("startPage"));
-	model.addAttribute("endPage", map.get("endPage"));
-	model.addAttribute("pagePerRow", pagePerRow);*/
+		orderService.insertOrder(loginMember, itemNo);	
 		return "redirect:/orderList";
 	}
 	
-	@RequestMapping(value ="/orderList", method = RequestMethod.GET)
+	/*@RequestMapping(value ="/orderList", method = RequestMethod.GET)
 	public String orderList(Model model											
 									,@RequestParam(value="currentPage", defaultValue="1") int currentPage
 									,@RequestParam(value="pagePerRow", required=true, defaultValue="10") int pagePerRow) {
@@ -55,7 +48,7 @@ public class OrderController {
 	model.addAttribute("endPage", map.get("endPage"));
 	model.addAttribute("pagePerRow", pagePerRow);
 		return "OrderList";
-	}
+	}*/
 	
 	
 }
