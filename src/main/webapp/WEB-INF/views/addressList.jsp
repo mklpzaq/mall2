@@ -9,7 +9,8 @@
 		<title>Address List</title>
 		<script>
 			$(document).ready(function() {
-				var select;
+				var searchSelect;
+				var searchWord;
 				
 				$('#selectPagePerRow').change(function() {
 					$(location).attr('href', './getAddressList?pagePerRow=' + $('#selectPagePerRow > option:selected').val());
@@ -26,21 +27,18 @@
 				
 				/* 드롭메뉴 클릭했을때 글자 바꾸기와 드롭메뉴 닫기 */
 				$('#dropDownMenu > li').click(function(){
-					/* searchButton을 누르면 select변수의 값을 get방식으로 searchController로 검색어와 함께 넘길 것이다.
-					*  클릭했을때 일단 select변수에 저장시킨다.
+					/* searchButton을 누르면 searchWord변수의 값을 get방식으로 getAddressListController로 검색어와 함께 넘길 것이다.
+					*  클릭했을때 일단 searchWord변수에 text값을 저장시킨다.
 					*/
-					select = $(this).text();
+					searchSelect = $(this).text();
 					$('#selectButtonText').text($(this).text());
 					$('#selectButton').parent().removeClass('open');
 				});
 				
 				$('#searchButton').click(function(){
-					$(location).attr('href', './getAddressList');
+					searchWord = $('#searchWord').val();
+					$(location).attr('href', './getAddressList?searchSignal=1&searchSelect=' + searchSelect + '&searchWord=' + searchWord);
 				});
-				
-				
-				
-				
 				
 			})
 		</script>
@@ -94,7 +92,7 @@
 												<li><a href="#">addressContent</a></li>
 											</ul>
 										</div>
-										<input type="text" class="form-control" placeholder="검색어 입력">
+										<input type="text" id="searchWord" class="form-control" placeholder="검색어 입력">
 										<span class="input-group-btn">
 											<button id="searchButton" class="btn btn-default" type="button">검색</button>
 										</span>

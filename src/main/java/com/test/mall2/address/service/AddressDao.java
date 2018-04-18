@@ -34,7 +34,11 @@ public class AddressDao {
 		return sqlSession.selectOne(NS+"totalCountAddress");
 	}
 	
-	public List<Address> selectAddressList(Map<String, Integer> map){
+	public List<Address> selectSearchAddressList(Map<String, Object> map){
+		return null;
+	}
+	
+	public List<Address> selectAddressList(Map<String, Object> map){
 		return sqlSession.selectList(NS+"selectAddressList", map);
 	}
 	
