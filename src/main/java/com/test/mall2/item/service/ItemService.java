@@ -10,26 +10,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.test.mall2.category.service.Category;
+import com.test.mall2.category.service.CategoryService;
+
 
 @Service
 public class ItemService {
+	private static final Logger logger = LoggerFactory.getLogger(ItemService.class);
 
 	@Autowired
-	private ItemDao itemDao;
-		
+	private ItemDao itemDao;		
 	
 	public int insertItemForm(Item item) {
+		logger.info("ItemService------insertItemForm");
 		int row = itemDao.insertItem(item);
 		return row;
 	}
 	
-	
-	public Map<String, Object> selectItemList(int currentPage, int pagePerRow) {
+	public Map<String, Object> selectItemList(int currentPage, int pagePerRow) {	
+		logger.info("selectItemList");
 		Map<String, Integer> map = new HashMap<String, Integer>();
-		int beginRow = (currentPage-1)*pagePerRow;
+		int beginRow = (currentPage-1)*pagePerRow; //페이지의 첫번째 행을 지정해줌
 		map.put("beginRow", beginRow);
 		map.put("pagePerRow", pagePerRow);
-		List<Item> list = itemDao.selectItemList(map);
+		List<Category> list = itemDao.selectItemList(map);
 		
 		int total = itemDao.totalCountItem();
 		int lastPage =0;
@@ -56,10 +60,12 @@ public class ItemService {
 	}
 	
 	public Item updateItemForm(Item item) {
+		logger.info("ItemService------updateItemForm");
 		return itemDao.updateItemForm(item);
 	}
 	
 	public void deleteItem(int[] deleteCheckbox) {	
+		logger.info("ItemService------deleteItem");
 		for(int i = 0; i<deleteCheckbox.length; i++) {
 			int itemNo = deleteCheckbox[i];
 			itemDao.deleteItem(itemNo);

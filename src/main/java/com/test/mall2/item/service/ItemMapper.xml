@@ -17,9 +17,9 @@
 	
 	<select id="selectItemList" parameterType="java.util.Map" resultType="com.test.mall2.item.service.Item">
 		SELECT 
-			item_no
-			, item_name
-			, item_price 
+			item_no as itemNo
+			, item_name as ItemName
+			, item_price  as itemPrice
 		FROM item
 		ORDER BY item_no DESC 
 		LIMIT #{beginRow},#{pagePerRow}

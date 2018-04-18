@@ -8,7 +8,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <title>item list</title>
 <script>	
-	$(document).ready(function(){			
+$(document).ready(function(){			
 	  $('#pagePerRow').change(function(){	     	 
 	     	 $(location).attr('href', './selectItemList?pagePerRow='+$('#pagePerRow > option:selected').val());
 	  });
@@ -18,7 +18,7 @@
 		$("#button").click(function(){
 			$('input[name="deleteCheckbox"]:checked').each(function(){							
 				var text = $(this).val();
-				alert("categoryNo"+text+"삭제");					
+				alert("itemNo"+text+"삭제");					
 				$("#form1").submit();	
 			});
 		})	
@@ -79,8 +79,8 @@
 										<c:forEach var="item" items="${list}">
 											<tbody>
 												<tr>
-													<th><input type="checkbox" name="deleteCheckbox" value="${item.ItemNo}"></th>
-													<th scope = "row">${item.itemNo}</th>
+													 <th><input type="checkbox" name="deleteCheckbox" value="${item.ItemNo}"></th>
+													<td scope = "row">${item.itemNo}</td>
 													<td>${item.itemName}</td>
 													<td>${item.itemPrice}</td>
 													<td><a href="${pageContext.request.contextPath}/updateItemForm?itemNo=${item.itemNo}&pagePerRow=${pagePerRow}">수정</a></td>
