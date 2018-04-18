@@ -114,7 +114,7 @@ public class MemberController {
 	
 	}
 	
-	@RequestMapping(value = "/insertMemberForm", method = RequestMethod.POST)
+	@RequestMapping(value = "/1", method = RequestMethod.POST)
 	public String selectMemberOverlap() {
 		logger.info("selectMemberOverlap MemberController");
 		return "insertMemberForm";
