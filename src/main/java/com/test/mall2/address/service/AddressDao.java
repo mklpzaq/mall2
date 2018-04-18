@@ -34,8 +34,10 @@ public class AddressDao {
 		return sqlSession.selectOne(NS+"totalCountAddress");
 	}
 	
+	/* '검색버튼'을 눌러 검색을 했을 경우 리턴되는 List는 검색조건에 맞게 달라져야 한다. */
 	public List<Address> selectSearchAddressList(Map<String, Object> map){
-		return null;
+		
+		return sqlSession.selectList(NS+"selectSearchAddressList", map);
 	}
 	
 	public List<Address> selectAddressList(Map<String, Object> map){

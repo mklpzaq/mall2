@@ -41,6 +41,36 @@
 			address
 	</select>
 	
+	
+	<select id="selectSearchAddressList"
+			parameterType="java.util.Map"
+			resultType="com.test.mall2.address.service.Address">
+		SELECT
+			address_no AS addressNo
+			,member_no AS memberNo
+			,address_content AS addressContent
+		FROM
+			address
+		
+		<choose>
+			<when test="searchSelect.equals('addressNo')">
+				WHERE address_no = #{searchWord}
+			</when>
+			<when test="searchSelect.equals('memberNo')">
+				WHERE member_no = #{searchWord}
+			</when>
+			<when test="searchSelect.equals('addressContent')">
+				WHERE address_content = #{searchWord}
+			</when>
+		</choose>
+			
+		ORDER BY
+			address_no DESC
+		LIMIT
+			#{beginRow}, #{pagePerRow}
+	</select>
+	
+	
 	<!-- mybatis에서 세미콜론 찍으면 에러난다. -->
 	<select id="selectAddressList"
 			parameterType="java.util.Map"

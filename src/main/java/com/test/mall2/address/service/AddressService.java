@@ -36,6 +36,9 @@ public class AddressService {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("beginRow", beginRow);
 		map.put("pagePerRow", pagePerRow);
+		logger.info("currentPage :" + currentPage);
+		logger.info("beginRow :" + beginRow);
+		logger.info("pagePerRow :" + pagePerRow);
 		
 		/* searchSignal : 1 일경우 '검색버튼'을 누른경우가 되므로 
 		 * selectAddressList() 메서드를 사용하여 list를 가져올때,
@@ -49,14 +52,20 @@ public class AddressService {
 			map.put("searchWord", searchWord);
 		}
 		
-		logger.info("currentPage :" + currentPage);
-		logger.info("beginRow :" + beginRow);
-		logger.info("pagePerRow :" + pagePerRow);
-		
-		
-		List<Address> list = addressDao.selectAddressList(map);
+		/* '검색버튼'을 눌러 검색을 했을 경우(searchSignal : 1), 리스트는 검색결과에 맞게 다르게 반환되게 해야 한다. */
+		List<Address> list = null; 
 		if(1 == searchSignal) {
-			list = addressDao.selectSearchAddressList(map);
+			logger.info("=======서치사인 들어옴=========");
+			if(searchWord.equals("")) {
+				logger.info("=======서치워드 공란=========");
+				list = addressDao.selectAddressList(map);
+			}else {
+				logger.info("=======서치워드 존재함.=========");
+				list = addressDao.selectSearchAddressList(map);
+			}
+		}else {
+			logger.info("=======서치사인 안들어옴=========");
+			list = addressDao.selectAddressList(map);
 		}
 		
 		

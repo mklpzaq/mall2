@@ -28,14 +28,14 @@
 				/* 드롭메뉴 클릭했을때 글자 바꾸기와 드롭메뉴 닫기 */
 				$('#dropDownMenu > li').click(function(){
 					/* searchButton을 누르면 searchWord변수의 값을 get방식으로 getAddressListController로 검색어와 함께 넘길 것이다.
-					*  클릭했을때 일단 searchWord변수에 text값을 저장시킨다.
+					*  클릭했을때 선택한 select내용의 값을 #selectButtonText에 넣어준다.
 					*/
-					searchSelect = $(this).text();
 					$('#selectButtonText').text($(this).text());
 					$('#selectButton').parent().removeClass('open');
 				});
-				
+				/* 검색버튼을 클릭하면 get방식으로  searchSignal, searchSelect, searchWord값을 넘긴다.*/
 				$('#searchButton').click(function(){
+					searchSelect = $('#selectButtonText').text();
 					searchWord = $('#searchWord').val();
 					$(location).attr('href', './getAddressList?searchSignal=1&searchSelect=' + searchSelect + '&searchWord=' + searchWord);
 				});
@@ -84,7 +84,7 @@
 									<div class="input-group">
 										<div class="input-group-btn">
 											<button type="button" id="selectButton" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-												<span id="selectButtonText">검색조건</span> <span class="caret"></span>
+												<span id="selectButtonText">addressNo</span> <span class="caret"></span>
 											</button>
 											<ul id="dropDownMenu" class="dropdown-menu" role="menu">
 												<li><a href="#">addressNo</a></li>
