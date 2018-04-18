@@ -31,6 +31,7 @@
 								<li><a href="${pageContext.request.contextPath}/selectCategoryList">CategoryList</a></li>
 								<li><a href="${pageContext.request.contextPath}/selectBoardList">BoardList</a></li>
 								<li><a href="${pageContext.request.contextPath}/getAddressList">AddressList</a></li>					
+								<li><a href="${pageContext.request.contextPath}/selectItemList">ItemList</a></li>
 							</c:when>
 							<c:otherwise>									
 								<li><a href="${pageContext.request.contextPath}/selectBoardList">BoardList</a></li>	

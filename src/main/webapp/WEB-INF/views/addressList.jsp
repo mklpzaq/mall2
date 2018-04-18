@@ -34,7 +34,9 @@
 					$('#selectButton').parent().removeClass('open');
 				});
 				
-				
+				$('#searchButton').click(function(){
+					$(location).attr('href', './getAddressList');
+				});
 				
 				
 				
