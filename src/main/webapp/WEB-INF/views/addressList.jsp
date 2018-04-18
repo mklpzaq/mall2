@@ -9,9 +9,37 @@
 		<title>Address List</title>
 		<script>
 			$(document).ready(function() {
+				var select;
+				
 				$('#selectPagePerRow').change(function() {
 					$(location).attr('href', './getAddressList?pagePerRow=' + $('#selectPagePerRow > option:selected').val());
 				})
+				
+				/* 드롭다운 박스 클릭시 열고 닫고 이벤트 */
+				$('#selectButton').click(function(){
+					if($('#selectButton').parent().hasClass('open')){
+						$('#selectButton').parent().removeClass('open');
+					}else{
+						$('#selectButton').parent().addClass('open');
+					}
+				});
+				
+				/* 드롭메뉴 클릭했을때 글자 바꾸기와 드롭메뉴 닫기 */
+				$('#dropDownMenu > li').click(function(){
+					/* searchButton을 누르면 select변수의 값을 get방식으로 searchController로 검색어와 함께 넘길 것이다.
+					*  클릭했을때 일단 select변수에 저장시킨다.
+					*/
+					select = $(this).text();
+					$('#selectButtonText').text($(this).text());
+					$('#selectButton').parent().removeClass('open');
+				});
+				
+				
+				
+				
+				
+				
+				
 			})
 		</script>
 	</head>
@@ -47,6 +75,34 @@
 								</div>
 							</div>
 							<hr/>
+							
+							<!-- Begin Search -->
+							<div class="row">
+								<div class="col-sm-2"></div>
+								<div class="col-sm-8">
+									
+									<div class="input-group">
+										<div class="input-group-btn">
+											<button type="button" id="selectButton" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+												<span id="selectButtonText">검색조건</span> <span class="caret"></span>
+											</button>
+											<ul id="dropDownMenu" class="dropdown-menu" role="menu">
+												<li><a href="#">addressNo</a></li>
+												<li><a href="#">memberNo</a></li>
+												<li><a href="#">addressContent</a></li>
+											</ul>
+										</div>
+										<input type="text" class="form-control" placeholder="검색어 입력">
+										<span class="input-group-btn">
+											<button id="searchButton" class="btn btn-default" type="button">검색</button>
+										</span>
+									</div>
+								
+								</div>
+								<div class="col-sm-2"></div>
+							</div>
+							<!-- End Search -->
+							
 							<table class="table table-striped">
 								<thead>
 									<tr>
