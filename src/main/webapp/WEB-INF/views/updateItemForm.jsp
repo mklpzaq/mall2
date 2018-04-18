@@ -14,17 +14,23 @@
 				<div class="col-md-8">
 					<!-- Begin Content -->
 					
-					<form class="form-horizontal" action="${pageContext.request.contextPath}/updateItem" method="post">
+					<form class="form-horizontal" action="${pageContext.request.contextPath}/updateItemForm" method="post">
 						<div class="form-group">
 							<label for="inputItemNo" class="col-sm-2 control-label">상품번호</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="inputItemNo" value="${itemForm.itemNo}" name="ItemNo" readonly>   
+								<input type="text" class="form-control" id="inputItemNo" value="${item.itemNo}" name="ItemNo" readonly>   
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="inputItemName" class="col-sm-2 control-label">상품명</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="inputMemberId3" value=${itemForm.itemName}" name="ItemName">
+								<input type="text" class="form-control" id="inputItemName" value="${item.itemName}" name="ItemName">
+							</div>
+						</div>	
+						<div class="form-group">
+							<label for="inputItemPrice" class="col-sm-2 control-label">상품가격</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="inputItemPrice" value="${item.itemPrice}" name="ItemPrice">
 							</div>
 						</div>				
 						<div class="form-group">

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.test.mall2.category.controller.CategoryController;
+import com.test.mall2.category.service.Category;
 import com.test.mall2.item.service.Item;
 import com.test.mall2.item.service.ItemService;
 
@@ -43,16 +44,41 @@ public class ItemController {
 											,@RequestParam(value="pagePerRow", required=true, defaultValue="10") int pagePerRow) {
 		
 		logger.info("selectItemList");
-	Map<String, Object> map = itemService.selectItemList(currentPage,pagePerRow);
-	model.addAttribute("list", map.get("list"));
-	model.addAttribute("lastPage", map.get("lastPage"));
-	model.addAttribute("currentPage", currentPage);
-	model.addAttribute("startPage", map.get("startPage"));
-	model.addAttribute("endPage", map.get("endPage"));
-	model.addAttribute("pagePerRow", pagePerRow);
-		return "itemList";
-		
-		
+		Map<String, Object> map = itemService.selectItemList(currentPage,pagePerRow);
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("lastPage", map.get("lastPage"));
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("startPage", map.get("startPage"));
+		model.addAttribute("endPage", map.get("endPage"));
+		model.addAttribute("pagePerRow", pagePerRow);
+		return "itemList";	
 	}  
+	
+	
+	//updateItemForm
+	@RequestMapping(value = "/updateItemForm", method = RequestMethod.GET)
+	public String updateCategoryForm(Item item, Model model) {
+		logger.info("updateItemForm");
+		Item itemForm = itemService.updateItemForm(item);		
+		model.addAttribute("itemForm", itemForm);
+		return "updateItemForm";  
+	}  
+	
+	//updateItemForm
+	@RequestMapping(value = "/updateItemForm", method = RequestMethod.POST)
+	public String updateCategoryForm(Item item) {
+		logger.info("updateItemForm");
+		itemService.updateItemForm(item);		
+		return "redirect:selectItemList";
+	} 
+	
+	//deleteItem
+	@RequestMapping(value = "/deleteItem", method = RequestMethod.GET)
+	public String deleteCategory(@RequestParam(value="deleteCheckbox") int[] deleteCheckbox) {
+		logger.info("deleteItem");
+		itemService.deleteItem(deleteCheckbox);		
+
+		return "redirect:selectItemList";
+	} 
 	
 }

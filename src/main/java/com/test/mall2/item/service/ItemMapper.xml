@@ -33,12 +33,12 @@
 	
 	<update id="updateItemForm" parameterType="com.test.mall2.item.service.Item">
 		SELECT
-			item_name as itemName
+			item_no as itemNo
+			, item_name as itemName
 			, item_price as itemPrice
 		FROM item
 		WHERE
-			item_no =
-			#{itemN0}
+			item_no = #{itemNo}
 	</update>
 	
 	<update id="updateItem" parameterType="com.test.mall2.item.service.Item">

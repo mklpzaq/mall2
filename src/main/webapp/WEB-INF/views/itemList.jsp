@@ -21,7 +21,7 @@ $(document).ready(function(){
 				alert("itemNo"+text+"삭제");					
 				$("#form1").submit();	
 			});
-		})	
+		});	
 	});
 	
 	$(document).ready(function(){
@@ -79,7 +79,7 @@ $(document).ready(function(){
 										<c:forEach var="item" items="${list}">
 											<tbody>
 												<tr>
-													 <th><input type="checkbox" name="deleteCheckbox" value="${item.ItemNo}"></th>
+													 <th><input type="checkbox" name="deleteCheckbox" value="${item.itemNo}"></th>
 													<td scope = "row">${item.itemNo}</td>
 													<td>${item.itemName}</td>
 													<td>${item.itemPrice}</td>

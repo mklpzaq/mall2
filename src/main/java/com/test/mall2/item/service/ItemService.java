@@ -60,7 +60,7 @@ public class ItemService {
 	}
 	
 	public Item updateItemForm(Item item) {
-		logger.info("ItemService------updateItemForm");
+		logger.info("updateItemForm");
 		return itemDao.updateItemForm(item);
 	}
 	
