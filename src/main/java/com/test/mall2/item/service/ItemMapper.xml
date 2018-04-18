@@ -31,7 +31,7 @@
 		FROM item
 	</select>
 	
-	<update id="updateItemForm" parameterType="com.test.mall2.item.service.Item">
+	<select id="updateItemForm" parameterType="com.test.mall2.item.service.Item" resultType="com.test.mall2.item.service.Item">
 		SELECT
 			item_no as itemNo
 			, item_name as itemName
@@ -39,7 +39,7 @@
 		FROM item
 		WHERE
 			item_no = #{itemNo}
-	</update>
+	</select>
 	
 	<update id="updateItem" parameterType="com.test.mall2.item.service.Item">
 		UPDATE item

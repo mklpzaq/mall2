@@ -55,24 +55,24 @@ public class ItemController {
 	}  
 	
 	
-	//updateItemForm
+	//updateItemForm get
 	@RequestMapping(value = "/updateItemForm", method = RequestMethod.GET)
 	public String updateCategoryForm(Item item, Model model) {
-		logger.info("updateItemForm");
+		logger.info("updateItemForm-GET");
 		Item itemForm = itemService.updateItemForm(item);		
 		model.addAttribute("itemForm", itemForm);
 		return "updateItemForm";  
 	}  
 	
-	//updateItemForm
+	//updateItemForm post
 	@RequestMapping(value = "/updateItemForm", method = RequestMethod.POST)
-	public String updateCategoryForm(Item item) {
-		logger.info("updateItemForm");
+	public String updateItemForm(Item item) {
+		logger.info("updateItemForm-POST");
 		itemService.updateItemForm(item);		
 		return "redirect:selectItemList";
 	} 
 	
-	//deleteItem
+	//deleteItem get
 	@RequestMapping(value = "/deleteItem", method = RequestMethod.GET)
 	public String deleteCategory(@RequestParam(value="deleteCheckbox") int[] deleteCheckbox) {
 		logger.info("deleteItem");

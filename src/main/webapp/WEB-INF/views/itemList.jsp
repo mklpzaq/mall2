@@ -84,7 +84,7 @@ $(document).ready(function(){
 													<td scope = "row">${item.itemNo}</td>
 													<td>${item.itemName}</td>
 													<td>${item.itemPrice}</td>
-													<td><a href="${pageContext.request.contextPath}/updateItemForm?itemNo=${item.itemNo}">구매</a></td>
+													<td><a href="${pageContext.request.contextPath}/insertOrder?itemNo=${item.itemNo}">구매</a></td>
 													<td><a href="${pageContext.request.contextPath}/updateItemForm?itemNo=${item.itemNo}&pagePerRow=${pagePerRow}">수정</a></td>							
 												</tr>
 											</tbody>
