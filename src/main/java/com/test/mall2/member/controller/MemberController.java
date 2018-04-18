@@ -114,6 +114,10 @@ public class MemberController {
 	
 	}
 	
-	
+	@RequestMapping(value = "/insertMemberForm", method = RequestMethod.POST)
+	public String selectMemberOverlap() {
+		logger.info("selectMemberOverlap MemberController");
+		return "insertMemberForm";
+	}
 	
 }

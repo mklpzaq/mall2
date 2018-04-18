@@ -54,4 +54,9 @@ public class MemberDao {
 		int row = sqlSession.insert(NS+"insertMember",member);
 		return row;
 	}
+	
+	public String selectMemberOverlap(Member member) {
+		String overlap = sqlSession.selectOne(NS+"selectMemberOverlap", member);
+		return overlap;
+	}
 }

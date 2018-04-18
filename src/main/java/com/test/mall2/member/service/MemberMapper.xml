@@ -68,7 +68,17 @@
 		SELECT COUNT(*) FROM member
 	</select>
 	
-	
+	<select id="selectMemberOverlap"
+			resultType="com.test.mall2.member.service.Member"
+			>
+			SELECT member_id
+					,member_pw 
+			FROM member 
+			GROUP BY member_id
+					,member_pw 
+			HAVING COUNT(#{memberId} 
+						,#{memberPw})>1	
+	</select>
  
 	<insert id="insertMember" 
 			parameterType="com.test.mall2.member.service.Member">
