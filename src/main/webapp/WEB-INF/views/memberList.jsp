@@ -20,6 +20,13 @@
 					confirm("정말로 삭제 하시겠습니까?");
 				});
 			});
+			
+			function change(){
+				var property = $('#searchOption').val();
+				var show = $('#keyword');
+				$('#keyword').html('<input type="text" name="keyword">');
+			}
+			
 		</script>
 	</head>
 	<body>
@@ -156,7 +163,16 @@
 									</li>
 								</ul>
 							</nav>
-						</div>
+							<div>
+								<form action="${pageContext.request.contextPath}/searchMember" method="post">
+									<select id="searchOption" name="searchOption" onclick="change();">
+										<option value="member_id" <c:out value="${searchOption == 'member_id'?'selected':''}"/>>아이디</option>
+									</select>
+									<dr id="keyword"></dr>
+									<input type="submit" value="검색">
+								</form>
+							</div>
+						</div>												
 					</div>
 					<!-- End Content -->
 				</div>

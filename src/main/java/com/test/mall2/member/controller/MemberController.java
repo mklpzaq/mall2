@@ -27,6 +27,11 @@ public class MemberController {
 	private MemberService memberService;	
 	private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
 	
+	@RequestMapping(value="/searchMember", method = RequestMethod.POST)
+	public String searchMember() {
+		return "";
+	}
+	
 	@RequestMapping(value="/deleteMember", method = RequestMethod.GET)
 	public String deleteMember(@RequestParam(value="sendNo") int memberNo) {
 		int result = memberService.deleteMember(memberNo);
