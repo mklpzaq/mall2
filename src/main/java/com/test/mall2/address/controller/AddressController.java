@@ -73,13 +73,19 @@ public class AddressController {
 	public String getAddressList(Model model
 								,@RequestParam(value="currentPage", defaultValue="1") int currentPage
 								,@RequestParam(value="pagePerRow", defaultValue="10", required=true) int pagePerRow
-								,@RequestParam(value="searchSignal", defaultValue="0") int searchSignal
-								,@RequestParam(value="searchSelect", defaultValue="") String searchSelect
+								,@RequestParam(value="searchSignal", defaultValue="n") String searchSignal
+								,@RequestParam(value="searchSelect", defaultValue="addressNo") String searchSelect
 								,@RequestParam(value="searchWord", defaultValue="") String searchWord) {
+		logger.info("====================================");
 		logger.info("getAddressList AddressController");
 		logger.info("searchSignal : " + searchSignal);
 		logger.info("searchSelect : " + searchSelect);
 		logger.info("searchWord : " + searchWord);
+		
+		/* 공란 검색을 했을 시  searchSignal을 n으로 바꾸어준다.*/
+		if(searchWord.equals("")) {
+			searchSignal = "n";
+		}
 		
 		Map<String, Object> map= addressService.getAddressList(currentPage, pagePerRow, searchSignal, searchSelect, searchWord);
 		
@@ -88,11 +94,17 @@ public class AddressController {
 		model.addAttribute("beginPageNumForCurrentPage", map.get("beginPageNumForCurrentPage"));
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("pagePerRow", pagePerRow);
+		model.addAttribute("searchSignal", searchSignal);
+		model.addAttribute("searchSelect", searchSelect);
+		model.addAttribute("searchWord", searchWord);
 		logger.info("list : "+ map.get("list"));
 		logger.info("lastPage : "+ map.get("lastPage"));
 		logger.info("beginPageNumForCurrentPage : "+ map.get("beginPageNumForCurrentPage"));
 		logger.info("currentPage : "+ currentPage);
-		logger.info("pagePerRow : "+ pagePerRow);	
+		logger.info("pagePerRow : "+ pagePerRow);
+		logger.info("searchSignal : " + searchSignal);
+		logger.info("searchSelect : " + searchSelect);
+		logger.info("searchWord : " + searchWord);
 		return "addressList";
 	}
 	
