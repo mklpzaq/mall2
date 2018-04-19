@@ -69,7 +69,6 @@ $(document).ready(function(){
 									<tr>
 										<th><input type="checkbox" id="checkboxAll" value=""></th>
 										<td>상품번호</td>
-										<td>카테고리번호</td>
 										<td>카테고리</td>
 										<td>상품명</td>
 										<td>상품 가격</td>
@@ -84,7 +83,6 @@ $(document).ready(function(){
 												<tr>
 													<th><input type="checkbox" name="deleteCheckbox" value="${item.itemNo}"></th>
 													<td scope = "row">${item.itemNo}</td>
-													<td>${item.category.categoryNo}</td>
 													<td>${item.category.categoryName}</td>
 													<td>${item.itemName}</td>
 													<td>${item.itemPrice}</td>
