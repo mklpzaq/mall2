@@ -68,7 +68,9 @@ $(document).ready(function(){
 								<thead>
 									<tr>
 										<th><input type="checkbox" id="checkboxAll" value=""></th>
-										<td>번호</td>
+										<td>상품번호</td>
+										<td>카테고리번호</td>
+										<td>카테고리</td>
 										<td>상품명</td>
 										<td>상품 가격</td>
 										<td>구매</td>
@@ -80,8 +82,10 @@ $(document).ready(function(){
 										<c:forEach var="item" items="${list}">
 											<tbody>
 												<tr>
-													 <th><input type="checkbox" name="deleteCheckbox" value="${item.itemNo}"></th>
+													<th><input type="checkbox" name="deleteCheckbox" value="${item.itemNo}"></th>
 													<td scope = "row">${item.itemNo}</td>
+													<td>${item.category.categoryNo}</td>
+													<td>${item.category.categoryName}</td>
 													<td>${item.itemName}</td>
 													<td>${item.itemPrice}</td>
 													<td><a href="${pageContext.request.contextPath}/insertOrder?itemNo=${item.itemNo}">구매</a></td>

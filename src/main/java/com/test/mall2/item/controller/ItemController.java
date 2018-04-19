@@ -69,7 +69,7 @@ public class ItemController {
 	public String updateItemForm(Item item) {
 		logger.info("updateItemForm-POST");
 		itemService.updateItem(item);		
-		return "redirect:selectItemList";
+		return "redirect:/selectItemList";
 	} 
 	
 	//deleteItem get
@@ -78,7 +78,7 @@ public class ItemController {
 		logger.info("deleteItem");
 		itemService.deleteItem(deleteCheckbox);		
 
-		return "redirect:selectItemList";
+		return "redirect:/selectItemList";
 	} 
 	
 }

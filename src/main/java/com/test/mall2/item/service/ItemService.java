@@ -22,7 +22,7 @@ public class ItemService {
 	private ItemDao itemDao;		
 	
 	public int insertItemForm(Item item) {
-		logger.info("ItemService------insertItemForm");
+		logger.info("insertItemForm");
 		int row = itemDao.insertItem(item);
 		return row;
 	}
@@ -64,9 +64,9 @@ public class ItemService {
 		return itemDao.updateItemForm(item);
 	}
 	
-	public void updateItem(Item item)  {	
+	public int updateItem(Item item)  {	
 		logger.info("updateItem");
-		itemDao.updateItem(item);
+		return itemDao.updateItem(item);
 	 
 	}
 	
