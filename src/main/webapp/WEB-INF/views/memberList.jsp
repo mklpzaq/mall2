@@ -15,6 +15,10 @@
 				$('#selectPagePerRow').change(function(){
 					$(location).attr('href', './getMemberList?pagePerRow='+$('#selectPagePerRow > option:selected').val());
 				});
+				
+				$('#deleteMember').click(function(){
+					confirm("정말로 삭제 하시겠습니까?");
+				});
 			});
 		</script>
 	</head>
@@ -67,7 +71,7 @@
 											<td>${member.memberId}</td>
 											<td>${member.memberPw}</td>
 											<td><a href="${pageContext.request.contextPath}/updateMember?sendNo=${member.memberNo}">수정</a></td>
-											<td><a href="${pageContext.request.contextPath}/deleteMember?sendNo=${member.memberNo}">삭제</a></td>
+											<td id="deleteMember"><a href="${pageContext.request.contextPath}/deleteMember?sendNo=${member.memberNo}">삭제</a></td>
 											<td><a href="${pageContext.request.contextPath}/insertAddress?sendNo=${member.memberNo}">주소추가</a></td>											
 										</tr>
 									</c:forEach>

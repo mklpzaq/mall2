@@ -74,7 +74,7 @@
 					}
 				
 					$('#insertMemberForm').submit();
-				});
+				});				
 			});
 		</script>
 	</head>
