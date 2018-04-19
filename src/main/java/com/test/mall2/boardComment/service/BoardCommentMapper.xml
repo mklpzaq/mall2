@@ -5,6 +5,19 @@
  
 <mapper namespace="com.test.mall2.boardComment.service.BoardCommentMapper">
 	
+	<select id="getBoardCommentList"
+			resultType="com.test.mall2.boardComment.service.BoardComment">
+		SELECT
+			comment_no AS commentNo
+			,board_no AS boardNo
+			,member_id AS memberId
+			,comment_content AS commentContent
+		FROM
+			board_comment
+		ORDER BY comment_no DESC
+	</select>
+	
+	
 	<insert id="insertBoardComment"
 			parameterType="com.test.mall2.boardComment.service.BoardComment">
 		INSERT

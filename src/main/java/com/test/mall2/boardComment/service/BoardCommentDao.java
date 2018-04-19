@@ -1,5 +1,7 @@
 package com.test.mall2.boardComment.service;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +14,11 @@ public class BoardCommentDao {
 	private SqlSessionTemplate sqlSession;
 	private static final Logger logger = LoggerFactory.getLogger(BoardCommentDao.class);
 	final String NS ="com.test.mall2.boardComment.service.BoardCommentMapper.";
+	
+	public List<BoardComment> getBoardCommentList() {
+		logger.info("getBoardCommentList BoardCommentDao");
+		return sqlSession.selectList(NS+"getBoardCommentList");
+	}
 	
 	public int insertBoardComment(BoardComment boardComment) {
 		logger.info("insertBoardComment BoardCommentDao");

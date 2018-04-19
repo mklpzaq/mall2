@@ -1,11 +1,15 @@
 package com.test.mall2.boardComment.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.test.mall2.IndexController;
 import com.test.mall2.boardComment.service.BoardComment;
@@ -17,11 +21,22 @@ public class BoardCommentController {
 	private BoardCommentService boardCommentService;
 	private static final Logger logger = LoggerFactory.getLogger(BoardCommentController.class);
 	
-	@RequestMapping(value = "/getBoardCommentList", method = RequestMethod.GET)
-	public String getBoardCommentList(){
-		logger.info("/getBoardCommentList GET boardCommentController");
-		//boardCommentService.getBoardCommentList();
-		return "boardCommentList";
+	@RequestMapping(value = "/deleteBoardComment", method = RequestMethod.GET)
+	public String deleteBoardComment(@RequestParam(value="sendNo") int commentNo){
+		logger.info("/deleteBoardComment GET boardCommentController");
+		logger.info("commentNo : " + commentNo);
+		//int result = boardCommentService.getBoardCommentList();
+		
+		return "redirect:/getBoardCommentList";
+	}
+	
+	@RequestMapping(value = "/getBoardCommentAllList", method = RequestMethod.GET)
+	public String getBoardCommentList(Model model){
+		logger.info("/getAllBoardCommentList GET boardCommentController");
+		List<BoardComment> list = boardCommentService.getBoardCommentList();
+		
+		model.addAttribute("list", list);
+		return "boardCommentAllList";
 	}
 	
 	@RequestMapping(value = "/insertBoardComment", method = RequestMethod.POST)
@@ -29,7 +44,8 @@ public class BoardCommentController {
 		logger.info("/insertBoardComment POST boardCommentController");
 		logger.info(boardComment.toString());
 		int result = boardCommentService.insertBoardComment(boardComment);
-		return "redirect:/getBoardCommentList";
+		
+		return "redirect:/getBoardCommentAllList";
 	}
 }
 
