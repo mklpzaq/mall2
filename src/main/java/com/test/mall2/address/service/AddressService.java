@@ -29,7 +29,7 @@ public class AddressService {
 		return addressDao.selectAddressForUpdate(addressNo);
 	}
 	
-	public Map<String, Object> getAddressList(int currentPage, int pagePerRow, String searchSignal, String searchSelect, String searchWord) {
+	public Map<String, Object> getAddressList(int currentPage, int pagePerRow, String searchSelect, String searchWord) {
 		logger.info("getAddressList AddressService");
 		int beginRow = (currentPage-1)*pagePerRow;
 		
@@ -50,10 +50,8 @@ public class AddressService {
 		
 		
 		
-		map.put("searchSignal", searchSignal);
 		map.put("searchSelect", searchSelect);
 		map.put("searchWord", searchWord);
-		logger.info("searchSignal :" + searchSignal);
 		logger.info("searchSelect :" + searchSelect);
 		logger.info("searchWord :" + searchWord);
 		

@@ -12,10 +12,6 @@
 				var searchSelect;
 				var searchWord;
 				
-				$('#selectPagePerRow').change(function() {
-					$(location).attr('href', './getAddressList?pagePerRow=' + $('#selectPagePerRow > option:selected').val());
-				})
-				
 				/* 드롭다운 박스 클릭시 열고 닫고 이벤트 */
 				$('#selectButton').click(function(){
 					if($('#selectButton').parent().hasClass('open')){
@@ -33,6 +29,13 @@
 					$('#selectButtonText, #monitorSearchSelect').text($(this).text());
 					$('#selectButton').parent().removeClass('open');
 				});
+				
+				$('#selectPagePerRow').change(function() {
+					/* searchSelect = $('#monitorSearchSelect').text();
+					searchWord = $('#monitorSearchWord').val(); */
+					$(location).attr('href', './getAddressList?pagePerRow=' + $('#selectPagePerRow > option:selected').val() + '&searchSelect=' + $('#monitorSearchSelect').text() + '&searchWord=' + $('#monitorSearchWord').text());
+				});
+				
 				/* 검색버튼을 클릭하면 get방식으로  searchSignal, searchSelect, searchWord값을 넘긴다.*/
 				$('#searchButton').click(function(){
 					searchSelect = $('#selectButtonText').text();
@@ -57,9 +60,8 @@
 							<div class="row">
 								<div class="col-md-4">
 									<strong>${currentPage} / ${lastPage} Page</strong><br/>
-									<strong>search 상태 : </strong>${searchSignal}<br/>
 									<strong>searchSelect : </strong><span id="monitorSearchSelect">${searchSelect}</span><br/>
-									<strong>searchWord : </strong>[${searchWord}]<br/>						
+									<strong>searchWord : </strong><span id="monitorSearchWord">${searchWord}</span><br/>						
 								</div>
 								<div class="col-md-4">
 									<h3>Address List</h3>
