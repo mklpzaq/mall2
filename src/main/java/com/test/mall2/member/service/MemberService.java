@@ -95,11 +95,7 @@ public class MemberService {
 	public int addMember(Member member) {
 		int row = memberDao.insertMember(member);
 		return row;
-	}
+	}	
 	
-	public String selectMemberOverlap(Member member) {
-		String overlap = memberDao.selectMemberOverlap(member);
-		return overlap;
-	}
 	
 }

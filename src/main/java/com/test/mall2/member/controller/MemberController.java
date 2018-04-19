@@ -106,18 +106,19 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/insertMemberForm", method = RequestMethod.POST)
-	public String insertMember(Member member) {		
-		logger.info("insertMember MemberController");
-		int row = memberService.addMember(member);
+	public String insertMember(Model model
+								,Member member) {		
+		logger.info("insertMember MemberController");		
 		
-		return "redirect:/getMemberList";
+		int row = memberService.addMember(member);
+		logger.info(row+ " ========insertMember MemberController");		
+		if (row != 1) {
+			return "insertMemberForm";
+		}
+		
+		return "redirect:/getMemberList";	
+		
 	
-	}
-	
-	@RequestMapping(value = "/1", method = RequestMethod.POST)
-	public String selectMemberOverlap() {
-		logger.info("selectMemberOverlap MemberController");
-		return "insertMemberForm";
 	}
 	
 }

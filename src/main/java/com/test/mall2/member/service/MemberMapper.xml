@@ -66,29 +66,16 @@
 	<!-- 마이바티스에서 세미콜론 찍으면 에러난다. -->
 	<select id="totalCountMember" resultType="Integer">
 		SELECT COUNT(*) FROM member
-	</select>
-	
-	<select id="selectMemberOverlap"
-			resultType="com.test.mall2.member.service.Member"
-			>
-			SELECT member_id
-					,member_pw 
-			FROM member 
-			GROUP BY member_id
-					,member_pw 
-			HAVING COUNT(#{memberId} 
-						,#{memberPw})>1	
-	</select>
+	</select>	
  
 	<insert id="insertMember" 
 			parameterType="com.test.mall2.member.service.Member">
-			INSERT INTO member(
-				member_id 
-				,member_pw
-				) VALUES (
-					#{memberId}
-					,#{memberPw}
-			)
+			INSERT INTO member 
+				(member_id, member_pw)
+			SELECT #{memberId}, #{memberPw} FROM dual
+			WHERE NOT EXISTS(
+				SELECT * FROM member
+			WHERE member_id = #{memberId});	
 	 </insert>
 </mapper>
 
