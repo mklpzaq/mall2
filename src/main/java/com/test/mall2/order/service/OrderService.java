@@ -31,7 +31,7 @@ public class OrderService {
 		orderDao.insertOrder(map);
 	}
 	
-	/*public Map orderList(int currentPage, int pagePerRow) {
+	public Map orderList(int currentPage, int pagePerRow) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		int beginRow = (currentPage-1)*pagePerRow;
 		map.put("beginRow", beginRow);
@@ -59,7 +59,7 @@ public class OrderService {
 		returnmap.put("startPage", startPage);
 		returnmap.put("endPage", endPage);
 		return returnmap;		
-	}*/
+	}
 	
 	
 }

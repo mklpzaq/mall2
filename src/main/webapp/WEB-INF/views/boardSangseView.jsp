@@ -92,8 +92,9 @@
 								</font>
 							</td>
 						</tr>
+						
 					</table>
-										
+					<a href="./insertBoardComment?boardNo=${board.boardNo}">[댓글등록]</a>		
 					<!-- End Content -->
 				</div>
 				<div class="col-md-2"></div>

@@ -34,7 +34,7 @@ public class OrderController {
 		return "redirect:/orderList";
 	}
 	
-	/*@RequestMapping(value ="/orderList", method = RequestMethod.GET)
+	@RequestMapping(value ="/orderList", method = RequestMethod.GET)
 	public String orderList(Model model											
 									,@RequestParam(value="currentPage", defaultValue="1") int currentPage
 									,@RequestParam(value="pagePerRow", required=true, defaultValue="10") int pagePerRow) {
@@ -48,7 +48,7 @@ public class OrderController {
 	model.addAttribute("endPage", map.get("endPage"));
 	model.addAttribute("pagePerRow", pagePerRow);
 		return "OrderList";
-	}*/
+	}
 	
 	
 }

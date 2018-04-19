@@ -19,14 +19,16 @@ public class OrderDao {
 		return row;
 	}
 	
-	public void selectOrderList(Map map) {
+	public Map<String, String> selectOrderList(Map map) {
+		Map<String, String> map2 = null;
+		sqlSession.selectList(NS + "orderList", map);
 		
-		//return sqlSession.selectList(NS + "orderList", map);		
+		return map2;	
 	}
 	
-	public void totalCountBoard() {
+	public int totalCountBoard() {
+		int x = 0;
 		
-		
-		//return;
+		return x;
 	}
 }

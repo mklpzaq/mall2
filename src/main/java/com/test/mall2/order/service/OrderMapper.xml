@@ -13,7 +13,7 @@
 	</insert>
 
 	
-	<select id="orderList">
+	<select id="orderList" resultType="java.util.Map">
 		SELECT column_name(s)
 			FROM member
 		FULL OUTER JOIN order ON member.member_no = order.member_no;
