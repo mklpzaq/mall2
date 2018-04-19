@@ -21,6 +21,14 @@ public class BoardCommentController {
 	private BoardCommentService boardCommentService;
 	private static final Logger logger = LoggerFactory.getLogger(BoardCommentController.class);
 	
+	/*@RequestMapping(value = "/updateBoardComment", method = RequestMethod.GET)
+	public String deleteBoardComment(@RequestParam(value="sendNo") int commentNo){
+		logger.info("/deleteBoardComment GET boardCommentController");
+		logger.info("commentNo : " + commentNo);
+		int result = boardCommentService.deleteBoardComment(commentNo);
+		return "redirect:/getBoardCommentAllList";
+	}*/
+	
 	@RequestMapping(value = "/deleteBoardComment", method = RequestMethod.GET)
 	public String deleteBoardComment(@RequestParam(value="sendNo") int commentNo){
 		logger.info("/deleteBoardComment GET boardCommentController");
