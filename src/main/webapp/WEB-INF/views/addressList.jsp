@@ -43,7 +43,7 @@
 					$(location).attr('href', './getAddressList?searchSignal=y&searchSelect=' + searchSelect + '&searchWord=' + searchWord);
 				});
 				
-			})
+			});
 		</script>
 	</head>
 	<body>
