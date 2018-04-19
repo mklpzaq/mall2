@@ -17,17 +17,19 @@ public class BoardCommentController {
 	private BoardCommentService boardCommentService;
 	private static final Logger logger = LoggerFactory.getLogger(BoardCommentController.class);
 	
-	@RequestMapping(value = "/insertBoardComment", method = RequestMethod.GET)
-	public String insertBoardComment(){
-		logger.info("/insertBoardComment GET boardCommentController");
-		return "/index";
+	@RequestMapping(value = "/getBoardCommentList", method = RequestMethod.GET)
+	public String getBoardCommentList(){
+		logger.info("/getBoardCommentList GET boardCommentController");
+		//boardCommentService.getBoardCommentList();
+		return "boardCommentList";
 	}
 	
 	@RequestMapping(value = "/insertBoardComment", method = RequestMethod.POST)
 	public String insertBoardComment(BoardComment boardComment){
 		logger.info("/insertBoardComment POST boardCommentController");
+		logger.info(boardComment.toString());
 		int result = boardCommentService.insertBoardComment(boardComment);
-		return null;
+		return "redirect:/getBoardCommentList";
 	}
 }
 
