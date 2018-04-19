@@ -5,12 +5,28 @@
  
 <mapper namespace="com.test.mall2.boardComment.service.BoardCommentMapper">
 	
+	<select id="selectBoardCommentForUpdate"
+			parameterType="Integer"
+			resultType="com.test.mall2.boardComment.service.BoardComment">
+		SELECT
+			comment_no AS commentNo
+			,board_no AS boardNo
+			,member_id AS memberId
+			,comment_content AS commentContent
+		FROM
+			board_comment
+		WHERE 
+			comment_no = #{commentNo}
+			
+	</select>
 	
 	<delete id="deleteBoardComment"
 			parameterType="Integer">
 		DELETE
-		FROM board_comment
-		WHERE comment_no = #{commentNo}
+		FROM
+			board_comment
+		WHERE
+			comment_no = #{commentNo}
 	</delete>
 	
 	<select id="getBoardCommentList"

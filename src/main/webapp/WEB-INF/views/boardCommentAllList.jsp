@@ -41,7 +41,7 @@
 												<td>${boardComment.boardNo}</td>
 												<td>${boardComment.memberId}</td>
 												<td>${boardComment.commentContent}</td>
-												<td><a href="#">수정(공사중)</a></td>
+												<td><a href="${pageContext.request.contextPath}/updateBoardComment?sendNo=${boardComment.commentNo}">수정</a></td>
 												<td><a href="${pageContext.request.contextPath}/deleteBoardComment?sendNo=${boardComment.commentNo}">삭제</a></td>
 											</tr>
 										</c:forEach>

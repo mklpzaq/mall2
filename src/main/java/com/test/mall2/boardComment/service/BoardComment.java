@@ -3,8 +3,8 @@ package com.test.mall2.boardComment.service;
 public class BoardComment {
 	private int commentNo;
 	private int boardNo;
-	private String commentContent;
 	private String memberId;
+	private String commentContent;
 	
 	public int getCommentNo() {
 		return commentNo;
