@@ -5,6 +5,14 @@
  
 <mapper namespace="com.test.mall2.boardComment.service.BoardCommentMapper">
 	
+	
+	<delete id="deleteBoardComment"
+			parameterType="Integer">
+		DELETE
+		FROM board_comment
+		WHERE comment_no = #{commentNo}
+	</delete>
+	
 	<select id="getBoardCommentList"
 			resultType="com.test.mall2.boardComment.service.BoardComment">
 		SELECT

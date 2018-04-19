@@ -36,7 +36,8 @@
 								
 							</c:when>
 							<c:otherwise>									
-								<li><a href="${pageContext.request.contextPath}/selectBoardList">BoardList</a></li>	
+								<li><a href="${pageContext.request.contextPath}/selectBoardList">BoardList</a></li>
+								<li><a href="${pageContext.request.contextPath}/getBoardCommentAllList">BoardCommentAllList</a></li>	
 							</c:otherwise>
 						</c:choose>				
 					</ul>										

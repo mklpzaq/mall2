@@ -15,6 +15,10 @@ public class BoardCommentDao {
 	private static final Logger logger = LoggerFactory.getLogger(BoardCommentDao.class);
 	final String NS ="com.test.mall2.boardComment.service.BoardCommentMapper.";
 	
+	public int deleteBoardComment(int commentNo) {
+		return sqlSession.delete(NS+"deleteBoardComment", commentNo);
+	}
+	
 	public List<BoardComment> getBoardCommentList() {
 		logger.info("getBoardCommentList BoardCommentDao");
 		return sqlSession.selectList(NS+"getBoardCommentList");

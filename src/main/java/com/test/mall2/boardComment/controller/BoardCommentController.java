@@ -25,14 +25,13 @@ public class BoardCommentController {
 	public String deleteBoardComment(@RequestParam(value="sendNo") int commentNo){
 		logger.info("/deleteBoardComment GET boardCommentController");
 		logger.info("commentNo : " + commentNo);
-		//int result = boardCommentService.getBoardCommentList();
-		
-		return "redirect:/getBoardCommentList";
+		int result = boardCommentService.deleteBoardComment(commentNo);
+		return "redirect:/getBoardCommentAllList";
 	}
 	
 	@RequestMapping(value = "/getBoardCommentAllList", method = RequestMethod.GET)
 	public String getBoardCommentList(Model model){
-		logger.info("/getAllBoardCommentList GET boardCommentController");
+		logger.info("/getBoardCommentAllList GET boardCommentController");
 		List<BoardComment> list = boardCommentService.getBoardCommentList();
 		
 		model.addAttribute("list", list);
