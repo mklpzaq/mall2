@@ -39,23 +39,23 @@
 							
 							left join item
 							on od.item_no=item.item_no)
-			<!-- <include refid="search"></include> -->
+			<!-- <include refid="search"></include>
 	    	
-	    	limit #{beginRow}, #{pagePerRow} 
+	    	limit #{beginRow}, #{pagePerRow} -->
 	    	
-	    	ORDER BY me.order_no DESC
+	    	ORDER BY order_no DESC
 			
 	</select>
 	
-	<!-- <sql id="search">	
+	<sql id="search">	
 	    <choose>	      
 	        <when test="searchOption == 'order_date'">        
-	        	WHERE order_date BETWEEN '${keyword1}' AND '${keyword2}'            
+	        	and order_date BETWEEN '${keyword1}' AND '${keyword2}'            
 	        </when>
 	        <otherwise>
-	            WHERE ${searchOption} like CONCAT('%','${keyword}','%')
+	            and ${searchOption} like CONCAT('%','${keyword}','%')
 	        </otherwise>
 	    </choose>
-	</sql> -->
+	</sql>
 	
 </mapper>
