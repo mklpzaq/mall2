@@ -1,5 +1,6 @@
 package com.test.mall2.order.controller;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -37,10 +38,12 @@ public class OrderController {
 	@RequestMapping(value ="/orderList", method = RequestMethod.GET)
 	public String orderList(Model model											
 									,@RequestParam(value="currentPage", defaultValue="1") int currentPage
-									,@RequestParam(value="pagePerRow", required=true, defaultValue="10") int pagePerRow) {
+									,@RequestParam(value="pagePerRow", required=true, defaultValue="10") int pagePerRow
+									,@RequestParam(value="searchOption", defaultValue="all") String searchOption
+									,@RequestParam(value="keyword", defaultValue="") ArrayList<String> keyword) {
 		
-		
-	Map<String, Object> map = orderService.orderList(currentPage, pagePerRow);
+		logger.info("orderList");
+	Map<String, Object> map = orderService.orderList(currentPage, pagePerRow, searchOption, keyword);
 	model.addAttribute("list", map.get("list"));
 	model.addAttribute("lastPage", map.get("lastPage"));
 	model.addAttribute("currentPage", currentPage);

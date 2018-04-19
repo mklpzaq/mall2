@@ -201,8 +201,8 @@
 								<form action="<%=request.getContextPath()%>/searchBoardList" method="post">
 									<select id="searchOption" name="searchOption" onclick="changehtml();">											
 										<option value="member_id"  <c:out value="${searchOption == 'member_id'?'selected':''}"/>>아이디</option>
-										<option value="board_title"  <c:out value="${searchOption == 'board_title'?'selected':''}"/>>제목</option>											
-										<option value="board_date"  <c:out value="${searchOption == 'board_date'?'selected':''}"/>>등록날짜</option>		
+										<option value="item_name"  <c:out value="${searchOption == 'item_name'?'selected':''}"/>>제목</option>											
+										<option value="order_date"  <c:out value="${searchOption == 'board_date'?'selected':''}"/>>등록날짜</option>		
 									</select>
 									<dr id="keyword"></dr>
 									<%-- <input id="keyword" name="keyword" value="${keyword}"> --%>

@@ -13,13 +13,49 @@
 	</insert>
 
 	
-	<select id="orderList" resultType="java.util.Map">
-		SELECT column_name(s)
-			FROM member
-		FULL OUTER JOIN order ON member.member_no = order.member_no;
-		
-		
-		
+	<select id="orderList" parameterType="java.util.Map" resultType="list">
+		select 
+			od.order_no 
+			,me.member_id 
+			,ca.category_name 
+			,it.item_name 
+			,it.item_price 
+			,od.order_date
+			
+			from `order` as od
+			
+			join member as me
+				using(member_no)
+				
+			join item as it
+				using(item_no)	
+				
+			join category as ca
+				using(category_no)
+				 
+					where category_no
+					in(select item.category_no 
+							from `order` as od
+							
+							left join item
+							on od.item_no=item.item_no)
+			<!-- <include refid="search"></include> -->
+	    	
+	    	limit #{beginRow}, #{pagePerRow} 
+	    	
+	    	ORDER BY me.order_no DESC
+			
 	</select>
+	
+	<!-- <sql id="search">	
+	    <choose>	      
+	        <when test="searchOption == 'order_date'">        
+	        	WHERE order_date BETWEEN '${keyword1}' AND '${keyword2}'            
+	        </when>
+	        <otherwise>
+	            WHERE ${searchOption} like CONCAT('%','${keyword}','%')
+	        </otherwise>
+	    </choose>
+	</sql> -->
 	
 </mapper>

@@ -1,5 +1,6 @@
 package com.test.mall2.order.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.test.mall2.board.service.Board;
 import com.test.mall2.member.service.Member;
 
 @Service
@@ -21,6 +21,7 @@ public class OrderService {
 	
 	public void insertOrder(Member loginMember, int itemNo) {
 		
+		logger.info("insertOrder");
 		int loginMemberNo = loginMember.getMemberNo();
 		
 		Map<String, Integer> map= new HashMap<String, Integer>();
@@ -31,12 +32,19 @@ public class OrderService {
 		orderDao.insertOrder(map);
 	}
 	
-	public Map orderList(int currentPage, int pagePerRow) {
-		Map<String, Integer> map = new HashMap<String, Integer>();
+	public Map<String, Object> orderList(int currentPage, int pagePerRow, String searchOption, ArrayList<String> keyword) {
+		logger.info("orderList");
+		Map<String, Object> map = new HashMap<String, Object>();
 		int beginRow = (currentPage-1)*pagePerRow;
 		map.put("beginRow", beginRow);
 		map.put("pagePerRow", pagePerRow);
-		Map<String, String> map2  = orderDao.selectOrderList(map);
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
+		List<Object> list = orderDao.selectOrderList(map);
+		
+		String k = (String) list.get(0);
+		logger.info(k);
+		
 		
 		int total = orderDao.totalCountBoard();
 		int lastPage = 0;
@@ -54,7 +62,7 @@ public class OrderService {
 		}
 		
 		Map<String, Object> returnmap = new HashMap<String, Object>();
-		returnmap.put("map2", map2);
+		returnmap.put("list", list);
 		returnmap.put("lastPage", lastPage);
 		returnmap.put("startPage", startPage);
 		returnmap.put("endPage", endPage);
