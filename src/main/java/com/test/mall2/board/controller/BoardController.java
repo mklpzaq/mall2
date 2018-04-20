@@ -76,6 +76,10 @@ public class BoardController {
 		logger.info(list.toString());
 		model.addAttribute("boardView", boardView);
 		model.addAttribute("boardCommentList", list);
+		
+		
+		//redirectAttributes.addFlashAttribute("board", board); 리다이렉트 시킬때 변수값 넣어서 넘길때 쓸수 있는 메서드
+		
 		return "boardSangseView";
 	}
 	

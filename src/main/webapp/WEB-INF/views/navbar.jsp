@@ -33,6 +33,7 @@
 								<li><a href="${pageContext.request.contextPath}/getAddressList">AddressList</a></li>					
 								<li><a href="${pageContext.request.contextPath}/selectItemList">ItemList</a></li>
 								<li><a href="${pageContext.request.contextPath}/getBoardCommentAllList">BoardCommentAllList</a></li>
+								<li><a href="${pageContext.request.contextPath}/orderList">orderList</a></li>
 								
 							</c:when>
 							<c:otherwise>
