@@ -68,6 +68,7 @@ public class BoardController {
 	 *  */
 	@RequestMapping(value = "/boardView", method= RequestMethod.GET)
 	public String boardView(Board board, Model model) {
+		/* boardList.jsp에서 넘어왔을 때는 매개변수 board에는 boardNo값만 있는 상태가 된다. */
 		logger.info("/boardView BoardController");
 		/* boardNo, memberId, boardTitle, boardContent, boardDate 맴버변가 모두 세팅된 Board객체참조변수 boardView. */
 		Board boardView = boardService.boardView(board);

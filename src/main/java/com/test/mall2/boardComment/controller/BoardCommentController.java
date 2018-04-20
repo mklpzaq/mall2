@@ -10,8 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.test.mall2.IndexController;
+import com.test.mall2.board.service.Board;
 import com.test.mall2.boardComment.service.BoardComment;
 import com.test.mall2.boardComment.service.BoardCommentService;
 
@@ -58,12 +60,18 @@ public class BoardCommentController {
 	}
 	
 	@RequestMapping(value = "/insertBoardComment", method = RequestMethod.POST)
-	public String insertBoardComment(BoardComment boardComment){
+	public String insertBoardComment(BoardComment boardComment
+									,Board board
+									,RedirectAttributes redirectAttributes){
 		logger.info("/insertBoardComment POST boardCommentController");
 		logger.info(boardComment.toString());
+		logger.info(board.toString());
+		logger.info("========================================");
 		int result = boardCommentService.insertBoardComment(boardComment);
 		
-		return "redirect:/getBoardCommentAllList";
+		redirectAttributes.addFlashAttribute("board", board);
+		/*return "redirect:/getBoardCommentAllList";*/
+		return "redirect:/boardView";
 	}
 }
 

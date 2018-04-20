@@ -36,6 +36,10 @@ public class Board {
 	public void setBoardDate(String boardDate) {
 		this.boardDate = boardDate;
 	}
-	
+	@Override
+	public String toString() {
+		return "Board [boardNo=" + boardNo + ", memberId=" + memberId + ", boardTitle=" + boardTitle + ", boardContent="
+				+ boardContent + ", boardDate=" + boardDate + "]";
+	}
 	
 }
