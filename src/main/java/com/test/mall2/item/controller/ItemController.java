@@ -14,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.test.mall2.board.service.Board;
 import com.test.mall2.category.service.Category;
 import com.test.mall2.category.service.CategoryService;
 import com.test.mall2.item.service.Item;
@@ -47,20 +49,21 @@ public class ItemController {
 	@RequestMapping(value = "/selectItemList", method = RequestMethod.GET)
 	public String selectItemList(Model model
 											,@RequestParam(value="currentPage", defaultValue="1") int currentPage
-											,@RequestParam(value="pagePerRow", required=true, defaultValue="10") int pagePerRow) {
+											,@RequestParam(value="pagePerRow", required=true, defaultValue="10") int pagePerRow
+											,@RequestParam(value="searchOption", defaultValue="member_id") String searchOption
+											,@RequestParam(value="keyword", defaultValue="") ArrayList<Object> keyword) {
 		
-		logger.info("selectItemList");
-		Map<String, Object> map = itemService.selectItemList(currentPage,pagePerRow);
+		Map<String, Object> map = itemService.selectItemList(currentPage, pagePerRow, searchOption, keyword);
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("lastPage", map.get("lastPage"));
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("startPage", map.get("startPage"));
 		model.addAttribute("endPage", map.get("endPage"));
 		model.addAttribute("pagePerRow", pagePerRow);
+		model.addAttribute("keyword", "");	
+		
 		return "itemList";	
-	}  
-	
-	
+}
 	//updateItemForm get
 	@RequestMapping(value = "/updateItemForm", method = RequestMethod.GET)
 	public String updateItemForm(Item item, Model model) {
@@ -90,21 +93,32 @@ public class ItemController {
 	} 
 	
 	
-	@RequestMapping(value="/searchItemList", method = RequestMethod.POST)
-	// @RequestParam(defaultValue="") ==> 기본값 할당
-	public String list(@RequestParam(value="searchItemList", defaultValue="all") String searchOption
-	                        , @RequestParam(value="keyword", defaultValue="") ArrayList<String> keyword
-	                        , Model model) throws Exception{
-	    List<Item> list = itemService.listAll(searchOption, keyword); // 레코드의 갯수
-	   
-	    Map<String, Object> map = new HashMap<String, Object>();
-	    map.put("list", list); // list
-	    map.put("searchOption", searchOption); // 검색옵션
-	    map.put("keyword", keyword); // 검색키워드
-	    
-	    model.addAttribute("list", list);
-	    model.addAttribute("searchOption", searchOption);
-	    model.addAttribute("keyword", keyword);
-	    return "itemList"; // list.jsp로 List가 전달된다.
+	
+	@RequestMapping(value ="/searchItemList", method = RequestMethod.GET)
+	public String searchItemList(Model model											
+									,@RequestParam(value="currentPage", defaultValue="1") int currentPage
+									,@RequestParam(value="pagePerRow", required=true, defaultValue="10") int pagePerRow
+									,@RequestParam(value="searchOption", defaultValue="member_id") String searchOption
+									,@RequestParam(value="keyword", defaultValue="") ArrayList<Object> keyword) {
+		
+		Map<String, Object> map = itemService.selectItemList(currentPage, pagePerRow, searchOption, keyword);
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("lastPage", map.get("lastPage"));
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("startPage", map.get("startPage"));
+		model.addAttribute("endPage", map.get("endPage"));
+		model.addAttribute("pagePerRow", pagePerRow);
+		model.addAttribute("searchOption", searchOption);
+		if(keyword.size() == 1) {
+			model.addAttribute("keyword", keyword.get(0));
+		}else if(keyword.size() == 2) {
+			model.addAttribute("keyword", keyword);
+		}else{	
+			model.addAttribute("keyword", "");	
+		}
+		
+		return "itemList";
 	}
+	
+
 }

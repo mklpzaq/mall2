@@ -9,7 +9,7 @@ public class Item {
 	private int itemNo;
 	private String itemName;
 	private String itemPrice;
-	private Category categoryName;
+	private Category category;
 	
 	public int getItemNo() {
 		return itemNo;
@@ -30,15 +30,15 @@ public class Item {
 		this.itemPrice = itemPrice;
 	}
 	public Category getCategory() {
-		return categoryName;
+		return category;
 	}
 	public void setCategory(Category category) {
-		this.categoryName = category;
+		this.category = category;
 	}
 	
 	@Override
 	public String toString() {
 		return "Item [itemNo=" + itemNo + ", itemName=" + itemName + ", itemPrice=" + itemPrice + ", category="
-				+ categoryName + "]";
+				+ category + "]";
 	}
 }

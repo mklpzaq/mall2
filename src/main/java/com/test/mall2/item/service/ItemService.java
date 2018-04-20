@@ -19,11 +19,7 @@ public class ItemService {
 	@Autowired
 	private ItemDao itemDao;
 	
-	// 게시글 전체 목록 ItemDao.listAll메서드 호출
-	public List<Item> listAll(String searchOption, ArrayList<String> keyword) throws Exception {
-		return itemDao.listAll(searchOption, keyword);
-	}
-		
+	
 	public void deleteItem(int[] deleteCheckbox) {	
 		logger.info("deleteItem");
 		for(int i = 0; i<deleteCheckbox.length; i++) {
@@ -42,13 +38,32 @@ public class ItemService {
 		return itemDao.updateItemForm(item);
 	}
 	
-	public Map<String, Object> selectItemList(int currentPage, int pagePerRow) {	
+	public Map<String, Object> selectItemList(int currentPage, int pagePerRow, String searchOption, ArrayList<Object> keyword) {	
 		logger.info("selectItemList");
-		Map<String, Integer> map = new HashMap<String, Integer>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<Item> list;
 		int beginRow = (currentPage-1)*pagePerRow; //페이지의 첫번째 행을 지정해줌
-		map.put("beginRow", beginRow);
-		map.put("pagePerRow", pagePerRow);
-		List<Item> list = itemDao.selectItemList(map);
+		if(keyword.size() == 1) {
+			map.put("beginRow", beginRow);
+			map.put("pagePerRow", pagePerRow);
+			map.put("searchOption", searchOption);
+			map.put("keyword", keyword.get(0));
+			list = itemDao.selectItemList(map);		
+		}else if(keyword.size() == 2) {
+			logger.info("keyword.size() == 2");
+			map.put("beginRow", beginRow);
+			map.put("pagePerRow", pagePerRow);
+			map.put("searchOption", searchOption);
+			map.put("keyword1", keyword.get(0));
+			map.put("keyword2", keyword.get(1));
+			list = itemDao.selectItemList(map);	;		
+		}else {
+			map.put("beginRow", beginRow);
+			map.put("pagePerRow", pagePerRow);
+			map.put("searchOption", searchOption);		
+			list = itemDao.selectItemList(map);	
+		}
+		
 		
 		int total = itemDao.totalCountItem();
 		int lastPage =0;
