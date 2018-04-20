@@ -38,7 +38,7 @@
 			join category as ca
 				using(category_no)
 				 
-					where category_no
+					where mb.member_id = #{loginMemberId} and category_no 
 					in(select item.category_no 
 							from `order` as od
 							
@@ -77,13 +77,14 @@
 				using(item_no)	
 				
 			join category as ca
-				using(category_no)	
+				using(category_no)
+				where mb.member_id = #{loginMemberId}	
 		<choose>	      
 	        <when test="searchOption == 'order_date'">        
-	        	where order_date BETWEEN '${keyword1}' AND '${keyword2}'            
+	        	and order_date BETWEEN '${keyword1}' AND '${keyword2}'            
 	        </when>
 	        <otherwise>
-	            where ${searchOption} like CONCAT('%','${keyword}','%')
+	            and ${searchOption} like CONCAT('%','${keyword}','%')
 	        </otherwise>
 	    </choose>
 	</select>

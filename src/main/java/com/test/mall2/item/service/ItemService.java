@@ -42,30 +42,23 @@ public class ItemService {
 		logger.info("selectItemList");
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Item> list;
+		int total;
 		int beginRow = (currentPage-1)*pagePerRow; //페이지의 첫번째 행을 지정해줌
 		if(keyword.size() == 1) {
 			map.put("beginRow", beginRow);
 			map.put("pagePerRow", pagePerRow);
 			map.put("searchOption", searchOption);
 			map.put("keyword", keyword.get(0));
-			list = itemDao.selectItemList(map);		
-		}else if(keyword.size() == 2) {
-			logger.info("keyword.size() == 2");
-			map.put("beginRow", beginRow);
-			map.put("pagePerRow", pagePerRow);
-			map.put("searchOption", searchOption);
-			map.put("keyword1", keyword.get(0));
-			map.put("keyword2", keyword.get(1));
-			list = itemDao.selectItemList(map);	;		
+			list = itemDao.selectItemList(map);	
+			total = itemDao.totalCountItem(map);
 		}else {
 			map.put("beginRow", beginRow);
 			map.put("pagePerRow", pagePerRow);
 			map.put("searchOption", searchOption);		
-			list = itemDao.selectItemList(map);	
-		}
+			list = itemDao.selectItemList(map);
+			total = itemDao.totalCountItem(map);
+		}	
 		
-		
-		int total = itemDao.totalCountItem();
 		int lastPage =0;
 		if(total%pagePerRow ==0) {
 			lastPage = total/pagePerRow;

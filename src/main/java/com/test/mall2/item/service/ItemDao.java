@@ -35,7 +35,7 @@ public class ItemDao {
 		return sqlSession.selectOne(NS+"updateItemForm", item);
 	}
 	
-	public int totalCountItem() {
+	public int totalCountItem(Map<String, Object> map) {
 		return sqlSession.selectOne(NS+"totalCountItem"); // 결과값이 하나 이므로 selectOne 사용
 	}
 	

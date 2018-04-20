@@ -26,6 +26,7 @@ public class OrderDao {
 	
 	public List<Order> selectOrderList(Map<String, Object> map) {		
 		logger.info("selectOrderList");
+		
 		return sqlSession.selectList(NS + "orderList", map);	
 	}
 	

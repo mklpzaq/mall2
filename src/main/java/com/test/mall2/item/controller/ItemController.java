@@ -98,7 +98,7 @@ public class ItemController {
 	public String searchItemList(Model model											
 									,@RequestParam(value="currentPage", defaultValue="1") int currentPage
 									,@RequestParam(value="pagePerRow", required=true, defaultValue="10") int pagePerRow
-									,@RequestParam(value="searchOption", defaultValue="member_id") String searchOption
+									,@RequestParam(value="searchOption", defaultValue="category_name") String searchOption
 									,@RequestParam(value="keyword", defaultValue="") ArrayList<Object> keyword) {
 		
 		Map<String, Object> map = itemService.selectItemList(currentPage, pagePerRow, searchOption, keyword);
