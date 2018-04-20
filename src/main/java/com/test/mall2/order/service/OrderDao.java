@@ -24,14 +24,14 @@ public class OrderDao {
 		return row;
 	}
 	
-	public List<Object> selectOrderList(Map<String, Object> map) {		
+	public List<Order> selectOrderList(Map<String, Object> map) {		
 		logger.info("selectOrderList");
 		return sqlSession.selectList(NS + "orderList", map);	
 	}
 	
-	public int totalCountBoard() {
-		int x = 0;
+	public int totalCountOrder(Map<String, Object> map) {
 		
-		return x;
+		
+		return sqlSession.selectOne(NS + "totalCountOrder", map);
 	}
 }

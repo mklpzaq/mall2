@@ -32,21 +32,33 @@ public class OrderService {
 		orderDao.insertOrder(map);
 	}
 	
-	public Map<String, Object> orderList(int currentPage, int pagePerRow, String searchOption, ArrayList<String> keyword) {
+	public Map<String, Object> orderList(int currentPage, int pagePerRow, String searchOption, ArrayList<Object> keyword) {
 		logger.info("orderList");
 		Map<String, Object> map = new HashMap<String, Object>();
+		List<Order> list;
 		int beginRow = (currentPage-1)*pagePerRow;
-		map.put("beginRow", beginRow);
-		map.put("pagePerRow", pagePerRow);
-		map.put("searchOption", searchOption);
-		map.put("keyword", keyword);
-		List<Object> list = orderDao.selectOrderList(map);
+		if(keyword.size() == 1) {
+			map.put("beginRow", beginRow);
+			map.put("pagePerRow", pagePerRow);
+			map.put("searchOption", searchOption);
+			map.put("keyword", keyword.get(0));
+			list = orderDao.selectOrderList(map);		
+		}else if(keyword.size() == 2) {
+			logger.info("keyword.size() == 2");
+			map.put("beginRow", beginRow);
+			map.put("pagePerRow", pagePerRow);
+			map.put("searchOption", searchOption);
+			map.put("keyword1", keyword.get(0));
+			map.put("keyword2", keyword.get(1));
+			list = orderDao.selectOrderList(map);		
+		}else {
+			map.put("beginRow", beginRow);
+			map.put("pagePerRow", pagePerRow);
+			map.put("searchOption", searchOption);		
+			list = orderDao.selectOrderList(map);	
+		}
 		
-		String k = (String) list.get(0);
-		logger.info(k);
-		
-		
-		int total = orderDao.totalCountBoard();
+		int total = orderDao.totalCountOrder(map);
 		int lastPage = 0;
 		if(total%pagePerRow == 0) {
 			lastPage = total/pagePerRow;

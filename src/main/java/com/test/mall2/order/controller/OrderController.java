@@ -39,18 +39,27 @@ public class OrderController {
 	public String orderList(Model model											
 									,@RequestParam(value="currentPage", defaultValue="1") int currentPage
 									,@RequestParam(value="pagePerRow", required=true, defaultValue="10") int pagePerRow
-									,@RequestParam(value="searchOption", defaultValue="all") String searchOption
-									,@RequestParam(value="keyword", defaultValue="") ArrayList<String> keyword) {
+									,@RequestParam(value="searchOption", defaultValue="member_id") String searchOption
+									,@RequestParam(value="keyword") ArrayList<Object> keyword) {
 		
-		logger.info("orderList");
-	Map<String, Object> map = orderService.orderList(currentPage, pagePerRow, searchOption, keyword);
-	model.addAttribute("list", map.get("list"));
-	model.addAttribute("lastPage", map.get("lastPage"));
-	model.addAttribute("currentPage", currentPage);
-	model.addAttribute("startPage", map.get("startPage"));
-	model.addAttribute("endPage", map.get("endPage"));
-	model.addAttribute("pagePerRow", pagePerRow);
-		return "OrderList";
+		logger.info((String) keyword.get(0));
+		Map<String, Object> map = orderService.orderList(currentPage, pagePerRow, searchOption, keyword);
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("lastPage", map.get("lastPage"));
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("startPage", map.get("startPage"));
+		model.addAttribute("endPage", map.get("endPage"));
+		model.addAttribute("pagePerRow", pagePerRow);
+		model.addAttribute("searchOption", searchOption);
+		if(keyword.size() == 1) {
+			model.addAttribute("keyword", keyword.get(0));
+		}else if(keyword.size() == 2) {
+			model.addAttribute("keyword", keyword.get(0));
+		}else{	
+			model.addAttribute("keyword", "");	
+		}
+		
+		return "orderList";
 	}
 	
 	

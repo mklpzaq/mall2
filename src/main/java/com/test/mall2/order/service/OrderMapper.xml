@@ -13,18 +13,18 @@
 	</insert>
 
 	
-	<select id="orderList" parameterType="java.util.Map" resultType="list">
+	<select id="orderList" parameterType="java.util.Map" resultType="com.test.mall2.order.service.Order">
 		select 
-			od.order_no 
-			,me.member_id 
-			,ca.category_name 
-			,it.item_name 
-			,it.item_price 
-			,od.order_date
+			od.order_no as orderNo
+			,mb.member_id as memberId
+			,ca.category_name as categoryName
+			,it.item_name as itemName
+			,it.item_price as itemPrice
+			,od.order_date as orderDate
 			
 			from `order` as od
 			
-			join member as me
+			join member as mb
 				using(member_no)
 				
 			join item as it
@@ -39,23 +39,48 @@
 							
 							left join item
 							on od.item_no=item.item_no)
-			<!-- <include refid="search"></include>
+			<include refid="search"></include>
 	    	
-	    	limit #{beginRow}, #{pagePerRow} -->
 	    	
-	    	ORDER BY order_no DESC
-			
+	    	ORDER BY od.order_no DESC <!-- order by가 리미트 이에 올라가 있어야하는듯?  -->
+	    	
+	    	limit #{beginRow}, #{pagePerRow}			
 	</select>
 	
 	<sql id="search">	
 	    <choose>	      
-	        <when test="searchOption == 'order_date'">        
-	        	and order_date BETWEEN '${keyword1}' AND '${keyword2}'            
+	        <when test="searchOption == 'order_date'">    
+	        	and order_date BETWEEN '${keyword1}' AND '${keyword2}' 	        	           
 	        </when>
 	        <otherwise>
-	            and ${searchOption} like CONCAT('%','${keyword}','%')
+	        	and ${searchOption} like CONCAT('%','${keyword}','%')	             
 	        </otherwise>
 	    </choose>
 	</sql>
+	
+	<select id="totalCountOrder"
+			parameterType="java.util.Map"
+			resultType="Integer">
+		SELECT
+			COUNT(*)
+			from `order` as od
+			
+			join member as mb
+				using(member_no)
+				
+			join item as it
+				using(item_no)	
+				
+			join category as ca
+				using(category_no)	
+		<choose>	      
+	        <when test="searchOption == 'order_date'">        
+	        	where order_date BETWEEN '${keyword1}' AND '${keyword2}'            
+	        </when>
+	        <otherwise>
+	            where ${searchOption} like CONCAT('%','${keyword}','%')
+	        </otherwise>
+	    </choose>
+	</select>
 	
 </mapper>

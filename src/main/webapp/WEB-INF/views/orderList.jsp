@@ -10,15 +10,16 @@
 		<script>
 			$(document).ready(function() {
 				$('#pagePerRow').change(function() {
-					$(location).attr('href', './selectBoardList?pagePerRow=' + $('#pagePerRow > option:selected').val());
-				})
-			})
+					$(location).attr('href', './orderList?pagePerRow=' + $('#pagePerRow > option:selected').val()+'&searchOption='+$('#searchOption').val()+'&keyword='+$('#keyword').val());
+				});
+			});
+			
 			$(document).ready(function(){
-			$("#button").click(function(){
-				$('input[name="deleteCheckbox"]:checked').each(function(){							
-					var text = $(this).val();
-					alert("categoryNo"+text+"삭제");					
-					$("#form1").submit();	
+				$("#button").click(function(){
+					$('input[name="deleteCheckbox"]:checked').each(function(){							
+						var text = $(this).val();
+						alert("categoryNo"+text+"삭제");					
+						$("#form1").submit();	
 					});
 				})	
 			});
@@ -30,13 +31,13 @@
 					}else{
 						$("input[type=checkbox]").prop("checked",false);
 					}
-				});
+				});			
 			});
 			
 			function changehtml(){
 				var property = $("#searchOption").val();
 				var show = $("#keyword");
-				if(property=="board_date"){
+				if(property=="order_date"){
 					$("#keyword").html('<input type="date" name="keyword">~<input type="date" name="keyword">');
 				}else {
 					$("#keyword").html('<input type="text" name="keyword">');
@@ -52,16 +53,18 @@
 				<div class="col-sm-6">
 					<!-- Begin Content -->
 					<a href="${pageContext.request.contextPath}/">Home</a>
-					<button><a href = "${pageContext.request.contextPath}/insertBoardForm">글쓰기</a></button>
+					<%-- <button><a href = "${pageContext.request.contextPath}/insertBoardForm">글쓰기</a></button> --%>
 					<div class="panel panel-default">
 						<div class="panel-body text-center">
 							<div class="row">
 								<div class="col-sm-3">
 									<strong>${currentPage} / ${lastPage} Page</strong><br/>
-									pagePerRow : <strong id="textPagePerRow">${pagePerRow}</strong>
+									pagePerRow : <strong id="textPagePerRow">${pagePerRow}</strong><br/>
+									searchOption : <strong id="textSearchOption">${searchOption}</strong><br/>
+									keyword : <strong id="textKeyword">${keyword}</strong>
 								</div>
 								<div class="col-sm-6">
-									<h3>Board List</h3>
+									<h3>Order List</h3>
 								</div>
 								<div class="col-sm-3">
 									<select id="pagePerRow">
@@ -77,21 +80,25 @@
 								<thead>
 									<tr>
 										<th><input type="checkbox" id="checkboxAll" value=""></th>
-										<td width="8%">번호</td>
-										<td width="50%">제목</td>
-										<td width="15%">작성자</td>
-										<td width="27%">작성날짜</td>
+										<td width="15%">주문번호</td>
+										<td width="20%">주문자아이디</td>
+										<td width="15%">카테고리명</td>
+										<td width="20%">아이템명</td>
+										<td width="15%">가격</td>
+										<td width="15%">주문날짜</td>
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach var="board" items="${list}">
+									<c:forEach var="order" items="${list}">
 										<tbody>
 											<tr>
-												<th><input type="checkbox" name="deleteCheckbox" value="${board.boardNo}"></th>
-												<th scope = "row">${board.boardNo}</th>
-												<td><a href="${pageContext.request.contextPath}/boardView?boardNo=${board.boardNo}">${board.boardTitle}</a></td>
-												<td>${board.memberId}</td>
-												<td>${board.boardDate}</td>
+												<th><input type="checkbox" name="deleteCheckbox" value="${order.orderNo}"></th>
+												<th scope = "row">${order.orderNo}</th>
+												<td>${order.memberId}</td>
+												<td>${order.categoryName}</td>
+												<td>${order.itemName}</td>
+												<td>${order.itemPrice}</td>
+												<td>${order.orderDate}</td>
 											</tr>
 										</tbody>
 									</c:forEach>
@@ -111,24 +118,24 @@
 							<nav>
 								<ul class="pagination">								
 									<c:if test="${currentPage>1}">
-										<li><a href="${pageContext.request.contextPath}/selectBoardList?pagePerRow=${pagePerRow}">처음으로</a></li>
-										<li><a href="${pageContext.request.contextPath}/selectBoardList?currentPage=${currentPage-1}&pagePerRow=${pagePerRow}">이전</a></li>
+										<li><a href="${pageContext.request.contextPath}/orderList?pagePerRow=${pagePerRow}&searchOption=${searchOption}&keyword=${keyword}">처음으로</a></li>
+										<li><a href="${pageContext.request.contextPath}/orderList?currentPage=${currentPage-1}&pagePerRow=${pagePerRow}&searchOption=${searchOption}&keyword=${keyword}">이전</a></li>
 									</c:if>
 									
 									<c:forEach var="iCount" begin="${startPage}" end="${endPage}">
 										<c:choose>
 											<c:when test="${iCount == currentPage}">
-												<li class="active"><a href="${pageContext.request.contextPath}/selectBoardList?currentPage=${iCount}&pagePerRow=${pagePerRow}">${iCount}</a></li>
+												<li class="active"><a href="${pageContext.request.contextPath}/orderList?currentPage=${iCount}&pagePerRow=${pagePerRow}&searchOption=${searchOption}&keyword=${keyword}">${iCount}</a></li>
 											</c:when>
 											<c:otherwise>
-												<li><a href="${pageContext.request.contextPath}/selectBoardList?currentPage=${iCount}&pagePerRow=${pagePerRow}">${iCount}</a></li>
+												<li><a href="${pageContext.request.contextPath}/orderList?currentPage=${iCount}&pagePerRow=${pagePerRow}&searchOption=${searchOption}&keyword=${keyword}">${iCount}</a></li>
 											</c:otherwise>
 										</c:choose>								
 									</c:forEach>
 									
 									<c:if test="${currentPage < lastPage}">
-										<li><a href="${pageContext.request.contextPath}/selectBoardList?currentPage=${currentPage+1}&pagePerRow=${pagePerRow}">다음</a></li>
-										<li><a href="${pageContext.request.contextPath}/selectBoardList?currentPage=${lastPage}&pagePerRow=${pagePerRow}">마지막으로</a></li>
+										<li><a href="${pageContext.request.contextPath}/orderList?currentPage=${currentPage+1}&pagePerRow=${pagePerRow}&searchOption=${searchOption}&keyword=${keyword}">다음</a></li>
+										<li><a href="${pageContext.request.contextPath}/orderList?currentPage=${lastPage}&pagePerRow=${pagePerRow}&searchOption=${searchOption}&keyword=${keyword}">마지막으로</a></li>
 									</c:if>
 																		
 									<%-- <li>
@@ -194,15 +201,18 @@
 										<a href="${pageContext.request.contextPath}/getMemberList?currentPage=${lastPage}&pagePerRow=${pagePerRow}" aria-label="Next">
 											<span aria-hidden="true">&raquo;</span>
 										</a>
-									</li> --%>
+									</li> 
+																		
+									<c:out value="${searchOption == 'member_id'?'selected':''}"/>
+									--%>
 								</ul>
 							</nav>
 							<div>
-								<form action="<%=request.getContextPath()%>/searchBoardList" method="post">
+								<form action="<%=request.getContextPath()%>/orderList" method="get">
 									<select id="searchOption" name="searchOption" onclick="changehtml();">											
-										<option value="member_id"  <c:out value="${searchOption == 'member_id'?'selected':''}"/>>아이디</option>
-										<option value="item_name"  <c:out value="${searchOption == 'item_name'?'selected':''}"/>>제목</option>											
-										<option value="order_date"  <c:out value="${searchOption == 'board_date'?'selected':''}"/>>등록날짜</option>		
+										<option value="member_id" <c:if test="${member_id == 'member_id'}">selected</c:if>>주문아이디</option>
+										<option value="item_name"  <c:if test="${item_name == 'item_name'}">selected</c:if>>주문제품</option>											
+										<option value="order_date" <c:if test="${order_date == 'order_date'}">selected</c:if>>주문날짜</option>		
 									</select>
 									<dr id="keyword"></dr>
 									<%-- <input id="keyword" name="keyword" value="${keyword}"> --%>
