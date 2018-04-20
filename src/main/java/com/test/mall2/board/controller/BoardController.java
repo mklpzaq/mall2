@@ -57,13 +57,23 @@ public class BoardController {
 		return "insertBoardForm";
 	}
 	
-	
+	/* 해당 boardComment에 관한 상세한 설명이 들어있는 페이지로 이동한다.
+	 * 여기에는 comment입력 form과,
+	 * 해당 boardComment에 해당되는 댓글 리스트가 있다.
+	 * boardView() 메서드의 매개변수인 board에는 boardNo값만이 담겨져 있고
+	 * boardService.boardView() 메서드를 통해
+	 * boardNo, memberId, boardTitle, boardContent, boardDate 맴버변가 모두 세팅된, 
+	 * Board객체를 리턴받게 된다.
+	 *  */
 	@RequestMapping(value = "/boardView", method= RequestMethod.GET)
 	public String boardView(Board board, Model model) {
+		logger.info("/boardView BoardController");
+		
+		
+		/* boardNo, memberId, boardTitle, boardContent, boardDate 맴버변가 모두 세팅된 Board객체참조변수 boardView. */
 		Board boardView = boardService.boardView(board);
 		
 		model.addAttribute("boardView", boardView);
-		
 		return "boardSangseView";
 	}
 	

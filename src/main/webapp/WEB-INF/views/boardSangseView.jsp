@@ -31,92 +31,44 @@
 			
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-md-3"></div>
-					<div class="col-md-6">
+					<div class="col-md-2"></div>
+					<div class="col-md-8">
 						<!-- Begin Content -->
-						<table style="margin:0 auto;" cellpadding="0" cellspacing="0">
-							<tr align="center" valign="middle">
-								<td colspan="5">board 게시판</td>
-							</tr>
-							
-							<tr>
-								<td style="font-family:돋음; font-size:12" height="16">
-									<div align="center">제 목&nbsp;&nbsp;</div>
-								</td>
-								
-								<td style="font-family:돋음; font-size:12">
-								${boardView.boardTitle}
-								</td>
-							</tr>
-							
-							<tr bgcolor="cccccc">
-								<td colspan="2" style="height:1px;">
-								</td>
-							</tr>
-							
-							<tr>
-								<td style="font-family:돋음; font-size:12" height="16">
-									<div align="center">작성자&nbsp;&nbsp;</div>
-								</td>
-								
-								<td style="font-family:돋음; font-size:12">
-								${boardView.memberId}
-								</td>
-							</tr>
-							
-							<tr>
-								<td style="font-family:돋음; font-size:12">
-									<div align="center">내 용</div>
-								</td>
-								<td style="font-family:돋음; font-size:12">
-									<table border=0 width=490 height=250 style="table-layout:fixed">
-										<tr>
-											<td valign=top style="font-family:돋음; font-size:12">
-											${boardView.boardContent}
-											</td>
-										</tr>
-									</table>
-								</td>
-							</tr>
-							<%-- <tr>
-								<td style="font-family:돋음; font-size:12">
-									<div align="center">첨부파일</div>
-								</td>
-								<td style="font-family:돋음; font-size:12">
-								<%if(!(board.getBOARD_FILE()==null)){ %>
-								<a href="<%= request.getContextPath() %>/board/filedown.jsp?filename=<%=board.getBOARD_FILE()%>">
-									<%=board.getBOARD_FILE() %>			
-									
-									
-								</a>
-								<%} %>
-								</td>
-							</tr> --%>
-							
-							<tr bgcolor="cccccc">
-								<td colspan="2" style="height:1px;"></td>
-							</tr>
-							<tr><td colspan="2">&nbsp;</td></tr>
-							
-							<tr align="center" valign="middle">
-								<td colspan="5">
-									<font size=2>
-									<a href="./updateBoardForm?boardNo=${board.boardNo}">
-									[수정]
-									</a>&nbsp;&nbsp;
-									<a href="./deleteBoard?boardNo=${board.boardNo}">
-									[삭제]
-									</a>&nbsp;&nbsp;
-									<a href="./selectBoardList">[목록]</a>&nbsp;&nbsp;
-									</font>
-								</td>
-							</tr>
-							
-						</table>
 						
-						<button id="insertBoardCommentFormButton" class="btn btn-default" type="button">댓글 쓰기</button>
-					
+						<div>
+							<a href="./updateBoardForm?boardNo=${board.boardNo}">
+								[수정]
+							</a>&nbsp;&nbsp;
+							<a href="./deleteBoard?boardNo=${board.boardNo}">
+								[삭제]
+							</a>&nbsp;&nbsp;
+							<a href="./selectBoardList">
+								[목록]
+							</a>
+						</div>
+						
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<div class="row">
+									<div class="col-sm-4">
+										글 번호 : ${boardView.boardNo}<br/>
+										작성자 : ${boardView.memberId}
+									</div>
+									<div class="col-sm-4 text-center">
+										<h3 class="panel-title">${boardView.boardTitle}</h3>
+									</div>
+									<div class="col-sm-4 text-right">
+										작성일 : ${boardView.boardDate}
+									</div>
+								</div>
+							</div>
+							<div class="panel-body" style="height:100px;">
+								${boardView.boardContent}
+							</div>
+						</div>
+						
 						<!-- Begin Write Comment -->
+						<button id="insertBoardCommentFormButton" class="btn btn-default" type="button">댓글 쓰기</button>
 						<div id="insertBoardCommentForm" class="none">
 							<div class="panel panel-default">
 								<div class="panel-body">
@@ -134,10 +86,43 @@
 							</div>
 						</div>
 						<!-- End Write Comment -->
+					
 						
-						<!-- End Content -->
+						<!-- Begin CommentList -->
+						
+						
+						<div class="bs-example" data-example-id="simple-table">
+							<table class="table">
+								<caption>boardComment List</caption>
+								<thead>
+									<tr>
+										<td>commentNo</td>
+										<td>memberId</td>
+										<td>CommentContent</td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td scope="row">1</td>
+										<td>dd</td>
+										<td>Marksefsfasfesafee bnsfewafevafvaesvefszbvsbszfsefvfszsefzsffeszvzbsbsMarksefsfasfesafee bnsfewafevafvaesvefszbvsbszfsefvfszsefzsffeszvzbsbs</td>
+									</tr>
+									<tr>
+										<td scope="row">1</td>
+										<td>dd</td>
+										<td>54</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						
+						
+						<!-- End CommentList -->
+						
+						
+					<!-- End Content -->
 					</div>
-					<div class="col-md-3"></div>
+					<div class="col-md-2"></div>
 				</div>
 			</div>
 	

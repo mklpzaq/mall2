@@ -35,7 +35,6 @@
 							</div>
 						</div>
 					
-					
 					<!-- End Content -->
 				</div>
 				<div class="col-md-3"></div>
