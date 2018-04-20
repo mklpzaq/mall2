@@ -35,7 +35,8 @@
 								<li><a href="${pageContext.request.contextPath}/getBoardCommentAllList">BoardCommentAllList</a></li>
 								
 							</c:when>
-							<c:otherwise>									
+							<c:otherwise>
+								<li><a href="${pageContext.request.contextPath}/insertMemberForm">insertMember</a></li>										
 								<li><a href="${pageContext.request.contextPath}/selectBoardList">BoardList</a></li>
 								<li><a href="${pageContext.request.contextPath}/getBoardCommentAllList">BoardCommentAllList</a></li>	
 							</c:otherwise>

@@ -15,6 +15,10 @@ public class BoardCommentDao {
 	private static final Logger logger = LoggerFactory.getLogger(BoardCommentDao.class);
 	final String NS ="com.test.mall2.boardComment.service.BoardCommentMapper.";
 	
+	public int updateBoardComment(BoardComment boardComment) {
+		return sqlSession.update(NS+"updateBoardComment", boardComment);
+	}
+	
 	public BoardComment selectBoardCommentForUpdate(int commentNo) {
 		return sqlSession.selectOne(NS+"selectBoardCommentForUpdate", commentNo);
 	}

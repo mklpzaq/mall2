@@ -5,6 +5,16 @@
  
 <mapper namespace="com.test.mall2.boardComment.service.BoardCommentMapper">
 	
+	<update id="updateBoardComment"
+			parameterType="com.test.mall2.boardComment.service.BoardComment">
+		UPDATE
+			board_comment
+		SET
+			comment_content = #{commentContent}
+		WHERE
+			comment_no = #{commentNo}
+	</update>
+	
 	<select id="selectBoardCommentForUpdate"
 			parameterType="Integer"
 			resultType="com.test.mall2.boardComment.service.BoardComment">

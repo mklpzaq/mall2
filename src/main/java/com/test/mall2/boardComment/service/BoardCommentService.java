@@ -13,6 +13,10 @@ public class BoardCommentService {
 	private BoardCommentDao boardCommentDao;
 	private static final Logger logger = LoggerFactory.getLogger(BoardCommentService.class);
 	
+	public int updateBoardComment(BoardComment boardComment) {
+		return boardCommentDao.updateBoardComment(boardComment);
+	}
+	
 	public BoardComment selectBoardCommentForUpdate(int commentNo) {
 		return boardCommentDao.selectBoardCommentForUpdate(commentNo);
 	}

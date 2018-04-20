@@ -27,9 +27,9 @@
 										<input type="hidden" name="boardNo" value="${boardComment.boardNo}">
 										<input type="hidden" name="memberId" value="${boardComment.memberId}">
 										<div class="form-group">
-											<textarea class="form-control" rows="3" name="commentContent" value="${boardComment.commentContent}" placeholder="댓글 입력"></textarea>
+											<textarea class="form-control" rows="3" name="commentContent" placeholder="댓글 입력">${boardComment.commentContent}</textarea>
 										</div>
-										<button style="margin:0px 0px 15px 0px;" type="submit" class="btn btn-default">입력 완료</button>
+										<button style="margin:0px 0px 15px 0px;" type="submit" class="btn btn-default">수정 완료</button>
 									</form>
 								</div>
 							</div>

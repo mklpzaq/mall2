@@ -21,6 +21,14 @@ public class BoardCommentController {
 	private BoardCommentService boardCommentService;
 	private static final Logger logger = LoggerFactory.getLogger(BoardCommentController.class);
 	
+	@RequestMapping(value = "/updateBoardComment", method = RequestMethod.POST)
+	public String updateBoardComment(BoardComment boardComment){
+		logger.info("/updateBoardComment GET boardCommentController");
+		logger.info(boardComment.toString());
+		int result = boardCommentService.updateBoardComment(boardComment);
+		return "redirect:/getBoardCommentAllList";
+	}
+	
 	@RequestMapping(value = "/updateBoardComment", method = RequestMethod.GET)
 	public String updateBoardComment(Model model
 									,@RequestParam(value="sendNo") int commentNo){
