@@ -12,12 +12,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.test.mall2.boardComment.service.BoardComment;
+
 @Repository
 public class BoardDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	final String NS ="com.test.mall2.board.service.BoardMapper.";
 	private static final Logger logger = LoggerFactory.getLogger(BoardDao.class);
+	
+	public List<BoardComment> selectBoardCommentList(Board board){
+		return sqlSession.selectList(NS+"selectBoardCommentList", board);
+	}
 	
 	public List<Board> selectBoardList(Map<String, Integer> map) {
 		return sqlSession.selectList(NS + "selectBoardList", map);	

@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.test.mall2.board.service.Board;
 import com.test.mall2.board.service.BoardService;
+import com.test.mall2.boardComment.service.BoardComment;
 
 
 @Controller
@@ -68,12 +69,13 @@ public class BoardController {
 	@RequestMapping(value = "/boardView", method= RequestMethod.GET)
 	public String boardView(Board board, Model model) {
 		logger.info("/boardView BoardController");
-		
-		
 		/* boardNo, memberId, boardTitle, boardContent, boardDate 맴버변가 모두 세팅된 Board객체참조변수 boardView. */
 		Board boardView = boardService.boardView(board);
 		
+		List<BoardComment> list = boardService.selectBoardCommentList(board);
+		logger.info(list.toString());
 		model.addAttribute("boardView", boardView);
+		model.addAttribute("boardCommentList", list);
 		return "boardSangseView";
 	}
 	

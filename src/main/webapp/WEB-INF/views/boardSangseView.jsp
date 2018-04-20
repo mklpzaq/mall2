@@ -90,28 +90,24 @@
 						
 						<!-- Begin CommentList -->
 						
-						
+						<h3>boardComment List</h3>
 						<div class="bs-example" data-example-id="simple-table">
 							<table class="table">
-								<caption>boardComment List</caption>
 								<thead>
 									<tr>
-										<td>commentNo</td>
-										<td>memberId</td>
-										<td>CommentContent</td>
+										<td><strong>commentNo</strong></td>
+										<td><strong>memberId</strong></td>
+										<td><strong>CommentContent</strong></td>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td scope="row">1</td>
-										<td>dd</td>
-										<td>Marksefsfasfesafee bnsfewafevafvaesvefszbvsbszfsefvfszsefzsffeszvzbsbsMarksefsfasfesafee bnsfewafevafvaesvefszbvsbszfsefvfszsefzsffeszvzbsbs</td>
-									</tr>
-									<tr>
-										<td scope="row">1</td>
-										<td>dd</td>
-										<td>54</td>
-									</tr>
+									<c:forEach var="boardComment" items="${boardCommentList}">
+										<tr>
+											<td><strong>${boardComment.commentNo}</strong></td>
+											<td><strong>${boardComment.memberId}</strong></td>
+											<td>${boardComment.commentContent}</td>
+										</tr>
+									</c:forEach>
 								</tbody>
 							</table>
 						</div>

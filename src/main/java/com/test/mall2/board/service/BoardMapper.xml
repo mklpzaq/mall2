@@ -5,6 +5,21 @@
   
 <mapper namespace="com.test.mall2.board.service.BoardMapper">
 	
+	<select id="selectBoardCommentList"
+			parameterType="com.test.mall2.board.service.Board"
+			resultType="com.test.mall2.boardComment.service.BoardComment">
+		SELECT
+			comment_no AS commentNo
+			,board_no AS boardNo
+			,comment_content AS commentContent
+			,member_id AS memberId
+		FROM
+			board_comment
+		WHERE
+			board_no = #{boardNo}
+		ORDER BY comment_no DESC
+	</select>
+	
 	<select id="listAll" parameterType="java.util.Map" resultType="com.test.mall2.board.service.Board">
 	    SELECT 
 	    	board_no as boardNo

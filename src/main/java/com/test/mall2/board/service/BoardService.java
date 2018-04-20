@@ -11,12 +11,19 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.test.mall2.boardComment.service.BoardComment;
+
 
 @Service
 public class BoardService {
 	@Autowired
 	private BoardDao boardDao;
 	private static final Logger logger = LoggerFactory.getLogger(BoardService.class);
+	
+	public List<BoardComment> selectBoardCommentList(Board board){
+		return boardDao.selectBoardCommentList(board);
+	}
+	
 	
 	public Map<String, Object> selectBoardList(int currentPage, int pagePerRow) {
 		logger.info("selectBoardList");
