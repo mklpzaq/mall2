@@ -110,7 +110,7 @@ $(document).ready(function(){
 												<tr>
 													<th><input type="checkbox" name="deleteCheckbox" value="${item.itemNo}"></th>
 													<td scope = "row">${item.itemNo}</td>
-													<td>${item.categoryName}</td>
+													<td>${item.category.categoryName}</td>
 													<td>${item.itemName}</td>
 													<td>${item.itemPrice}</td>
 													<td><a href="${pageContext.request.contextPath}/insertOrder?itemNo=${item.itemNo}">구매</a></td>

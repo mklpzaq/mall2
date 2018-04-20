@@ -62,6 +62,8 @@
 		SELECT 
 			count(*) 
 		FROM item
+		JOIN category
+		ON item.category_no = category.category_no
 	</select>
 	
 	<select id="updateItemForm" parameterType="com.test.mall2.item.service.Item" resultType="com.test.mall2.item.service.Item">
