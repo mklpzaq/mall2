@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +24,24 @@ public class MemberDao {
 	@Autowired
  	private SqlSessionTemplate sqlSession;
 	final String NS ="com.test.mall2.member.service.MemberMapper.";
+	
+	public List<Member> searchAll(String searchOption, ArrayList<String> keyword){
+		
+		logger.info("======searchAll========");
+		List<Member> returnList;
+		if(keyword.size() == 1) {
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("searchOption", searchOption);
+			map.put("keyword", keyword.get(0));
+			returnList = sqlSession.selectList(NS+"searchAll" , map);			
+		}else {
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("searchOption", searchOption);
+			
+			returnList = sqlSession.selectList(NS+"searchAll" , map);
+		}		
+		return returnList;
+	}
 	
 	public int deleteMember(int memberNo) {
 		return sqlSession.delete(NS+"deleteMember", memberNo);

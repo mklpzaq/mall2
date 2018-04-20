@@ -1,6 +1,7 @@
 package com.test.mall2.member.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,8 +29,21 @@ public class MemberController {
 	private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
 	
 	@RequestMapping(value="/searchMember", method = RequestMethod.POST)
-	public String searchMember() {
-		return "";
+	public String searchMember(@RequestParam(value="searchOption", defaultValue="all") String searchOption
+								,@RequestParam(value="keyword", defaultValue="") ArrayList<String> keyword
+								,Model model)  {
+		
+		List<Member> list = memberService.searchAll(searchOption, keyword);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("searchOption", searchOption);
+		model.addAttribute("keyword", keyword);		
+		return "memberList";
 	}
 	
 	@RequestMapping(value="/deleteMember", method = RequestMethod.GET)

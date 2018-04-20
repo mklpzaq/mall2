@@ -20,6 +20,12 @@ public class MemberService {
 	private MemberDao memberDao;
 	private static final Logger logger = LoggerFactory.getLogger(MemberService.class);
 	
+	public List<Member> searchAll(String searchOption, ArrayList<String> keyword){
+		
+		logger.info("====searchOption=====");
+		return memberDao.searchAll(searchOption,keyword);
+	}
+	
 	public int deleteMember(int memberNo) {		
 		return memberDao.deleteMember(memberNo);
 	}
