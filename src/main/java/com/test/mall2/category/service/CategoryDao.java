@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.test.mall2.category.service.Category;
+
 @Repository
 public class CategoryDao {
 	
@@ -38,14 +40,18 @@ public class CategoryDao {
 		return sqlsession.selectOne(NS+"updateCategoryForm", category);
 	}
 	
-	public void updateCategory(Category category) {
+	public int updateCategory(Category category) {
 		
-		sqlsession.update(NS+"updateCategory", category);
+		return sqlsession.update(NS+"updateCategory", category);
 	}
 	
 	public void deleteCategory(int categoryNo) {
 		logger.info("Dao-deleteCategory");
 		sqlsession.delete(NS+"deleteCategory", categoryNo);
+	}
+	
+	public List<Category> selectCategoryAllList() {
+		return sqlsession.selectList(NS+"selectCategoryAllList");
 	}
 	
 }

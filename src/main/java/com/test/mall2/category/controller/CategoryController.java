@@ -40,7 +40,7 @@ public class CategoryController {
 		logger.info("categoryInsertForm");
 		categoryService.insertCategoryForm(category);
    
-		return "redirect:selectCategoryList";
+		return "redirect:/selectCategoryList";
 	}
 	
 	@RequestMapping(value = "/selectCategoryList", method = RequestMethod.GET)
@@ -65,18 +65,16 @@ public class CategoryController {
 	public String updateCategoryForm(Category category, Model model) {
 		logger.info("updateCategoryForm");
 		Category categoryForm = categoryService.updateCategoryForm(category);		
-		
 		model.addAttribute("categoryForm", categoryForm);
-		
 		return "updateCategoryForm";  
 	}  
 	
 	@RequestMapping(value = "/updateCategoryForm", method = RequestMethod.POST)
 	public String updateCategoryForm(Category category) {
 		logger.info("updateCategoryForm");
-		categoryService.updateCategory(category);		
+		int row = categoryService.updateCategory(category);		
 
-		return "redirect:selectCategoryList";
+		return "redirect:/selectCategoryList";
 	} 
 	
 	@RequestMapping(value = "/deleteCategory", method = RequestMethod.GET)
@@ -84,6 +82,6 @@ public class CategoryController {
 		logger.info("Controller-deleteCategory");
 		categoryService.deleteCategory(deleteCheckbox);		
 
-		return "redirect:selectCategoryList";
+		return "redirect:/selectCategoryList";
 	} 
 }

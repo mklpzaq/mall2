@@ -7,7 +7,9 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <title>item list</title>
-<script>	
+<script>
+
+//체크박스 삭제기능
 $(document).ready(function(){			
 	  $('#pagePerRow').change(function(){	     	 
 	     	 $(location).attr('href', './selectItemList?pagePerRow='+$('#pagePerRow > option:selected').val());
@@ -33,6 +35,15 @@ $(document).ready(function(){
 			}
 		});
 	});
+	//검색기능
+	function changehtml(){
+		var property = $("#searchOption").val();
+		var show = $("#keyword");
+			$("#keyword").html('<input type="text" name="keyword">');
+		}
+
+	
+	
 </script>
 </head>
 <body>
@@ -64,6 +75,22 @@ $(document).ready(function(){
 								</div>
 							</div>
 							<hr/>
+							
+							<!-- Begin Search -->
+							<div>
+								<form action="<%=request.getContextPath()%>/searchItemList" method="post">
+									<select id="searchOption" name="searchOption" onclick="changehtml();">											
+										<option value="category_name"  <c:out value="${searchOption == 'category_name'?'selected':''}"/>>카테고리</option>
+										<option value="item_name"  <c:out value="${searchOption == 'item_name'?'selected':''}"/>>상품명</option>											
+										<option value="item_price"  <c:out value="${searchOption == 'item_price'?'selected':''}"/>>상품가격</option>		
+									</select>
+									<dr id="keyword"></dr>
+									<%-- <input id="keyword" name="keyword" value="${keyword}"> --%>
+									<input type="submit" value="검색버튼" >
+								</form>
+							</div>
+							<!-- End Search -->
+							
 							<table class="table table-striped">
 								<thead>
 									<tr>

@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 	<mapper namespace="com.test.mall2.item.service.ItemMapper">
-
+	<!-- selectItemList 테이블조인 -->
 	<!--	resultMap - type : 객체 타입
 			resultMap - id : resultMap 명
 			id : PK 멤버변수 지정. 
@@ -46,16 +46,27 @@
 	</insert>
 	
 	<select id="selectItemList" parameterType="java.util.Map" resultType="com.test.mall2.item.service.Item">
-		SELECT 
+		select 
 			item.item_no as itemNo
-			, category.category_no as categoryNo
 			, category.category_name as categoryName
-			, item.item_name as ItemName
-			, item.item_price  as itemPrice
-		FROM item join category
+			, item.item_name as itemName
+			, item.item_price as itemPrice
+		from item join category 
+		on 
+			item.category_no = category.category_no 
+		order by item_no DESC 
+		limit #{beginRow},#{pagePerRow}
+		
+		<!-- select 
+			item.item_no as itemNo
+			,category.category_no as categoryNo
+			,category.category_name as categoryName
+			,item.item_name as itemName
+			,item.item_price as itemPrice 
+		from item join category
 		on item.category_no = category.category_no
-		ORDER BY item_no DESC 
-		LIMIT #{beginRow},#{pagePerRow}
+		order by item_no DESC 
+		limit #{beginRow},#{pagePerRow} -->
 	</select>
 	
 	<select id="totalCountItem" resultType="Integer">
@@ -91,6 +102,16 @@
 		WHERE
 			item_no = #{itemNo}		
 	</delete>
+	
+	<select id="listAll" parameterType="java.util.Map" resultType="com.test.mall2.item.service.Item">
+	     	    SELECT 
+	    	item_no as itemNo
+	    	, category_no as categoryNo
+	    	, item_name as itemName
+	    	, item_price as itemPrice
+	    FROM item
+	    ORDER BY item_no DESC
+	</select>
 	
 </mapper>
 

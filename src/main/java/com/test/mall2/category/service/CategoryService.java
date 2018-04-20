@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
+import com.test.mall2.category.service.Category;
+
 @Service
 public class CategoryService {
 	
@@ -65,9 +67,9 @@ public class CategoryService {
 		return categoryDao.updateCategoryForm(category); 
 	}
 	
-	public void updateCategory(Category category)  {	
+	public int updateCategory(Category category)  {	
 		logger.info("updateCategory");
-		categoryDao.updateCategory(category);
+		return categoryDao.updateCategory(category);
 	 
 	}
 	
@@ -79,6 +81,9 @@ public class CategoryService {
 			categoryDao.deleteCategory(categoryNo);
 		}
 			 
+	}
+	public List<Category> selectCategoryAllList() {
+		return categoryDao.selectCategoryAllList();
 	}
 	
 

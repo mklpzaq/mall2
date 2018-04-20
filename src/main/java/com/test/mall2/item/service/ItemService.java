@@ -1,5 +1,6 @@
 package com.test.mall2.item.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,12 +20,29 @@ public class ItemService {
 	private static final Logger logger = LoggerFactory.getLogger(ItemService.class);
 
 	@Autowired
-	private ItemDao itemDao;		
+	private ItemDao itemDao;
 	
-	public int insertItemForm(Item item) {
-		logger.info("insertItemForm");
-		int row = itemDao.insertItem(item);
-		return row;
+	// 게시글 전체 목록 ItemDao.listAll메서드 호출
+	public List<Item> listAll(String searchOption, ArrayList<String> keyword) throws Exception {
+		return itemDao.listAll(searchOption, keyword);
+	}
+		
+	public void deleteItem(int[] deleteCheckbox) {	
+		logger.info("deleteItem");
+		for(int i = 0; i<deleteCheckbox.length; i++) {
+			int itemNo = deleteCheckbox[i];
+			itemDao.deleteItem(itemNo);
+	}
+	}
+	
+	public int updateItem(Item item)  {	
+		logger.info("updateItem");
+		return itemDao.updateItem(item);
+	}
+	
+	public Item updateItemForm(Item item) {
+		logger.info("updateItemForm");
+		return itemDao.updateItemForm(item);
 	}
 	
 	public Map<String, Object> selectItemList(int currentPage, int pagePerRow) {	
@@ -33,7 +51,7 @@ public class ItemService {
 		int beginRow = (currentPage-1)*pagePerRow; //페이지의 첫번째 행을 지정해줌
 		map.put("beginRow", beginRow);
 		map.put("pagePerRow", pagePerRow);
-		List<Category> list = itemDao.selectItemList(map);
+		List<Item> list = itemDao.selectItemList(map);
 		
 		int total = itemDao.totalCountItem();
 		int lastPage =0;
@@ -59,22 +77,11 @@ public class ItemService {
 		return returnmap;
 	}
 	
-	public Item updateItemForm(Item item) {
-		logger.info("updateItemForm");
-		return itemDao.updateItemForm(item);
-	}
-	
-	public int updateItem(Item item)  {	
-		logger.info("updateItem");
-		return itemDao.updateItem(item);
-	 
-	}
-	
-	public void deleteItem(int[] deleteCheckbox) {	
-		logger.info("deleteItem");
-		for(int i = 0; i<deleteCheckbox.length; i++) {
-			int itemNo = deleteCheckbox[i];
-			itemDao.deleteItem(itemNo);
-	}
+	public int insertItemForm(Item item) {
+		logger.info("insertItemForm");
+		int row = itemDao.insertItem(item);
+		return row;
 	}
 }
+	
+	

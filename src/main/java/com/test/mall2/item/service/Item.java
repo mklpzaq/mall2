@@ -10,6 +10,7 @@ public class Item {
 	private String itemName;
 	private String itemPrice;
 	private Category category;
+	
 	public int getItemNo() {
 		return itemNo;
 	}
