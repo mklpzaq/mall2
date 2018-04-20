@@ -34,4 +34,9 @@ public class OrderDao {
 		
 		return sqlSession.selectOne(NS + "totalCountOrder", map);
 	}
+	
+	public void deleteOrder(int orderNo) {
+		logger.info("Dao-deleteCategory");
+		sqlSession.delete(NS+"deleteOrder", orderNo);
+	}
 }

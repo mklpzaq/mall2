@@ -36,6 +36,14 @@ public class OrderController {
 		return "redirect:/orderList";
 	}
 	
+	@RequestMapping(value = "/deleteOrder", method = RequestMethod.GET)
+	public String deleteOrder(@RequestParam(value="deleteCheckbox") int[] deleteCheckbox) {
+		logger.info("Controller-deleteCategory");
+		orderService.deleteOrder(deleteCheckbox);		
+
+		return "redirect:/selectCategoryList";
+	} 
+	
 	@RequestMapping(value ="/orderList", method = RequestMethod.GET)
 	public String orderList(Model model											
 									,@RequestParam(value="currentPage", defaultValue="1") int currentPage

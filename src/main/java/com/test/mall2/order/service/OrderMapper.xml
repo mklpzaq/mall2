@@ -12,6 +12,11 @@
 			VALUES (NULL, #{loginMemberNo}, #{itemNo}, NOW())
 	</insert>
 
+	<delete id="deleteOrder" parameterType="com.test.mall2.order.service.Order">
+		DELETE 
+			FROM `order` 
+		WHERE order_no = #{orderNo}	
+	</delete>
 	
 	<select id="orderList" parameterType="java.util.Map" resultType="com.test.mall2.order.service.Order">
 		select 

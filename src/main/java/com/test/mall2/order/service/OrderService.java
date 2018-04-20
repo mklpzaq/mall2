@@ -32,6 +32,16 @@ public class OrderService {
 		orderDao.insertOrder(map);
 	}
 	
+	public void deleteOrder(int[] deleteCheckbox)  {	
+		logger.info("Service-deleteCategory");
+		
+		for(int i = 0; i<deleteCheckbox.length; i++) {
+			int orderNo = deleteCheckbox[i];
+			orderDao.deleteOrder(orderNo);
+		}
+			 
+	}
+	
 	public Map<String, Object> orderList(int currentPage, int pagePerRow, String searchOption, ArrayList<Object> keyword) {
 		logger.info("orderList");
 		Map<String, Object> map = new HashMap<String, Object>();

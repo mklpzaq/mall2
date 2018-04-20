@@ -94,19 +94,21 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach var="order" items="${list}">
-										<tbody>
-											<tr>
-												<th><input type="checkbox" name="deleteCheckbox" value="${order.orderNo}"></th>
-												<th scope = "row">${order.orderNo}</th>
-												<td>${order.memberId}</td>
-												<td>${order.categoryName}</td>
-												<td>${order.itemName}</td>
-												<td>${order.itemPrice}</td>
-												<td>${order.orderDate}</td>
-											</tr>
-										</tbody>
-									</c:forEach>
+									<form id="form1" method="get" action="${pageContext.request.contextPath}/deleteOrder">
+										<c:forEach var="order" items="${list}">
+											<tbody>
+												<tr>
+													<th><input type="checkbox" name="deleteCheckbox" value="${order.orderNo}"></th>
+													<th scope = "row">${order.orderNo}</th>
+													<td>${order.memberId}</td>
+													<td>${order.categoryName}</td>
+													<td>${order.itemName}</td>
+													<td>${order.itemPrice}</td>
+													<td>${order.orderDate}</td>
+												</tr>
+											</tbody>
+										</c:forEach>
+									</form>
 									<%-- <c:choose>
 										<c:when test="${currentPage == lastPage}">
 											<c:forEach var="remainderRow" begin="1" end="${pagePerRow - lastPageMemberCnt}" step="1">
@@ -224,6 +226,9 @@
 									<input type="submit" value="검색버튼" >
 								</form>
 							</div>
+							<div>
+						  		<button id="button">주문 취소</button>
+							</div>	
 						</div>
 					</div>
 					<!-- End Content -->
