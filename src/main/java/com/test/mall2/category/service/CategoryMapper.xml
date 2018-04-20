@@ -5,8 +5,7 @@
  
 <mapper namespace="com.test.mall2.category.service.CategoryMapper">
 	
-	<select id="totalCountCategory"
-			resultType="Integer">
+	<select id="totalCountCategory" resultType="Integer">
 		select count(*) from category
 	
 	</select>
@@ -53,5 +52,13 @@
 			FROM category 
 		WHERE category_no = #{categoryNo}	
 	</delete>
+	
+	<select id="selectCategoryAllList" resultType="com.test.mall2.category.service.Category">
+		select
+			category_no as categoryNo
+			,category_name as categoryName
+		from category
+		ORDER BY category_no DESC
+	</select>
 </mapper>
 

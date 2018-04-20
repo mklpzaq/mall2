@@ -1,6 +1,5 @@
 package com.test.mall2.category.service;
 
-
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +21,6 @@ public class CategoryDao {
 	private static final Logger logger = LoggerFactory.getLogger(CategoryService.class);
 		
 	public int insertCategory(Category category) {
-		logger.debug("insertCategory");
 		int row = sqlsession.insert(NS+"insertCategory", category);	
 		return row;
 	}
@@ -36,17 +34,14 @@ public class CategoryDao {
 	}
 	
 	public Category updateCategoryForm(Category category){
-				
 		return sqlsession.selectOne(NS+"updateCategoryForm", category);
 	}
 	
-	public int updateCategory(Category category) {
-		
+	public int updateCategory(Category category) { 
 		return sqlsession.update(NS+"updateCategory", category);
 	}
 	
 	public void deleteCategory(int categoryNo) {
-		logger.info("Dao-deleteCategory");
 		sqlsession.delete(NS+"deleteCategory", categoryNo);
 	}
 	

@@ -9,7 +9,7 @@ public class Item {
 	private int itemNo;
 	private String itemName;
 	private String itemPrice;
-	private Category category;
+	private String categoryName;
 	
 	public int getItemNo() {
 		return itemNo;
@@ -29,15 +29,11 @@ public class Item {
 	public void setItemPrice(String itemPrice) {
 		this.itemPrice = itemPrice;
 	}
-	public Category getCategory() {
-		return category;
+	public String getCategory() {
+		return categoryName;
 	}
-	public void setCategory(Category category) {
-		this.category = category;
+	public void setCategory(String category) {
+		this.categoryName = category;
 	}
-	@Override
-	public String toString() {
-		return "Item [itemNo=" + itemNo + ", itemName=" + itemName + ", itemPrice=" + itemPrice + ", category="
-				+ category + "]";
-	}
+	
 }

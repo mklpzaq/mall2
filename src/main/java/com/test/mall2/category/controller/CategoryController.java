@@ -2,8 +2,6 @@ package com.test.mall2.category.controller;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,24 +21,19 @@ public class CategoryController {
 	private static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
 	
 	@Autowired
-	CategoryService categoryService;	
+	private CategoryService categoryService;	
 	
 	@RequestMapping(value = "/insertCategoryForm", method = RequestMethod.GET)
 	public String categoryInsertForm() {		
-   
-		return "insertCategoryForm";
+   		return "insertCategoryForm";
 	}
 
 	
 	@RequestMapping(value = "/insertCategoryForm", method = RequestMethod.POST)
 	public String categoryInsertForm(Category category) {
-		//Category category = new Category();
-		//category.setCategoryName(categoryName);
-		
 		logger.info("categoryInsertForm");
 		categoryService.insertCategoryForm(category);
-   
-		return "redirect:/selectCategoryList";
+   		return "redirect:/selectCategoryList";
 	}
 	
 	@RequestMapping(value = "/selectCategoryList", method = RequestMethod.GET)
@@ -57,8 +50,6 @@ public class CategoryController {
 	model.addAttribute("endPage", map.get("endPage"));
 	model.addAttribute("pagePerRow", pagePerRow);
 		return "categoryList";
-		
-		
 	}  
 	
 	@RequestMapping(value = "/updateCategoryForm", method = RequestMethod.GET)

@@ -1,6 +1,6 @@
 package com.test.mall2.item.service;
 
-import java.sql.Date;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,9 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.test.mall2.board.service.Board;
-import com.test.mall2.category.controller.CategoryController;
-import com.test.mall2.category.service.Category;
 
 @Repository
 public class ItemDao {

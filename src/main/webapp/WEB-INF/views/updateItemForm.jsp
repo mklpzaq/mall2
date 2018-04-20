@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -19,6 +20,17 @@
 							<label for="inputItemNo" class="col-sm-2 control-label">상품번호</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control" name="itemNo" value="${itemForm.itemNo}"  readonly>   
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="inputItemNo" class="col-sm-2 control-label">카테고리</label>
+							<div class="col-sm-10">
+								<select id="categoryList" name="category.categoryNo">
+									<option>카테고리 선택</option>
+									<c:forEach var="category" items="${list}">
+										<option value="${category.categoryNo}">${category.categoryName}</option>
+									</c:forEach>
+								</select>
 							</div>
 						</div>
 						<div class="form-group">

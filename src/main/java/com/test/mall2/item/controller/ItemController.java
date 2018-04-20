@@ -14,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import com.test.mall2.category.controller.CategoryController;
 import com.test.mall2.category.service.Category;
 import com.test.mall2.category.service.CategoryService;
 import com.test.mall2.item.service.Item;
@@ -66,7 +65,9 @@ public class ItemController {
 	@RequestMapping(value = "/updateItemForm", method = RequestMethod.GET)
 	public String updateItemForm(Item item, Model model) {
 		logger.info("updateItemForm-GET");
-		Item itemForm = itemService.updateItemForm(item);		
+		List<Category> list = categoryService.selectCategoryAllList();
+		Item itemForm = itemService.updateItemForm(item);
+		model.addAttribute("list", list);
 		model.addAttribute("itemForm", itemForm);
 		return "updateItemForm";  
 	}  
