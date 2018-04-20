@@ -5,6 +5,15 @@
  
 <mapper namespace="com.test.mall2.member.service.MemberMapper">
 	
+	<select id="deleteMemberForAddr">
+				
+	</select>
+	
+	<select id="addressCount">
+			SELECT COUNT(*) FROM address 
+			WHERE member_no = #{memberNo}
+	</select>
+			
 	<select id="searchAll"
 			parameterType="java.util.Map"
 			resultType="com.test.mall2.member.service.Member">
@@ -14,8 +23,7 @@
 				,member_pw as memberPw
 			FROM member
 			<include refid="searchList"></include>			
-			ORDER BY member_no DESC
-				
+			ORDER BY member_no DESC				
 	</select>
 	
 	<sql id="searchList">

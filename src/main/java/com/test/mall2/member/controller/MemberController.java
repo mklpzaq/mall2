@@ -48,6 +48,7 @@ public class MemberController {
 	
 	@RequestMapping(value="/deleteMember", method = RequestMethod.GET)
 	public String deleteMember(@RequestParam(value="sendNo") int memberNo) {
+		
 		int result = memberService.deleteMember(memberNo);
 		
 		return "redirect:/getMemberList";
