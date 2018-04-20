@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,9 +41,8 @@ public class OrderController {
 									,@RequestParam(value="currentPage", defaultValue="1") int currentPage
 									,@RequestParam(value="pagePerRow", required=true, defaultValue="10") int pagePerRow
 									,@RequestParam(value="searchOption", defaultValue="member_id") String searchOption
-									,@RequestParam(value="keyword") ArrayList<Object> keyword) {
+									,@RequestParam(value="keyword", defaultValue="") ArrayList<Object> keyword) {
 		
-		logger.info((String) keyword.get(0));
 		Map<String, Object> map = orderService.orderList(currentPage, pagePerRow, searchOption, keyword);
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("lastPage", map.get("lastPage"));
@@ -54,7 +54,7 @@ public class OrderController {
 		if(keyword.size() == 1) {
 			model.addAttribute("keyword", keyword.get(0));
 		}else if(keyword.size() == 2) {
-			model.addAttribute("keyword", keyword.get(0));
+			model.addAttribute("keyword", keyword);
 		}else{	
 			model.addAttribute("keyword", "");	
 		}

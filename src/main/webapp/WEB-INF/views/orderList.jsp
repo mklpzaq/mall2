@@ -43,6 +43,9 @@
 					$("#keyword").html('<input type="text" name="keyword">');
 				}
 			}	
+			
+			
+		
 		</script>
 	</head>
 	<body>
@@ -61,7 +64,9 @@
 									<strong>${currentPage} / ${lastPage} Page</strong><br/>
 									pagePerRow : <strong id="textPagePerRow">${pagePerRow}</strong><br/>
 									searchOption : <strong id="textSearchOption">${searchOption}</strong><br/>
-									keyword : <strong id="textKeyword">${keyword}</strong>
+									keyword : <strong id="textKeyword">
+																			
+											</strong>
 								</div>
 								<div class="col-sm-6">
 									<h3>Order List</h3>
